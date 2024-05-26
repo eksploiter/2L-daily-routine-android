@@ -21,14 +21,19 @@ public class SplashActivity extends AppCompatActivity {
 
         setContentView(R.layout.open); // 스플래시 화면으로 사용할 레이아웃 설정
 
+        // 지연 후 메인 액티비티 시작
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                // 이 부분에서 메인 액티비티를 시작합니다.
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                startActivity(intent);
-                finish(); // 스플래시 액티비티를 종료하여 뒤로 가기 버튼을 눌렀을 때 다시 보이지 않게 합니다.
+                startMainActivity(); // 메인 액티비티 시작 메소드 호출
             }
         }, 3000); // 3초 동안 지연
+    }
+
+    // 메인 액티비티 시작 메소드
+    private void startMainActivity() {
+        Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+        startActivity(intent); // 메인 액티비티 시작
+        finish(); // 스플래시 액티비티를 종료하여 뒤로 가기 버튼을 눌렀을 때 다시 보이지 않게 함
     }
 }

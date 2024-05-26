@@ -41,19 +41,19 @@ public class BluetoothConnect extends AppCompatActivity {
     private BluetoothSocket bluetoothSocket;
 
     private static final int REQUEST_BLUETOOTH_CONNECT = 1;
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // UUID for SPP
+    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // SPP(UUID)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_connection);
 
-        hideSystemUI();
+        hideSystemUI(); // 시스템 UI 숨기기
 
         listView = findViewById(R.id.bluetooth_devices_list);
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
-        // Set up the back button
+        // 뒤로 가기 버튼 설정
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,12 +64,12 @@ public class BluetoothConnect extends AppCompatActivity {
             }
         });
 
-        // Initialize BLE button inside onCreate
+        // BLE 버튼 설정
         ImageButton bleButton = findViewById(R.id.bleButton);
         bleButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // 팝업창을 띄우는 코드
+                // 팝업창 띄우기
                 Dialog dialog = new Dialog(BluetoothConnect.this, R.style.RoundedDialog);
                 dialog.setContentView(R.layout.popup_ble);
                 Window window = dialog.getWindow();
@@ -93,20 +93,20 @@ public class BluetoothConnect extends AppCompatActivity {
             Toast.makeText(this, "블루투스를 지원하지 않는 기기입니다.", Toast.LENGTH_SHORT).show();
             finish();
         } else {
-            checkBluetoothPermissionAndDisplayDevices();
+            checkBluetoothPermissionAndDisplayDevices(); // 블루투스 권한 확인 및 페어링된 디바이스 표시
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 BluetoothDevice device = pairedDevicesList.get(position);
-                connectToDevice(device);
+                connectToDevice(device); // 선택한 블루투스 디바이스에 연결 시도
             }
         });
     }
 
     /**
-     * Hides the system UI for a full-screen experience.
+     * 전체 화면을 위해 시스템 UI를 숨김
      */
     private void hideSystemUI() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -126,7 +126,7 @@ public class BluetoothConnect extends AppCompatActivity {
     }
 
     /**
-     * Checks for Bluetooth permissions and displays paired devices if granted.
+     * 블루투스 권한을 확인하고 허용되면 페어링된 디바이스 표시
      */
     private void checkBluetoothPermissionAndDisplayDevices() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -141,7 +141,7 @@ public class BluetoothConnect extends AppCompatActivity {
     }
 
     /**
-     * Displays the list of paired Bluetooth devices.
+     * 페어링된 블루투스 디바이스 목록 표시
      */
     private void displayPairedDevices() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
@@ -159,7 +159,7 @@ public class BluetoothConnect extends AppCompatActivity {
     }
 
     /**
-     * Handles the result of permission requests.
+     * 권한 요청 결과 처리
      */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -174,9 +174,9 @@ public class BluetoothConnect extends AppCompatActivity {
     }
 
     /**
-     * Attempts to connect to the selected Bluetooth device.
+     * 선택한 블루투스 디바이스에 연결을 시도
      *
-     * @param device The Bluetooth device to connect to.
+     * @param device 연결할 블루투스 디바이스
      */
     private void connectToDevice(BluetoothDevice device) {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {

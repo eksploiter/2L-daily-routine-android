@@ -14,8 +14,8 @@ import android.view.View;
 
 public class WaterCupDark extends View {
     private Paint paint;
-    private int goalAmount = 2000; // Goal water amount in ml
-    private int currentAmount = 0; // Current amount of water consumed in ml
+    private int goalAmount = 2000; // 목표 물 섭취량 (ml)
+    private int currentAmount = 0; // 현재 물 섭취량 (ml)
 
     public WaterCupDark(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -29,9 +29,9 @@ public class WaterCupDark extends View {
 
     private void init() {
         paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        paint.setTextSize(100); // Text size
-        paint.setTextAlign(Paint.Align.CENTER); // Text alignment
-        setLayerType(LAYER_TYPE_SOFTWARE, null); // Set software layer type for BlurMaskFilter usage
+        paint.setTextSize(100); // 텍스트 크기
+        paint.setTextAlign(Paint.Align.CENTER); // 텍스트 정렬
+        setLayerType(LAYER_TYPE_SOFTWARE, null); // BlurMaskFilter 사용을 위해 소프트웨어 레이어 유형 설정
     }
 
     @Override
@@ -40,59 +40,59 @@ public class WaterCupDark extends View {
 
         int width = getWidth();
         int height = getHeight();
-        float startHeightAdjustment = height * 0.1f; // Adjust the start point downward
+        float startHeightAdjustment = height * 0.1f; // 시작점을 아래쪽으로 조정
 
-        // Background gradient
+        // 배경 그라데이션
         LinearGradient backgroundGradient = new LinearGradient(0, 0, 0, height,
                 new int[]{Color.parseColor("#194569"), Color.parseColor("#FF000000"), Color.parseColor("#FF000000")},
                 new float[]{0, 0.5f, 1}, Shader.TileMode.CLAMP);
         paint.setShader(backgroundGradient);
 
-        // Draw background gradient
+        // 배경 그라데이션 그리기
         paint.setStyle(Paint.Style.FILL);
         canvas.drawRect(0, 0, width, height, paint);
 
-        // Water drop path
+        // 물방울 경로
         Path dropPath = new Path();
         dropPath.moveTo(width / 2f, (height * 0.2f) + startHeightAdjustment);
         dropPath.quadTo(width * 0.1f, (height * 0.6f) + startHeightAdjustment, width / 2f, (height * 0.6f) + startHeightAdjustment);
         dropPath.quadTo(width * 0.9f, (height * 0.6f) + startHeightAdjustment, width / 2f, (height * 0.2f) + startHeightAdjustment);
         dropPath.close();
 
-        // Shadow paint
+        // 그림자 페인트
         Paint shadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        shadowPaint.setColor(Color.parseColor("#44000000")); // Lighter translucent black shadow
+        shadowPaint.setColor(Color.parseColor("#44000000")); // 투명 블랙 그림자
         shadowPaint.setStyle(Paint.Style.FILL);
-        shadowPaint.setMaskFilter(new BlurMaskFilter(30, BlurMaskFilter.Blur.NORMAL)); // Set blur effect for shadow
+        shadowPaint.setMaskFilter(new BlurMaskFilter(30, BlurMaskFilter.Blur.NORMAL)); // 그림자에 블러 효과 설정
 
-        // Draw shadow
+        // 그림자 그리기
         canvas.save();
-        canvas.translate(15, 35); // Offset shadow to the bottom right
+        canvas.translate(15, 35); // 그림자를 오른쪽 아래로 이동
         canvas.drawPath(dropPath, shadowPaint);
         canvas.restore();
 
-        // Water drop gradient
+        // 물방울 그라데이션
         LinearGradient dropGradient = new LinearGradient(0, 0, 0, height,
                 new int[]{Color.parseColor("#dbecf4"), Color.parseColor("#cadeed"), Color.parseColor("#5f84a2")},
                 new float[]{0, 0.6f, 1}, Shader.TileMode.CLAMP);
         paint.setShader(dropGradient);
-        paint.setMaskFilter(null); // Remove blur effect
+        paint.setMaskFilter(null); // 블러 효과 제거
 
-        // Fill water drop
+        // 물방울 채우기
         paint.setStyle(Paint.Style.FILL);
         canvas.drawPath(dropPath, paint);
 
-        // Add highlight to water drop
+        // 물방울에 하이라이트 추가
         RadialGradient highlightGradient = new RadialGradient(width / 2.05f, (height * 0.3f) + startHeightAdjustment,
                 width / 3f, new int[]{Color.WHITE, Color.TRANSPARENT}, null, Shader.TileMode.CLAMP);
         paint.setShader(highlightGradient);
         canvas.drawPath(dropPath, paint);
 
-        // Set clipping region
+        // 클리핑 영역 설정
         canvas.save();
         canvas.clipPath(dropPath);
 
-        // Set path for water filling
+        // 물 채우기 경로 설정
         Path waterPath = new Path();
         waterPath.moveTo(width * 0.1f, (height * 0.6f) + startHeightAdjustment);
         waterPath.quadTo(width * 0.25f, (height * 0.5f) + startHeightAdjustment, width * 0.5f, (height * 0.55f) + startHeightAdjustment);
@@ -101,28 +101,28 @@ public class WaterCupDark extends View {
         waterPath.lineTo(width * 0.1f, (height * 0.6f) + startHeightAdjustment);
         waterPath.close();
 
-        // Water gradient
+        // 물 그라데이션
         LinearGradient waterGradient = new LinearGradient(0, (height * 0.55f) + startHeightAdjustment, 0, (height * 0.6f) + startHeightAdjustment,
                 new int[]{Color.parseColor("#5f84a2"), Color.parseColor("#cadeed")},
                 new float[]{0, 1}, Shader.TileMode.CLAMP);
         paint.setShader(waterGradient);
 
-        // Fill water
+        // 물 채우기
         paint.setStyle(Paint.Style.FILL);
         canvas.drawPath(waterPath, paint);
 
-        // Remove clipping region
+        // 클리핑 영역 제거
         canvas.restore();
 
-        // Set text style to bold white
-        paint.setShader(null); // Remove gradient for text
-        paint.setColor(Color.WHITE); // Set text color to white
-        paint.setStyle(Paint.Style.FILL_AND_STROKE); // Set text style to fill and stroke
-        paint.setStrokeWidth(7); // Set text stroke width
+        // 텍스트 스타일 설정 (굵은 흰색)
+        paint.setShader(null); // 텍스트 그라데이션 제거
+        paint.setColor(Color.WHITE); // 텍스트 색상을 흰색으로 설정
+        paint.setStyle(Paint.Style.FILL_AND_STROKE); // 텍스트 스타일을 채우기 및 외곽선으로 설정
+        paint.setStrokeWidth(7); // 텍스트 외곽선 너비 설정
 
-        // Calculate percentage of goal achieved
+        // 목표 달성 비율 계산
         float percentage = (float) currentAmount / goalAmount;
-        String text = String.format("%.0f%%", percentage * 100); // Convert to percentage
+        String text = String.format("%.0f%%", percentage * 100); // 백분율로 변환
 
         // Draw text, adjust position
         canvas.drawText(text, width / 2f, (height * 0.5f) + startHeightAdjustment, paint);

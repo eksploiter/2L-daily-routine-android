@@ -29,20 +29,19 @@ public class Stat extends AppCompatActivity {
         // stat.xml 레이아웃 로드
         setContentView(R.layout.stat);
 
-        // Setting up the back button to navigate back to MainActivity
+        // 뒤로 가기 버튼을 MainActivity로 돌아가도록 설정합니다.
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Stat.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Finish the current activity to remove it from the back stack
-            } // 이 부분이 추가되었습니다.
+                finish(); // 현재 액티비티를 종료하여 백 스택에서 제거합니다.
+            }
+        });
 
-        }); // 이 부분이 추가되었습니다.
-
-        ImageButton statButton = (ImageButton) findViewById(R.id.statButton);
-
+        // 통계 버튼 설정
+        ImageButton statButton = findViewById(R.id.statButton);
         statButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,7 +64,6 @@ public class Stat extends AppCompatActivity {
                 dialog.show();
             }
         });
-
 
         // 인텐트로부터 물 섭취 데이터를 받아옵니다.
         // 실제 데이터 대신 모의 데이터를 사용합니다.

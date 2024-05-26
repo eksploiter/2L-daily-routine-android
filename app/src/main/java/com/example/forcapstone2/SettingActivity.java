@@ -25,7 +25,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -53,19 +52,17 @@ public class SettingActivity extends AppCompatActivity {
     int h, m; // 선택된 알림 시간 표시하는 토스트 메시지 출력에 사용
     ImageButton informationButton; // 팝업으로 정보창 띄우기 위한 ImageButton 변수
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        // Existing setup methods
+        // 기존 설정 메소드 호출
         setupSpinner();
         initializeSpinnerSelection();
         setupTumblerWeight();
 
-        // Initialize other views
+        // 다른 뷰 초기화
         timePicker = findViewById(R.id.timePicker);
         showSelectedtime = findViewById(R.id.showSelectedTime);
         buttonSetTime = findViewById(R.id.buttonSetTime);
@@ -77,11 +74,11 @@ public class SettingActivity extends AppCompatActivity {
         showAndHideTimePicker();
         showInformation();
 
-        // Set text size for buttons
+        // 버튼 텍스트 크기 설정
         buttonSetTime.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
         showSelectedtime.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
-        // Set up the back button to navigate to MainActivity
+        // 뒤로 가기 버튼 설정
         ImageButton backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +97,6 @@ public class SettingActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerGoal.setAdapter(adapter);
     }
-
 
     private void setupTumblerWeight() { // 텀블러 무게 설정
         spinnerTumblerWeight = findViewById(R.id.spinnerTumblerWeight);
@@ -130,10 +126,10 @@ public class SettingActivity extends AppCompatActivity {
         // 선택된 아이템의 값을 saveGoal 변수에 저장 후 setGoalAmount() 메소드 이용 (sharedPreferences로 연결)
         saveGoal = Integer.parseInt(parent.getItemAtPosition(position).toString()); // saveGoal 변수에 spinner로 선택된 값 저장
         myApp.setGoalAmount(saveGoal); // 목표치 값 sharedPreferences에 저장
-        myApp.setCurrentAmount(); // 마신량 최신화        ***(여기서 최신화하는 것이 맞는지 블루투스 구현 시 다시 생각해봐야 함.)***
+        myApp.setGoalAmount(1); // 마신량 최신화 *** (여기서 최신화하는 것이 맞는지 블루투스 구현 시 다시 생각해봐야 함.) ***
 
         if (myApp.getCurrentAmount(1) < myApp.getGoalAmount()) { // 마신량이랑 목표치 비교해서
-            checkAndNotifyForCurrentAmount(); // 알림 발생      ***앱 완성하면 필요 X, 지금은 목표치 변화량에 따른 알림 발생 보기 위해 넣어놓은 것.
+            checkAndNotifyForCurrentAmount(); // 알림 발생 *** 앱 완성하면 필요 X, 지금은 목표치 변화량에 따른 알림 발생 보기 위해 넣어놓은 것.
         }
         if (mlnitSpinner == false) { // 처음 선택되었을 때 알림 메시지 안 뜨도록
             mlnitSpinner = true;
@@ -248,7 +244,6 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
     }
-
 
     private void showInformation() { // 하이루란? 버튼 설정
         informationButton = (ImageButton) findViewById(R.id.informationButton);
