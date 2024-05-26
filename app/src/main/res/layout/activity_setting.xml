@@ -38,8 +38,8 @@
     <!-- 알림 설정 아이콘 및 텍스트 -->
     <ImageView
         android:id="@+id/notificationSettingsIcon"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="50dp"
         android:src="@drawable/alram"
@@ -132,8 +132,8 @@
     <!-- 텀블러 무게 설정 아이콘 및 텍스트 -->
     <ImageView
         android:id="@+id/icon_tumbler_weight_settings"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_marginStart="36dp"
         android:layout_marginTop="50dp"
         android:src="@drawable/weight"
