@@ -102,13 +102,13 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-   private void setupTumblerWeight() { // 텀블러 무게 설정
+    private void setupTumblerWeight() { // 텀블러 무게 설정
         spinnerTumblerWeight = findViewById(R.id.spinnerTumblerWeight);
-       ArrayAdapter<CharSequence> tumblerWeightAdapter = ArrayAdapter.createFromResource(this,
-               R.array.tumbler_weight_options, android.R.layout.simple_spinner_item);
-       tumblerWeightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-       spinnerTumblerWeight.setAdapter(tumblerWeightAdapter);
-   }
+        ArrayAdapter<CharSequence> tumblerWeightAdapter = ArrayAdapter.createFromResource(this,
+                R.array.tumbler_weight_options, android.R.layout.simple_spinner_item);
+        tumblerWeightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerTumblerWeight.setAdapter(tumblerWeightAdapter);
+    }
 
     private void initializeSpinnerSelection() {
         // 스피너 아이템 선택 이벤트 처리
@@ -132,7 +132,7 @@ public class SettingActivity extends AppCompatActivity {
         myApp.setGoalAmount(saveGoal); // 목표치 값 sharedPreferences에 저장
         myApp.setCurrentAmount(); // 마신량 최신화        ***(여기서 최신화하는 것이 맞는지 블루투스 구현 시 다시 생각해봐야 함.)***
 
-        if (myApp.getCurrentAmount() < myApp.getGoalAmount()) { // 마신량이랑 목표치 비교해서
+        if (myApp.getCurrentAmount(1) < myApp.getGoalAmount()) { // 마신량이랑 목표치 비교해서
             checkAndNotifyForCurrentAmount(); // 알림 발생      ***앱 완성하면 필요 X, 지금은 목표치 변화량에 따른 알림 발생 보기 위해 넣어놓은 것.
         }
         if (mlnitSpinner == false) { // 처음 선택되었을 때 알림 메시지 안 뜨도록
