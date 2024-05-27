@@ -26,7 +26,7 @@ import androidx.core.app.NotificationManagerCompat;
 public class MainActivity extends AppCompatActivity {
     private ImageButton informationButton;
     private Switch switch1;
-    private boolean isDarkTheme = false; // 현재 테마 상태를 추적합니다.
+    private boolean isDarkTheme = false; // Tracks the current theme
 
     private WaterCupDark waterCupDark;
     private int currentAmount = 0;
@@ -37,13 +37,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 앱 객체 가져오기
         MyApp myApp = (MyApp) getApplication();
 
-        // 알림 채널 생성
         createNotificationChannel();
 
-        // XML에서 뷰들을 찾아서 변수에 할당
         waterCupDark = findViewById(R.id.waterCupDark);
         ImageView button = findViewById(R.id.button);
         ImageView button2 = findViewById(R.id.button2);
@@ -53,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         ImageView reloadIcon = findViewById(R.id.reloadIcon);
         switch1 = findViewById(R.id.switch1);
 
-        // 버튼 클릭 리스너 설정
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 버튼2 클릭 리스너 설정
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -79,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 스위치 클릭 리스너 설정
         switch1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 설정 버튼 클릭 리스너 설정
         buttonSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 통계 아이콘 클릭 리스너 설정
         statisticsIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 블루투스 아이콘 클릭 리스너 설정
         bluetoothIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -115,7 +106,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 새로고침 아이콘 클릭 리스너 설정
         reloadIcon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 정보 버튼 클릭 리스너 설정
         informationButton = findViewById(R.id.informationButton);
+
         informationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // 테마 전환 메서드
     private void toggleTheme() {
         isDarkTheme = !isDarkTheme;
         if (isDarkTheme) {
@@ -144,7 +133,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 정보 팝업창 표시 메서드
     private void showInformationPopup() {
         Dialog dialog = new Dialog(MainActivity.this, R.style.RoundedDialog);
         dialog.setContentView(R.layout.popup_activity);
@@ -164,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    // 알림 채널 생성 메서드
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             CharSequence name = getString(R.string.channel_name);
@@ -177,7 +164,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // 알림 생성 메서드
     private void createNotification() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "GOALATTAINMENT_CHANNEL_ID")
                 .setSmallIcon(R.drawable.hirue)
