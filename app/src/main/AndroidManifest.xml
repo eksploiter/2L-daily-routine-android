@@ -5,8 +5,9 @@
     <!-- 블루투스 권한 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-    <!-- 블루투스 연결 권한 -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+    <uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <!-- 알림 표시 권한 -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <!-- 정확한 알람 스케줄링 권한 -->
@@ -16,44 +17,44 @@
 
     <application
         android:name=".MyApp"
-    android:allowBackup="true"
-    android:dataExtractionRules="@xml/data_extraction_rules"
-    android:fullBackupContent="@xml/backup_rules"
-    android:icon="@mipmap/ic_launcher"
-    android:label="@string/app_name"
-    android:roundIcon="@mipmap/ic_launcher_round"
-    android:supportsRtl="true"
-    android:theme="@style/Theme.Forcapstone2"
-    tools:targetApi="31">
-    <activity
-        android:name=".SplashActivity"
-        android:exported="true"> <!-- SplashActivity는 앱에 노출될 수 있도록 설정 -->
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
-    <activity
-        android:name=".MainActivity"
-        android:exported="true"> <!-- MainActivity는 앱에 노출될 수 있도록 설정 -->
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-        </intent-filter>
-    </activity>
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Forcapstone2"
+        tools:targetApi="31">
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true"> <!-- SplashActivity는 앱에 노출될 수 있도록 설정 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"> <!-- MainActivity는 앱에 노출될 수 있도록 설정 -->
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
 
-    <activity
-        android:name=".SettingActivity"
-        android:exported="false" /> <!-- SettingActivity는 앱에 노출되지 않도록 설정 -->
-    <activity
-        android:name=".Stat"
-        android:exported="false" /> <!-- Stat는 앱에 노출되지 않도록 설정 -->
-    <activity
-        android:name=".BluetoothConnect"
-        android:exported="false" /> <!-- BluetoothConnect는 앱에 노출되지 않도록 설정 -->
+        <activity
+            android:name=".SettingActivity"
+            android:exported="false" /> <!-- SettingActivity는 앱에 노출되지 않도록 설정 -->
+        <activity
+            android:name=".Stat"
+            android:exported="false" /> <!-- Stat는 앱에 노출되지 않도록 설정 -->
+        <activity
+            android:name=".BluetoothConnect"
+            android:exported="false" /> <!-- BluetoothConnect는 앱에 노출되지 않도록 설정 -->
 
-    <!-- 알람 리시버 -->
-    <receiver android:name=".AlarmReceiver" />
+        <!-- 알람 리시버 -->
+        <receiver android:name=".AlarmReceiver" />
 
-</application>
+    </application>
 
-    </manifest>
+</manifest>

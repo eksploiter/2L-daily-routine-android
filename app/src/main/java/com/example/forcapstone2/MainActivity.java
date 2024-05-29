@@ -26,7 +26,7 @@ import androidx.core.app.NotificationManagerCompat;
 public class MainActivity extends AppCompatActivity {
     private ImageButton informationButton;
     private Switch switch1;
-    private boolean isDarkTheme = false; // Tracks the current theme
+    private boolean isDarkTheme = false;
 
     private WaterCupDark waterCupDark;
     private int currentAmount = 0;
@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         createNotificationChannel();
 
+        // Initialize views
         waterCupDark = findViewById(R.id.waterCupDark);
         ImageView button = findViewById(R.id.button);
         ImageView button2 = findViewById(R.id.button2);
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
         ImageView reloadIcon = findViewById(R.id.reloadIcon);
         switch1 = findViewById(R.id.switch1);
 
+
+        // Set click listeners
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

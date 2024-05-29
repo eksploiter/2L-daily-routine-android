@@ -14,8 +14,8 @@ import android.view.View;
 
 public class WaterCupView extends View {
     private Paint paint;
-    private int goalAmount = 2000; // 목표 물양(ml) 예시
-    private int currentAmount = 0; // 현재 마신 물양(ml) 예시
+    private int goalAmount = 2000; // 목표 물양(ml)
+    private int currentAmount = 0; // 현재 마신 물양(ml)
 
     public WaterCupView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -92,6 +92,23 @@ public class WaterCupView extends View {
         canvas.save();
         canvas.clipPath(dropPath);
 
+        // 텍스트를 흰색 굵은 글씨로 설정
+        paint.setShader(null); // 그라디언트를 텍스트에 적용하지 않도록 설정 해제
+        paint.setColor(Color.WHITE); // 텍스트 색상을 흰색으로 설정
+        paint.setStyle(Paint.Style.FILL_AND_STROKE); // 스타일을 FILL_AND_STROKE로 설정하여 굵은 글씨 생성
+        paint.setStrokeWidth(7); // 글씨 굵기 설정
+
+        // 목표치 대비 마신 물의 양 계산 및 텍스트 그리기
+        float percentage = (float) currentAmount / goalAmount;
+        String text = String.format("%.0f%%", percentage * 100); // 백분율로 변환
+
+        // 텍스트 그리기, 텍스트 위치도 함께 아래로 조정
+        canvas.drawText(text, width / 2f, (height * 0.5f) + startHeightAdjustment, paint);
+
+        // 다음에 다시 paint 객체를 사용할 때 영향을 주지 않도록 설정 초기화
+        paint.setStyle(Paint.Style.FILL); // 다시 FILL로 설정
+        paint.setStrokeWidth(0); // 글씨 굵기 초기화
+
         // 물을 중간 정도 채우기 위한 경로 설정
         Path waterPath = new Path();
         waterPath.moveTo(width * 0.1f, (height * 0.6f) + startHeightAdjustment);
@@ -118,54 +135,6 @@ public class WaterCupView extends View {
         paint.setShader(null); // 그라디언트를 텍스트에 적용하지 않도록 설정 해제
         paint.setColor(Color.WHITE); // 텍스트 색상을 흰색으로 설정
         paint.setStyle(Paint.Style.FILL_AND_STROKE); // 스타일을 FILL_AND_STROKE로 설정하여 굵은 글씨 생성
-        paint.setStrokeWidth(7); // 글씨 굵기 설정
-
-        // 목표치 대비 마신 물의 양 계산 및 텍스트 그리기
-        float percentage = (float) currentAmount / goalAmount;
-        String text = String.format("%.0f%%", percentage * 100); // 백분율로 변환
-
-        // 텍스트 그리기, 텍스트 위치도 함께 아래로 조정
-        canvas.drawText(text, width / 2f, (height * 0.5f) + startHeightAdjustment, paint);
-
-        // 다음에 다시 paint 객체를 사용할 때 영향을 주지 않도록 설정 초기화
-        paint.setStyle(Paint.Style.FILL); // 다시 FILL로 설정
-        paint.setStrokeWidth(0); // 글씨 굵기 초기화
-
-        // 옆에 맺혀있는 작은 물방울 그리기
-        drawSmallDrop(canvas, width * 0.15f, height * 0.09f + startHeightAdjustment, width * 0.04f);
-        drawSmallDrop(canvas, width * 0.20f, height * 0.04f + startHeightAdjustment, width * 0.03f);
-    }
-
-    private void drawSmallDrop(Canvas canvas, float cx, float cy, float radius) {
-        // 작은 물방울 그림자 설정
-        Paint smallShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        smallShadowPaint.setColor(Color.parseColor("#21000000")); // 더 밝은 반투명 검정색
-        smallShadowPaint.setStyle(Paint.Style.FILL);
-        smallShadowPaint.setMaskFilter(new BlurMaskFilter(30, BlurMaskFilter.Blur.NORMAL)); // 그림자를 더 흐리게 설정
-
-        // 작은 물방울 그림자 그리기
-        canvas.save();
-        canvas.translate(10, 20); // 그림자를 살짝 오른쪽 아래로 치우치게 설정
-        canvas.drawCircle(cx, cy, radius, smallShadowPaint);
-        canvas.restore();
-
-        // 작은 물방울 그라디언트 설정
-        RadialGradient smallDropGradient = new RadialGradient(cx, cy, radius,
-                new int[]{Color.parseColor("#dbecf4"), Color.parseColor("#cadeed"), Color.parseColor("#dbecf4")},
-                new float[]{0, 0.6f, 1}, Shader.TileMode.CLAMP);
-        paint.setShader(smallDropGradient);
-
-        // 작은 물방울 그리기
-        paint.setStyle(Paint.Style.FILL);
-        canvas.drawCircle(cx, cy, radius, paint);
-
-        // 작은 물방울 하이라이트 추가
-        RadialGradient smallHighlightGradient = new RadialGradient(cx, cy - radius / 3, radius / 3,
-                new int[]{Color.WHITE, Color.TRANSPARENT}, null, Shader.TileMode.CLAMP);
-        paint.setShader(smallHighlightGradient);
-        canvas.drawCircle(cx, cy, radius, paint);
-
-        // 설정 초기화
-        paint.setShader(null);
+        paint.setStrokeWidth(7);
     }
 }

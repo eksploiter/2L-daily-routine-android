@@ -41,7 +41,7 @@ public class BluetoothConnect extends AppCompatActivity {
     private BluetoothSocket bluetoothSocket;
 
     private static final int REQUEST_BLUETOOTH_CONNECT = 1;
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"); // SPP(UUID)
+    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
