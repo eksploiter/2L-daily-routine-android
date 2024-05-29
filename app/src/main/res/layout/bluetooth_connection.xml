@@ -36,7 +36,7 @@
         android:id="@+id/bleButton"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="310dp"
+        android:layout_marginStart="330dp"
         android:layout_marginTop="47dp"
         android:scaleType="centerInside"
         android:background="?android:attr/selectableItemBackground"

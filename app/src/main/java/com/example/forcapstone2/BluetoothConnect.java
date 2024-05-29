@@ -55,38 +55,32 @@ public class BluetoothConnect extends AppCompatActivity {
 
         // 뒤로 가기 버튼 설정
         ImageButton backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(BluetoothConnect.this, MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(BluetoothConnect.this, MainActivity.class);
+            startActivity(intent);
+            finish();
         });
 
         // BLE 버튼 설정
         ImageButton bleButton = findViewById(R.id.bleButton);
-        bleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 팝업창 띄우기
-                Dialog dialog = new Dialog(BluetoothConnect.this, R.style.RoundedDialog);
-                dialog.setContentView(R.layout.popup_ble);
-                Window window = dialog.getWindow();
-                WindowManager.LayoutParams params = window.getAttributes();
+        bleButton.setOnClickListener(v -> {
+            // 팝업창 띄우기
+            Dialog dialog = new Dialog(BluetoothConnect.this, R.style.RoundedDialog);
+            dialog.setContentView(R.layout.popup_ble);
+            Window window = dialog.getWindow();
+            WindowManager.LayoutParams params = window.getAttributes();
 
-                DisplayMetrics displayMetrics = new DisplayMetrics();
-                getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                int width = displayMetrics.widthPixels;
-                int height = displayMetrics.heightPixels;
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int width = displayMetrics.widthPixels;
+            int height = displayMetrics.heightPixels;
 
-                params.width = (int) (width * 0.85);
-                params.height = (int) (height * 0.7);
-                params.gravity = Gravity.CENTER;
+            params.width = (int) (width * 0.85);
+            params.height = (int) (height * 0.7);
+            params.gravity = Gravity.CENTER;
 
-                window.setAttributes(params);
-                dialog.show();
-            }
+            window.setAttributes(params);
+            dialog.show();
         });
 
         if (bluetoothAdapter == null) {
@@ -96,12 +90,9 @@ public class BluetoothConnect extends AppCompatActivity {
             checkBluetoothPermissionAndDisplayDevices(); // 블루투스 권한 확인 및 페어링된 디바이스 표시
         }
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                BluetoothDevice device = pairedDevicesList.get(position);
-                connectToDevice(device); // 선택한 블루투스 디바이스에 연결 시도
-            }
+        listView.setOnItemClickListener((parent, view, position, id) -> {
+            BluetoothDevice device = pairedDevicesList.get(position);
+            connectToDevice(device); // 선택한 블루투스 디바이스에 연결 시도
         });
     }
 
@@ -151,7 +142,7 @@ public class BluetoothConnect extends AppCompatActivity {
         ArrayList<String> devices = new ArrayList<>();
         pairedDevicesList = new ArrayList<>();
         for (BluetoothDevice device : pairedDevices) {
-            devices.add(device.getName());
+            devices.add(device.getName() + "\n" + device.getAddress());
             pairedDevicesList.add(device);
         }
         pairedDevicesAdapter = new ArrayAdapter<>(this, R.layout.list_item_bluetooth_device, devices);
@@ -182,15 +173,20 @@ public class BluetoothConnect extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        try {
-            bluetoothSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
-            bluetoothSocket.connect();
-            updateConnectionStatus("연결 상태: " + device.getName() + "과(와) 연결됨");
-        } catch (IOException e) {
-            Toast.makeText(this, "연결을 시도하는 동안 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-            e.printStackTrace();
-            updateConnectionStatus("연결 상태: 연결 실패");
-        }
+        new Thread(() -> {
+            try {
+                bluetoothSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                bluetoothSocket.connect();
+                runOnUiThread(() -> updateConnectionStatus("연결 상태: " + device.getName() + "과(와) 연결됨"));
+            } catch (IOException e) {
+                runOnUiThread(() -> {
+                    Toast.makeText(BluetoothConnect.this, "연결을 시도하는 동안 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                    updateConnectionStatus("연결 상태: 연결 실패");
+                });
+                e.printStackTrace();
+                closeSocket();
+            }
+        }).start();
     }
 
     /**
@@ -203,10 +199,10 @@ public class BluetoothConnect extends AppCompatActivity {
         connectionStatusTextView.setText(status);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Close the BluetoothSocket when the activity is destroyed to release resources.
+    /**
+     * Close the Bluetooth socket if it's open.
+     */
+    private void closeSocket() {
         if (bluetoothSocket != null) {
             try {
                 bluetoothSocket.close();
@@ -214,5 +210,11 @@ public class BluetoothConnect extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeSocket();
     }
 }
