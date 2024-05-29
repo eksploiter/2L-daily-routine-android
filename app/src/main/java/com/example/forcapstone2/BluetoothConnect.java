@@ -42,6 +42,7 @@ public class BluetoothConnect extends AppCompatActivity {
 
     private static final int REQUEST_BLUETOOTH_CONNECT = 1;
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    //private static final String TARGET_MAC_ADDRESS = "20:33:91:BA:82:3F"; // 사용자의 아두이노 블루투스 MAC 주소
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +122,18 @@ public class BluetoothConnect extends AppCompatActivity {
      */
     private void checkBluetoothPermissionAndDisplayDevices() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.BLUETOOTH_CONNECT}, REQUEST_BLUETOOTH_CONNECT);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{
+                        Manifest.permission.BLUETOOTH_CONNECT,
+                        Manifest.permission.BLUETOOTH_SCAN
+                }, REQUEST_BLUETOOTH_CONNECT);
+            } else {
+                displayPairedDevices();
+            }
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_BLUETOOTH_CONNECT);
             } else {
                 displayPairedDevices();
             }
@@ -173,9 +184,12 @@ public class BluetoothConnect extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+
         new Thread(() -> {
             try {
-                bluetoothSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                bluetoothAdapter.cancelDiscovery();  // 블루투스 검색 중지
+                UUID uuid = MY_UUID;
+                bluetoothSocket = device.createRfcommSocketToServiceRecord(uuid);
                 bluetoothSocket.connect();
                 runOnUiThread(() -> updateConnectionStatus("연결 상태: " + device.getName() + "과(와) 연결됨"));
             } catch (IOException e) {
