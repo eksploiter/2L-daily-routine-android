@@ -42,7 +42,7 @@ public class BluetoothConnect extends AppCompatActivity {
 
     private static final int REQUEST_BLUETOOTH_CONNECT = 1;
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    //private static final String TARGET_MAC_ADDRESS = "20:33:91:BA:82:3F"; // 사용자의 아두이노 블루투스 MAC 주소
+    private static final String TARGET_MAC_ADDRESS = "20:33:91:BA:82:3F"; // 사용자의 아두이노 블루투스 MAC 주소
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

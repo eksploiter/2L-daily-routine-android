@@ -67,9 +67,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/BluetoothConnect.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/BluetoothConnect.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/d70783be53fc14f24e42e23a4a4ef3ff/results.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/d75a4e934c1759b8278930862381bb42/results.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/d95b5d6506ac83248c499f2175a187d0/results.bin" beforeDir="false" />
@@ -87,7 +90,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\minsu\.android\avd\Pixel_8_Pro_API_33.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RF9N600EW7P]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -141,40 +144,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ApkExportedModule&quot;: &quot;forcapstone2.app&quot;,
-    &quot;ExportApk.ApkPathForforcapstone2.app&quot;: &quot;C:\\Users\\minsu\\OneDrive\\Desktop&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ScreenRecorder.SavePath&quot;: &quot;C:\\Users\\minsu\\OneDrive\\Desktop&quot;,
-    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/Users/minsu/OneDrive/Desktop&quot;,
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_SELECTED&quot;: &quot;WaterCupDark&quot;,
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_SELECTED&quot;: &quot;WaterCupView&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/minsu/OneDrive/Desktop/forcapstone2&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ApkExportedModule": "forcapstone2.app",
+    "ExportApk.ApkPathForforcapstone2.app": "C:\\Users\\minsu\\OneDrive\\Desktop",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ScreenRecorder.SavePath": "C:\\Users\\minsu\\OneDrive\\Desktop",
+    "ScreenshotViewer.SavePath": "C:/Users/minsu/OneDrive/Desktop",
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_SELECTED": "WaterCupDark",
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_SELECTED": "WaterCupView",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "C:/Users/minsu/OneDrive/Desktop",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ExportApk.BuildVariants&quot;: [
-      &quot;release&quot;
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
     ],
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_WaterCupDark_DIMENSIONS&quot;: [
-      &quot;1080&quot;,
-      &quot;1920&quot;
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_WaterCupDark_DIMENSIONS": [
+      "1080",
+      "1920"
     ],
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_WaterCupView_DIMENSIONS&quot;: [
-      &quot;1080&quot;,
-      &quot;1920&quot;
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_WaterCupView_DIMENSIONS": [
+      "1080",
+      "1920"
     ]
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Signing Configs" />
     <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
