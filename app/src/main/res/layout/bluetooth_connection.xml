@@ -54,13 +54,13 @@
         android:padding="35dp"/>
 
     <TextView
-        android:id="@+id/bluetooth_status"
+        android:id="@+id/connection_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/bluetooth_devices_list"
         android:layout_marginTop="20dp"
-        android:text="연결 상태: 연결되지 않음"
+        android:text="Disconnected"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="#194569"/>

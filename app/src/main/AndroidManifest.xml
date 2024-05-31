@@ -54,6 +54,9 @@
             android:name=".BluetoothConnect"
             android:exported="false"/>
 
+        <service android:name=".BluetoothService"
+            android:exported="false" />
+
         <!-- 알람 리시버 -->
         <receiver android:name=".AlarmReceiver"/>
 
