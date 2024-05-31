@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView bluetoothIcon;
     private ImageView reloadIcon;
 
+    private static final int REQUEST_PERMISSIONS = 1;
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         MyApp myApp = (MyApp) getApplication();
+
+        // Request necessary permissions
+        requestPermissions();
 
         createNotificationChannel();
 
@@ -118,6 +123,24 @@ public class MainActivity extends AppCompatActivity {
         });
 
         informationButton.setOnClickListener(v -> showInformationPopup());
+    }
+
+    private void requestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            if (checkSelfPermission(android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED ||
+                    checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{
+                        android.Manifest.permission.BLUETOOTH_SCAN,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                }, REQUEST_PERMISSIONS);
+            }
+        } else {
+            if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                }, REQUEST_PERMISSIONS);
+            }
+        }
     }
 
     private void setInitialTheme() {

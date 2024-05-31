@@ -1,68 +1,64 @@
 package com.example.forcapstone2;
 
-import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothSocket;
+import android.bluetooth.BluetoothGatt;
+import android.bluetooth.BluetoothGattCallback;
+import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattService;
+import android.bluetooth.BluetoothManager;
+import android.bluetooth.le.BluetoothLeScanner;
+import android.bluetooth.le.ScanCallback;
+import android.bluetooth.le.ScanResult;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowInsets;
-import android.view.WindowInsetsController;
 import android.view.WindowManager;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Set;
 import java.util.UUID;
 
 public class BluetoothConnect extends AppCompatActivity {
 
     private BluetoothAdapter bluetoothAdapter;
-    private ListView listView;
-    private ArrayAdapter<String> pairedDevicesAdapter;
-    private ArrayList<BluetoothDevice> pairedDevicesList;
-    private BluetoothSocket bluetoothSocket;
+    private BluetoothLeScanner bluetoothLeScanner;
+    private BluetoothGatt bluetoothGatt;
+    private Handler handler = new Handler();
+    private boolean isScanning = false;
 
-    private static final int REQUEST_BLUETOOTH_CONNECT = 1;
-    private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private static final String TARGET_MAC_ADDRESS = "20:33:91:BA:82:3F"; // 사용자의 아두이노 블루투스 MAC 주소
+    private static final long SCAN_PERIOD = 10000;
+    private static final String TARGET_MAC_ADDRESS = "1E:41:CF:5C:6F:4E"; // Your Arduino Nano BLE MAC address
+    private static final int REQUEST_PERMISSIONS = 1;
 
+    @SuppressLint("MissingPermission")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bluetooth_connection);
 
-        hideSystemUI(); // 시스템 UI 숨기기
-
-        listView = findViewById(R.id.bluetooth_devices_list);
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
-        // 뒤로 가기 버튼 설정
         ImageButton backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(v -> {
-            Intent intent = new Intent(BluetoothConnect.this, MainActivity.class);
-            startActivity(intent);
-            finish();
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BluetoothConnect.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
-        // BLE 버튼 설정
         ImageButton bleButton = findViewById(R.id.bleButton);
         bleButton.setOnClickListener(v -> {
             // 팝업창 띄우기
@@ -84,151 +80,125 @@ public class BluetoothConnect extends AppCompatActivity {
             dialog.show();
         });
 
-        if (bluetoothAdapter == null) {
-            Toast.makeText(this, "블루투스를 지원하지 않는 기기입니다.", Toast.LENGTH_SHORT).show();
-            finish();
-        } else {
-            checkBluetoothPermissionAndDisplayDevices(); // 블루투스 권한 확인 및 페어링된 디바이스 표시
+        // Request necessary permissions
+        requestPermissions();
+
+        // Initialize Bluetooth Adapter
+        final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        bluetoothAdapter = bluetoothManager.getAdapter();
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBtIntent, REQUEST_PERMISSIONS);
         }
 
-        listView.setOnItemClickListener((parent, view, position, id) -> {
-            BluetoothDevice device = pairedDevicesList.get(position);
-            connectToDevice(device); // 선택한 블루투스 디바이스에 연결 시도
-        });
+        bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+
+        // Start BLE scan
+        scanLeDevice(true);
     }
 
-    /**
-     * 전체 화면을 위해 시스템 UI를 숨김
-     */
-    private void hideSystemUI() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            final WindowInsetsController controller = getWindow().getInsetsController();
-            if (controller != null) {
-                controller.hide(WindowInsets.Type.statusBars());
-            }
-        } else {
-            getWindow().getDecorView().setSystemUiVisibility(
-                    View.SYSTEM_UI_FLAG_FULLSCREEN
-                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                            | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-        }
-    }
-
-    /**
-     * 블루투스 권한을 확인하고 허용되면 페어링된 디바이스 표시
-     */
-    private void checkBluetoothPermissionAndDisplayDevices() {
+    private void requestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
-                    ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{
-                        Manifest.permission.BLUETOOTH_CONNECT,
-                        Manifest.permission.BLUETOOTH_SCAN
-                }, REQUEST_BLUETOOTH_CONNECT);
-            } else {
-                displayPairedDevices();
-            }
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_BLUETOOTH_CONNECT);
-            } else {
-                displayPairedDevices();
+            if (checkSelfPermission(android.Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED ||
+                    checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{
+                        android.Manifest.permission.BLUETOOTH_SCAN,
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                }, REQUEST_PERMISSIONS);
             }
         } else {
-            displayPairedDevices();
-        }
-    }
-
-    /**
-     * 페어링된 블루투스 디바이스 목록 표시
-     */
-    private void displayPairedDevices() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-        ArrayList<String> devices = new ArrayList<>();
-        pairedDevicesList = new ArrayList<>();
-        for (BluetoothDevice device : pairedDevices) {
-            devices.add(device.getName() + "\n" + device.getAddress());
-            pairedDevicesList.add(device);
-        }
-        pairedDevicesAdapter = new ArrayAdapter<>(this, R.layout.list_item_bluetooth_device, devices);
-        listView.setAdapter(pairedDevicesAdapter);
-    }
-
-    /**
-     * 권한 요청 결과 처리
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_BLUETOOTH_CONNECT) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                displayPairedDevices();
-            } else {
-                Toast.makeText(this, "블루투스 연결 권한이 필요합니다.", Toast.LENGTH_SHORT).show();
+            if (checkSelfPermission(android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{
+                        android.Manifest.permission.ACCESS_FINE_LOCATION
+                }, REQUEST_PERMISSIONS);
             }
         }
     }
 
-    /**
-     * 선택한 블루투스 디바이스에 연결을 시도
-     *
-     * @param device 연결할 블루투스 디바이스
-     */
+    @SuppressLint("MissingPermission")
+    private void scanLeDevice(final boolean enable) {
+        if (enable) {
+            // Stops scanning after a pre-defined scan period.
+            handler.postDelayed(() -> {
+                isScanning = false;
+                bluetoothLeScanner.stopScan(leScanCallback);
+                Log.d("BluetoothConnect", "Stopped scanning");
+            }, SCAN_PERIOD);
+
+            isScanning = true;
+            bluetoothLeScanner.startScan(leScanCallback);
+            Log.d("BluetoothConnect", "Started scanning");
+        } else {
+            isScanning = false;
+            bluetoothLeScanner.stopScan(leScanCallback);
+            Log.d("BluetoothConnect", "Stopped scanning");
+        }
+    }
+
+    private final ScanCallback leScanCallback = new ScanCallback() {
+        @SuppressLint("MissingPermission")
+        @Override
+        public void onScanResult(int callbackType, ScanResult result) {
+            BluetoothDevice device = result.getDevice();
+            Log.d("BluetoothConnect", "Found device: " + device.getAddress());
+            if (TARGET_MAC_ADDRESS.equals(device.getAddress())) {
+                Log.d("BluetoothConnect", "Target device found");
+                connectToDevice(device);
+                scanLeDevice(false);
+            }
+        }
+    };
+
+    @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-
-        new Thread(() -> {
-            try {
-                bluetoothAdapter.cancelDiscovery();  // 블루투스 검색 중지
-                UUID uuid = MY_UUID;
-                bluetoothSocket = device.createRfcommSocketToServiceRecord(uuid);
-                bluetoothSocket.connect();
-                runOnUiThread(() -> updateConnectionStatus("연결 상태: " + device.getName() + "과(와) 연결됨"));
-            } catch (IOException e) {
-                runOnUiThread(() -> {
-                    Toast.makeText(BluetoothConnect.this, "연결을 시도하는 동안 오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-                    updateConnectionStatus("연결 상태: 연결 실패");
-                });
-                e.printStackTrace();
-                closeSocket();
-            }
-        }).start();
+        Log.d("BluetoothConnect", "Connecting to device: " + device.getAddress());
+        bluetoothGatt = device.connectGatt(this, false, gattCallback);
     }
 
-    /**
-     * Updates the connection status TextView.
-     *
-     * @param status The connection status message to display.
-     */
-    private void updateConnectionStatus(String status) {
-        TextView connectionStatusTextView = findViewById(R.id.bluetooth_status);
-        connectionStatusTextView.setText(status);
-    }
-
-    /**
-     * Close the Bluetooth socket if it's open.
-     */
-    private void closeSocket() {
-        if (bluetoothSocket != null) {
-            try {
-                bluetoothSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+    private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
+        @SuppressLint("MissingPermission")
+        @Override
+        public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
+            if (newState == BluetoothGatt.STATE_CONNECTED) {
+                Log.i("BluetoothConnect", "Connected to GATT server.");
+                bluetoothGatt.discoverServices();
+                runOnUiThread(() -> Toast.makeText(BluetoothConnect.this, "Connected to " + gatt.getDevice().getName(), Toast.LENGTH_SHORT).show());
+            } else if (newState == BluetoothGatt.STATE_DISCONNECTED) {
+                Log.i("BluetoothConnect", "Disconnected from GATT server.");
+                runOnUiThread(() -> Toast.makeText(BluetoothConnect.this, "Disconnected", Toast.LENGTH_SHORT).show());
             }
         }
-    }
 
+        @Override
+        public void onServicesDiscovered(BluetoothGatt gatt, int status) {
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                Log.i("BluetoothConnect", "Services discovered.");
+                // You can iterate through the discovered services and characteristics here.
+            } else {
+                Log.w("BluetoothConnect", "onServicesDiscovered received: " + status);
+            }
+        }
+
+        @Override
+        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                // Handle characteristic read
+            }
+        }
+
+        @Override
+        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
+            // Handle characteristic changed
+        }
+    };
+
+    @SuppressLint("MissingPermission")
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        closeSocket();
+        if (bluetoothGatt != null) {
+            bluetoothGatt.close();
+            bluetoothGatt = null;
+        }
     }
 }
