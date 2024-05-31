@@ -13,11 +13,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
@@ -26,10 +26,14 @@ import androidx.core.app.NotificationManagerCompat;
 public class MainActivity extends AppCompatActivity {
     private ImageButton informationButton;
     private Switch switch1;
-    private boolean isDarkTheme = false;
+    private Switch switch2;
 
-    private WaterCupDark waterCupDark;
-    private int currentAmount = 0;
+    private FrameLayout lightThemeLayout;
+    private FrameLayout darkThemeLayout;
+    private ImageView buttonSetting;
+    private ImageView statisticsIcon;
+    private ImageView bluetoothIcon;
+    private ImageView reloadIcon;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -42,98 +46,116 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
 
         // Initialize views
-        waterCupDark = findViewById(R.id.waterCupDark);
+        switch1 = findViewById(R.id.switch1);
+        switch2 = findViewById(R.id.switch2);
+        lightThemeLayout = findViewById(R.id.lightThemeLayout);
+        darkThemeLayout = findViewById(R.id.darkThemeLayout);
+
         ImageView button = findViewById(R.id.button);
         ImageView button2 = findViewById(R.id.button2);
-        ImageView buttonSetting = findViewById(R.id.buttonSetting);
-        ImageView statisticsIcon = findViewById(R.id.statisticsIcon);
-        ImageView bluetoothIcon = findViewById(R.id.bluetoothIcon);
-        ImageView reloadIcon = findViewById(R.id.reloadIcon);
-        switch1 = findViewById(R.id.switch1);
-
-
-        // Set click listeners
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myApp.getTodayAmount();
-                if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
-                    createNotification();
-                    myApp.drainAmount();
-                }
-                Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myApp.getTodayAmount();
-                if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
-                    createNotification();
-                    myApp.drinkAmount();
-                }
-                Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        switch1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                toggleTheme();
-                Toast.makeText(getApplicationContext(), "화면 변환 성공!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        buttonSetting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        statisticsIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Stat.class);
-                startActivity(intent);
-            }
-        });
-
-        bluetoothIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BluetoothConnect.class);
-                startActivity(intent);
-            }
-        });
-
-        reloadIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getApplicationContext(), "새로고침 성공!", Toast.LENGTH_SHORT).show();
-                myApp.reloadAmount();
-            }
-        });
-
+        buttonSetting = findViewById(R.id.buttonSetting);
+        statisticsIcon = findViewById(R.id.statisticsIcon);
+        bluetoothIcon = findViewById(R.id.bluetoothIcon);
+        reloadIcon = findViewById(R.id.reloadIcon);
         informationButton = findViewById(R.id.informationButton);
 
-        informationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showInformationPopup();
+        // Set the initial theme to light mode
+        setInitialTheme();
+
+        // Set click listeners
+        button.setOnClickListener(v -> {
+            myApp.getTodayAmount();
+            if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
+                createNotification();
+                myApp.drainAmount();
+            }
+            Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+        });
+
+        button2.setOnClickListener(view -> {
+            myApp.getTodayAmount();
+            if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
+                createNotification();
+                myApp.drinkAmount();
+            }
+            Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
+        });
+
+        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                switchToDarkTheme();
+            } else {
+                switchToLightTheme();
             }
         });
+
+        switch2.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                switchToDarkTheme();
+            } else {
+                switchToLightTheme();
+            }
+        });
+
+        buttonSetting.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intent);
+        });
+
+        statisticsIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, Stat.class);
+            startActivity(intent);
+        });
+
+        bluetoothIcon.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, BluetoothConnect.class);
+            startActivity(intent);
+        });
+
+        reloadIcon.setOnClickListener(v -> {
+            Toast.makeText(getApplicationContext(), "새로고침 성공!", Toast.LENGTH_SHORT).show();
+            myApp.reloadAmount();
+        });
+
+        informationButton.setOnClickListener(v -> showInformationPopup());
     }
 
-    private void toggleTheme() {
-        isDarkTheme = !isDarkTheme;
-        if (isDarkTheme) {
-            setContentView(new WaterCupDark(this));
-        } else {
-            setContentView(new WaterCupView(this));
-        }
+    private void setInitialTheme() {
+        lightThemeLayout.setVisibility(View.VISIBLE);
+        darkThemeLayout.setVisibility(View.GONE);
+        switch1.setChecked(false);
+        switch2.setChecked(false);
+        updateIconsForLightTheme();
+    }
+
+    private void switchToDarkTheme() {
+        lightThemeLayout.setVisibility(View.GONE);
+        darkThemeLayout.setVisibility(View.VISIBLE);
+        switch1.setChecked(true);
+        switch2.setChecked(true);
+        updateIconsForDarkTheme();
+    }
+
+    private void switchToLightTheme() {
+        lightThemeLayout.setVisibility(View.VISIBLE);
+        darkThemeLayout.setVisibility(View.GONE);
+        switch1.setChecked(false);
+        switch2.setChecked(false);
+        updateIconsForLightTheme();
+    }
+
+    private void updateIconsForLightTheme() {
+        buttonSetting.setImageResource(R.drawable.settings);
+        statisticsIcon.setImageResource(R.drawable.chart);
+        bluetoothIcon.setImageResource(R.drawable.bluetooth);
+        reloadIcon.setImageResource(R.drawable.reload);
+    }
+
+    private void updateIconsForDarkTheme() {
+        buttonSetting.setImageResource(R.drawable.settings_w);
+        statisticsIcon.setImageResource(R.drawable.chart_w);
+        bluetoothIcon.setImageResource(R.drawable.bluetooth_w);
+        reloadIcon.setImageResource(R.drawable.reload_w);
     }
 
     private void showInformationPopup() {

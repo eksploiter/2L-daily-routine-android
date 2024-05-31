@@ -136,5 +136,55 @@ public class WaterCupView extends View {
         paint.setColor(Color.WHITE); // 텍스트 색상을 흰색으로 설정
         paint.setStyle(Paint.Style.FILL_AND_STROKE); // 스타일을 FILL_AND_STROKE로 설정하여 굵은 글씨 생성
         paint.setStrokeWidth(7);
+
+        // Draw text, adjust position
+        canvas.drawText(text, width / 2f, (height * 0.5f) + startHeightAdjustment, paint);
+
+        // Reset paint settings
+        paint.setStyle(Paint.Style.FILL); // Reset style to fill
+        paint.setStrokeWidth(0); // Reset stroke width
+
+        // Draw small water drops
+        drawSmallDrop(canvas, width * 0.15f, height * 0.09f + startHeightAdjustment, width * 0.04f);
+        drawSmallDrop(canvas, width * 0.20f, height * 0.04f + startHeightAdjustment, width * 0.03f);
+    }
+
+    private void drawSmallDrop(Canvas canvas, float cx, float cy, float radius) {
+        // Small drop shadow
+        Paint smallShadowPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        smallShadowPaint.setColor(Color.parseColor("#21000000")); // Lighter translucent black
+        smallShadowPaint.setStyle(Paint.Style.FILL);
+        smallShadowPaint.setMaskFilter(new BlurMaskFilter(30, BlurMaskFilter.Blur.NORMAL)); // Set blur effect
+
+        // Draw small drop shadow
+        canvas.save();
+        canvas.translate(10, 20); // Offset shadow to the bottom right
+        canvas.drawCircle(cx, cy, radius, smallShadowPaint);
+        canvas.restore();
+
+        // Small drop gradient
+        RadialGradient smallDropGradient = new RadialGradient(cx, cy, radius,
+                new int[]{Color.parseColor("#dbecf4"), Color.parseColor("#cadeed"), Color.parseColor("#dbecf4")},
+                new float[]{0, 0.6f, 1}, Shader.TileMode.CLAMP);
+        paint.setShader(smallDropGradient);
+
+        // Draw small drop
+        paint.setStyle(Paint.Style.FILL);
+        canvas.drawCircle(cx, cy, radius, paint);
+
+        // Add highlight to small drop
+        RadialGradient smallHighlightGradient = new RadialGradient(cx, cy - radius / 3, radius / 3,
+                new int[]{Color.WHITE, Color.TRANSPARENT}, null, Shader.TileMode.CLAMP);
+        paint.setShader(smallHighlightGradient);
+        canvas.drawCircle(cx, cy, radius, paint);
+
+        // Reset paint settings
+        paint.setShader(null);
+    }
+
+    // Method to set the current amount of water consumed
+    public void setCurrentAmount(int currentAmount) {
+        this.currentAmount = currentAmount;
+        invalidate(); // Redraw view with updated water amount
     }
 }

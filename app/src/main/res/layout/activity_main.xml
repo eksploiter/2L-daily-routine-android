@@ -6,37 +6,66 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/goalimage"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
+    <!-- FrameLayout to contain the light and dark theme layouts -->
     <FrameLayout
+        android:id="@+id/themeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".MainActivity"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="match_parent">
 
-        <com.example.forcapstone2.WaterCupView
-            android:id="@+id/waterCupView"
+        <!-- Light Theme Layout -->
+        <FrameLayout
+            android:id="@+id/lightThemeLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
-        <Switch
-            android:id="@+id/switch1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginStart="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:thumb="@drawable/switch_track_thumb"
-            app:track="@drawable/switch_track_selector"
-            app:thumbTextPadding="24dp"
-            app:switchMinWidth="0dp"
-            />
+            <com.example.forcapstone2.WaterCupView
+                android:id="@+id/waterCupView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
 
+            <Switch
+                android:id="@+id/switch1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="20dp"
+                android:thumb="@drawable/switch_track_thumb"
+                app:track="@drawable/switch_track_selector"
+                app:thumbTextPadding="24dp"
+                app:switchMinWidth="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </FrameLayout>
+
+        <!-- Dark Theme Layout -->
+        <FrameLayout
+            android:id="@+id/darkThemeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <com.example.forcapstone2.WaterCupDark
+                android:id="@+id/waterCupDark"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <Switch
+                android:id="@+id/switch2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="20dp"
+                android:thumb="@drawable/switch_track_thumb"
+                app:track="@drawable/switch_track_selector"
+                app:layout_constraintStart_toStartOf="parent" />
+        </FrameLayout>
     </FrameLayout>
 
+    <!-- Layouts and Views that are common to both themes -->
     <LinearLayout
         android:layout_width="300dp"
         android:layout_height="110dp"
@@ -45,9 +74,8 @@
         android:gravity="center_vertical"
         app:layout_constraintBottom_toBottomOf="@+id/divider"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"> <!-- 이 부분 추가 -->
+        app:layout_constraintStart_toStartOf="parent">
 
-        <!-- 첫 번째 이미지 -->
         <ImageView
             android:id="@+id/button"
             android:layout_width="0dp"
@@ -56,7 +84,6 @@
             android:layout_weight="1"
             android:src="@drawable/trash" />
 
-        <!-- 텍스트 -->
         <TextView
             android:id="@+id/PurposewaterAmountText"
             android:layout_width="wrap_content"
@@ -67,7 +94,6 @@
             android:textSize="30sp"
             android:textStyle="bold" />
 
-        <!-- 두 번째 이미지 -->
         <ImageView
             android:id="@+id/button2"
             android:layout_width="0dp"
@@ -76,7 +102,7 @@
             android:layout_weight="1"
             android:src="@drawable/add" />
     </LinearLayout>
-    <!-- 목표치 달성하면 알림 발생하는 버튼 -->
+
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
@@ -115,7 +141,6 @@
             android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- Bluetooth Icon with Text -->
     <LinearLayout
         android:id="@+id/bluetoothLayout"
         android:layout_width="wrap_content"
@@ -142,7 +167,6 @@
             android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- Statistics Icon with Text -->
     <LinearLayout
         android:id="@+id/statisticsLayout"
         android:layout_width="wrap_content"
@@ -169,7 +193,6 @@
             android:textSize="11sp" />
     </LinearLayout>
 
-    <!-- Reload Icon with Text -->
     <LinearLayout
         android:id="@+id/reloadLayout"
         android:layout_width="wrap_content"
@@ -239,5 +262,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.20" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
