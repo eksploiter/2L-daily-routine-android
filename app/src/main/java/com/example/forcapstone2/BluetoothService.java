@@ -20,8 +20,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class BluetoothService extends Service {
+
+    public static final String ACTION_GATT_CONNECTED = "com.example.forcapstone2.ACTION_GATT_CONNECTED";
+    public static final String ACTION_GATT_DISCONNECTED = "com.example.forcapstone2.ACTION_GATT_DISCONNECTED";
 
     private final IBinder binder = new LocalBinder();
     private BluetoothAdapter bluetoothAdapter;
@@ -100,9 +104,11 @@ public class BluetoothService extends Service {
                 Log.i("BluetoothService", "Connected to GATT server.");
                 bluetoothGatt.discoverServices();
                 showToast("Connected to " + gatt.getDevice().getName());
+                broadcastUpdate(ACTION_GATT_CONNECTED);
             } else if (newState == BluetoothGatt.STATE_DISCONNECTED) {
                 Log.i("BluetoothService", "Disconnected from GATT server.");
                 showToast("Disconnected");
+                broadcastUpdate(ACTION_GATT_DISCONNECTED);
             }
         }
 
@@ -140,5 +146,10 @@ public class BluetoothService extends Service {
 
     private void showToast(final String message) {
         handler.post(() -> Toast.makeText(BluetoothService.this, message, Toast.LENGTH_SHORT).show());
+    }
+
+    private void broadcastUpdate(final String action) {
+        final Intent intent = new Intent(action);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }

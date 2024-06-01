@@ -2,21 +2,23 @@ package com.example.forcapstone2;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class BluetoothConnect extends AppCompatActivity {
 
@@ -36,6 +38,18 @@ public class BluetoothConnect extends AppCompatActivity {
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
+        }
+    };
+
+    private final BroadcastReceiver gattUpdateReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            final String action = intent.getAction();
+            if (BluetoothService.ACTION_GATT_CONNECTED.equals(action)) {
+                connectionStatus.setText("Connected");
+            } else if (BluetoothService.ACTION_GATT_DISCONNECTED.equals(action)) {
+                connectionStatus.setText("Disconnected");
+            }
         }
     };
 
@@ -77,6 +91,8 @@ public class BluetoothConnect extends AppCompatActivity {
         Intent serviceIntent = new Intent(this, BluetoothService.class);
         startService(serviceIntent);
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(gattUpdateReceiver, makeGattUpdateIntentFilter());
     }
 
     @Override
@@ -86,5 +102,13 @@ public class BluetoothConnect extends AppCompatActivity {
             unbindService(serviceConnection);
             isBound = false;
         }
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(gattUpdateReceiver);
+    }
+
+    private static IntentFilter makeGattUpdateIntentFilter() {
+        final IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(BluetoothService.ACTION_GATT_CONNECTED);
+        intentFilter.addAction(BluetoothService.ACTION_GATT_DISCONNECTED);
+        return intentFilter;
     }
 }
