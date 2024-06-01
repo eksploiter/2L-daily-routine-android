@@ -13,13 +13,17 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Stat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        MyApp myApp = (MyApp) getApplication();
 
         // 액티비티가 화면에 표시되기 전에 상태 표시줄을 숨깁니다.
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -28,6 +32,17 @@ public class Stat extends AppCompatActivity {
 
         // stat.xml 레이아웃 로드
         setContentView(R.layout.stat);
+
+
+        Calendar calendar = Calendar.getInstance();
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        if (dayOfWeek == Calendar.MONDAY) {
+            TextView textViewWeeklyStats = findViewById(R.id.textViewWeeklyStats);
+            String lastWeek = "지난 주 통계";
+            textViewWeeklyStats.setText(lastWeek);
+        }
+
 
         // 뒤로 가기 버튼을 MainActivity로 돌아가도록 설정합니다.
         ImageButton backButton = findViewById(R.id.back_button);
@@ -67,15 +82,15 @@ public class Stat extends AppCompatActivity {
 
         // 인텐트로부터 물 섭취 데이터를 받아옵니다.
         // 실제 데이터 대신 모의 데이터를 사용합니다.
-        int[] waterIntakeData = {2000, 1500, 1800, 2200, 2100, 1900, 1600}; // 예시 데이터
+        int[] waterIntakeData = {myApp.getMon(), myApp.getTue(), myApp.getWed(), myApp.getThu(), myApp.getFri(), myApp.getSat(), myApp.getSun()};
 
         // 요일 이름 배열
         String[] daysOfWeek = {"월", "화", "수", "목", "금", "토", "일"};
 
         // ListView에 표시할 데이터를 준비합니다.
         ArrayList<String> displayList = new ArrayList<>();
-        for (int i = 0; i < waterIntakeData.length; i++) {
-            String displayText = daysOfWeek[i] + " : " + waterIntakeData[i] + "ml";
+        for(int i = 0; i < waterIntakeData.length; i++) {
+            String displayText = daysOfWeek[i] + ": " + waterIntakeData[i] + "ml";
             displayList.add(displayText);
         }
 
@@ -86,9 +101,10 @@ public class Stat extends AppCompatActivity {
 
         // ProgressBar 설정
         ProgressBar progressBar = findViewById(R.id.progressBarWaterIntake);
-        int weeklyGoal = 14000; // 일주일 목표량 (2000ml x 7일)
+        int weeklyGoal = myApp.getGoalAmount() * 7; // 일주일 목표량 (2000ml x 7일)
         progressBar.setMax(weeklyGoal); // ProgressBar의 최대치를 일주일 목표량으로 설정
         progressBar.setProgress(totalIntake); // 현재 진행 사항을 계산된 총 섭취량으로 설정
+
 
         // ArrayAdapter를 사용하여 데이터를 ListView에 바인딩합니다.
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -98,6 +114,6 @@ public class Stat extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         TextView tvTotalIntake = findViewById(R.id.tvTotalIntake);
-        tvTotalIntake.setText("  주간 총 섭취량 : " + totalIntake + "ml / 14000ml"); // 실시간으로 변하는 총 섭취량 표시
+        tvTotalIntake.setText("  주간 총 섭취량 : " + totalIntake + "ml / " + weeklyGoal + "ml"); // 실시간으로 변하는 총 섭취량 표시
     }
 }

@@ -35,6 +35,7 @@ public class BluetoothService extends Service {
     private boolean isScanning = false;
     private static final long SCAN_PERIOD = 10000;
     private static final String TARGET_MAC_ADDRESS = "1E:41:CF:5C:6F:4E"; // Your Arduino Nano BLE MAC address
+    //private static final String TARGET_MAC_ADDRESS = "20:33:91:BA:82:3F"; // Your Arduino Nano BLE MAC address
 
     @Nullable
     @Override
