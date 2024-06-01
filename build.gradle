@@ -2,3 +2,5 @@
 plugins {
 alias(libs.plugins.androidApplication) apply false
 }
+//build.gradle 에서는 minSdk 만 주로 바꾼다. 31 또는 33으로
+//여기는 손 잘 안댐
