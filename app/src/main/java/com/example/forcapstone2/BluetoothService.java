@@ -13,13 +13,16 @@ import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
+import android.Manifest;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class BluetoothService extends Service {
@@ -35,7 +38,6 @@ public class BluetoothService extends Service {
     private boolean isScanning = false;
     private static final long SCAN_PERIOD = 10000;
     private static final String TARGET_MAC_ADDRESS = "1E:41:CF:5C:6F:4E"; // Your Arduino Nano BLE MAC address
-    //private static final String TARGET_MAC_ADDRESS = "20:33:91:BA:82:3F"; // Your Arduino Nano BLE MAC address
 
     @Nullable
     @Override
@@ -94,7 +96,11 @@ public class BluetoothService extends Service {
     @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
         Log.d("BluetoothService", "Connecting to device: " + device.getAddress());
-        bluetoothGatt = device.connectGatt(this, false, gattCallback);
+        if (ContextCompat.checkSelfPermission(BluetoothService.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
+            bluetoothGatt = device.connectGatt(BluetoothService.this, false, gattCallback);
+        } else {
+            showToast("Bluetooth Connect permission is required to connect to device");
+        }
     }
 
     private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
@@ -110,6 +116,8 @@ public class BluetoothService extends Service {
                 Log.i("BluetoothService", "Disconnected from GATT server.");
                 showToast("Disconnected");
                 broadcastUpdate(ACTION_GATT_DISCONNECTED);
+            } else {
+                Log.w("BluetoothService", "Connection state changed to " + newState + " with status " + status);
             }
         }
 

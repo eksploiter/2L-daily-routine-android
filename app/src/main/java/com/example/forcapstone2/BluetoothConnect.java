@@ -17,8 +17,16 @@ import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.widget.Toast;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 public class BluetoothConnect extends AppCompatActivity {
 
@@ -52,6 +60,24 @@ public class BluetoothConnect extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_BLUETOOTH_PERMISSIONS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                bindAndStartBluetoothService();
+            } else {
+                Toast.makeText(this, "Bluetooth permissions are required to use this feature", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void bindAndStartBluetoothService() {
+        Intent serviceIntent = new Intent(this, BluetoothService.class);
+        startService(serviceIntent);
+        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
 
     @SuppressLint({"MissingPermission", "MissingInflatedId"})
     @Override
@@ -88,9 +114,7 @@ public class BluetoothConnect extends AppCompatActivity {
             dialog.show();
         });
 
-        Intent serviceIntent = new Intent(this, BluetoothService.class);
-        startService(serviceIntent);
-        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+        checkAndRequestBluetoothPermissions();
 
         LocalBroadcastManager.getInstance(this).registerReceiver(gattUpdateReceiver, makeGattUpdateIntentFilter());
     }
@@ -110,5 +134,21 @@ public class BluetoothConnect extends AppCompatActivity {
         intentFilter.addAction(BluetoothService.ACTION_GATT_CONNECTED);
         intentFilter.addAction(BluetoothService.ACTION_GATT_DISCONNECTED);
         return intentFilter;
+    }
+
+    private static final int REQUEST_BLUETOOTH_PERMISSIONS = 1;
+
+    private void checkAndRequestBluetoothPermissions() {
+        String[] permissions = {
+                Manifest.permission.BLUETOOTH_CONNECT,
+                Manifest.permission.BLUETOOTH_SCAN
+        };
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED ||
+                ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, permissions, REQUEST_BLUETOOTH_PERMISSIONS);
+        } else {
+            bindAndStartBluetoothService();
+        }
     }
 }
