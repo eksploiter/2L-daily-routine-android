@@ -265,10 +265,10 @@
 
     <TextView
         android:id="@+id/amountPercent"
-        android:layout_width="93dp"
-        android:layout_height="54dp"
-        android:textSize="28sp"
-        android:layout_marginTop="245dp"
+        android:layout_width="95dp"
+        android:layout_height="55dp"
+        android:textSize="35sp"
+        android:layout_marginTop="240dp"
         android:layout_marginEnd="160dp"
         android:fontFamily="sans-serif-light"
         android:textColor="#ffffff"
@@ -287,7 +287,7 @@
         android:layout_marginTop="360dp"
         android:layout_marginEnd="20dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="#000000"
+        android:textColor="#194569"
         android:gravity="center"
         android:text="현재 물 측정값 : 0%"
         app:layout_constraintEnd_toEndOf="parent"
@@ -295,12 +295,14 @@
 
     <Button
         android:id="@+id/format"
-        android:layout_width="67dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="300dp"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/rounded_button"
         android:text="초기화"
-        app:layout_constraintStart_toStartOf="@+id/frameLayout"
+        android:textColor="#ffffff"
+        app:layout_constraintStart_toStartOf="@+id/themeContainer"
         app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

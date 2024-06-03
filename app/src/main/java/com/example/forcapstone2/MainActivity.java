@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         // activity_main.xml의 TextView에 연결해서 퍼센트 계산
         int percentage = (int) ((float) todayAmount / goalAmount * 100);
         TextView amountPercent = findViewById(R.id.amountPercent);
-        String percent = String.valueOf(percentage) + " %";
+        String percent = String.valueOf(percentage) + "%";
         amountPercent.setText(percent);
 
         // activity_main.xml의 TextView에 오늘 마신양 연결
@@ -317,7 +317,5 @@ public class MainActivity extends AppCompatActivity {
         String setResetTime = format1.format(new Date(resetCal.getTimeInMillis() + AlarmManager.INTERVAL_DAY));
 
         Log.d("resetAlarm", "ResetHour : " + setResetTime);
-
     }
-
 }

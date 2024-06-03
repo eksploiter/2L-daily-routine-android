@@ -114,22 +114,15 @@ public class WaterCupDark extends View {
         // 클리핑 영역 제거
         canvas.restore();
 
-        // 텍스트 스타일 설정 (굵은 흰색)
-        paint.setShader(null); // 텍스트 그라데이션 제거
-        paint.setColor(Color.WHITE); // 텍스트 색상을 흰색으로 설정
-        paint.setStyle(Paint.Style.FILL_AND_STROKE); // 텍스트 스타일을 채우기 및 외곽선으로 설정
-        paint.setStrokeWidth(7); // 텍스트 외곽선 너비 설정
+        // 텍스트를 흰색 굵은 글씨로 설정
+        paint.setShader(null); // 그라디언트를 텍스트에 적용하지 않도록 설정 해제
+        paint.setColor(Color.BLACK); // 텍스트 색상을 흰색으로 설정
+        paint.setStyle(Paint.Style.FILL); // 스타일을 FILL_AND_STROKE로 설정하여 굵은 글씨 생성
+        paint.setStrokeWidth(5); // 글씨 굵기 설정
 
-        // 목표 달성 비율 계산
-        float percentage = (float) currentAmount / goalAmount;
-        String text = String.format("%.0f%%", percentage * 100); // 백분율로 변환
-
-        // Draw text, adjust position
-        canvas.drawText(text, width / 2f, (height * 0.5f) + startHeightAdjustment, paint);
-
-        // Reset paint settings
-        paint.setStyle(Paint.Style.FILL); // Reset style to fill
-        paint.setStrokeWidth(0); // Reset stroke width
+        // 다음에 다시 paint 객체를 사용할 때 영향을 주지 않도록 설정 초기화
+        paint.setStyle(Paint.Style.FILL); // 다시 FILL로 설정
+        paint.setStrokeWidth(0); // 글씨 굵기 초기화
 
         // Draw small water drops
         drawSmallDrop(canvas, width * 0.15f, height * 0.09f + startHeightAdjustment, width * 0.04f);

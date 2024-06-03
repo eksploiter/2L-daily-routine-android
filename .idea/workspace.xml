@@ -62,32 +62,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SettingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SplashActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SplashActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/Stat.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/Stat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/WaterCupDark.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/WaterCupDark.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/WaterCupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/WaterCupView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bluetooth_connection.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bluetooth_connection.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c8983a1e4170e76e4c911160cdfcadf8/init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c8983a1e4170e76e4c911160cdfcadf8/init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c8983a1e4170e76e4c911160cdfcadf8/init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d2b617a4dcc0c3760431292bf1d9c4e2/proj.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d2b617a4dcc0c3760431292bf1d9c4e2/proj.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d2b617a4dcc0c3760431292bf1d9c4e2/proj.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d89ff55049d82736f17a77b0ee949ed4/cp_init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d89ff55049d82736f17a77b0ee949ed4/cp_init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d89ff55049d82736f17a77b0ee949ed4/cp_init.jar.receipt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/e5bff572b3d6bb408420f4921b02b083/results.bin" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

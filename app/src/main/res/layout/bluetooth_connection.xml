@@ -46,7 +46,7 @@
     <ListView
         android:id="@+id/bluetooth_devices_list"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="300dp"
         android:layout_below="@id/bluetooth_connection_title"
         android:layout_marginTop="20dp"
         android:divider="@drawable/custom_divider"
@@ -61,7 +61,7 @@
         android:layout_below="@id/bluetooth_devices_list"
         android:layout_marginTop="20dp"
         android:text="Disconnected"
-        android:textSize="18sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="#194569"/>
 </RelativeLayout>
