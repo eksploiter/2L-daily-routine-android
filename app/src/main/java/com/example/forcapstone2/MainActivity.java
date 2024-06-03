@@ -1,14 +1,18 @@
 package com.example.forcapstone2;
 
 import android.annotation.SuppressLint;
+import android.app.AlarmManager;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -17,11 +21,16 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton informationButton;
@@ -34,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView statisticsIcon;
     private ImageView bluetoothIcon;
     private ImageView reloadIcon;
+    private int currentAmount = 0;
+
 
     private static final int REQUEST_PERMISSIONS = 1;
 
@@ -64,6 +75,17 @@ public class MainActivity extends AppCompatActivity {
         reloadIcon = findViewById(R.id.reloadIcon);
         informationButton = findViewById(R.id.informationButton);
 
+        // activity_main.xml의 TextView에 목표량 연결
+        TextView purposewaterAmountText = findViewById(R.id.PurposewaterAmountText);
+        String goalAmountText = "목표량 " + String.valueOf((float) myApp.getGoalAmount()/1000 + "L");
+        purposewaterAmountText.setText(goalAmountText);
+
+        setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
+
+        createNotificationChannel();
+        resetAlarm(MainActivity.this);
+
+
         // Set the initial theme to light mode
         setInitialTheme();
 
@@ -74,7 +96,16 @@ public class MainActivity extends AppCompatActivity {
                 createNotification();
                 myApp.drainAmount();
             }
+            myApp.drainAmount();
+
+            TextView waterAmountText = findViewById(R.id.waterAmountText);
+            String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
+            waterAmountText.setText(todayAmountText);
+
+            setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
+
             Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+
         });
 
         button2.setOnClickListener(view -> {
@@ -83,7 +114,24 @@ public class MainActivity extends AppCompatActivity {
                 createNotification();
                 myApp.drinkAmount();
             }
+            myApp.drinkAmount();
+
+            TextView waterAmountText = findViewById(R.id.waterAmountText);
+            String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
+            waterAmountText.setText(todayAmountText);
+
+            int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
+            TextView amountPercent = findViewById(R.id.amountPercent);
+            String percent = String.valueOf(percentage) + " %";
+            amountPercent.setText(percent);
+
+            // 완성되면 지울 것. 테스트용
+            TextView nowAmount = findViewById(R.id.nowAmount);
+            String now = "현재 텀블러 측정값 : " + String.valueOf(myApp.getBeforeAmount());
+            nowAmount.setText(now);
+
             Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
+
         });
 
         switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -124,6 +172,28 @@ public class MainActivity extends AppCompatActivity {
 
         informationButton.setOnClickListener(v -> showInformationPopup());
     }
+
+    private void resetAlarm(MainActivity mainActivity) {
+    }
+
+    private void setMainTextVeiw(int todayAmount, int goalAmount, int beforeAmount) {
+        // activity_main.xml의 TextView에 연결해서 퍼센트 계산
+        int percentage = (int) ((float) todayAmount / goalAmount * 100);
+        TextView amountPercent = findViewById(R.id.amountPercent);
+        String percent = String.valueOf(percentage) + " %";
+        amountPercent.setText(percent);
+
+        // activity_main.xml의 TextView에 오늘 마신양 연결
+        TextView waterAmountText = findViewById(R.id.waterAmountText);
+        String todayAmountText = String.valueOf(todayAmount) + "mL";
+        waterAmountText.setText(todayAmountText);
+
+        // 완성되면 지울 것. 테스트용
+        TextView nowAmount = findViewById(R.id.nowAmount);
+        String now = "현재 물 측정값 : " + String.valueOf(beforeAmount);
+        nowAmount.setText(now);
+    }
+
 
     private void requestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -225,4 +295,29 @@ public class MainActivity extends AppCompatActivity {
         }
         notificationManager.notify(1, builder.build());
     }
+
+    public static void resetAlarm(Context context) {
+        AlarmManager resetAlarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        Intent resetIntent = new Intent(context, Initialize.class);
+        PendingIntent resetSender = PendingIntent.getBroadcast(context, 0, resetIntent, PendingIntent.FLAG_IMMUTABLE);
+
+        // 자정 시간
+        Calendar resetCal = Calendar.getInstance();
+        resetCal.setTimeInMillis(System.currentTimeMillis());
+        resetCal.set(Calendar.HOUR_OF_DAY, 0);
+        resetCal.set(Calendar.MINUTE, 0);
+        resetCal.set(Calendar.SECOND, 0);
+
+        //다음날 0시에 맞추기 위해 24시간을 뜻하는 상수인 AlarmManager.INTERVAL_DAY를 더해줌.
+        resetAlarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, resetCal.getTimeInMillis()
+                + AlarmManager.INTERVAL_DAY, AlarmManager.INTERVAL_DAY, resetSender);
+
+
+        SimpleDateFormat format1 = new SimpleDateFormat("MM/dd kk:mm:ss");
+        String setResetTime = format1.format(new Date(resetCal.getTimeInMillis() + AlarmManager.INTERVAL_DAY));
+
+        Log.d("resetAlarm", "ResetHour : " + setResetTime);
+
+    }
+
 }
