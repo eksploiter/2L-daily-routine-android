@@ -7,6 +7,8 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
+import android.bluetooth.BluetoothGattDescriptor;
+import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -22,13 +24,18 @@ import android.widget.Toast;
 import android.Manifest;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import java.util.UUID;
 
 public class BluetoothService extends Service {
 
     public static final String ACTION_GATT_CONNECTED = "com.example.forcapstone2.ACTION_GATT_CONNECTED";
     public static final String ACTION_GATT_DISCONNECTED = "com.example.forcapstone2.ACTION_GATT_DISCONNECTED";
+    public static final String ACTION_DATA_AVAILABLE = "com.example.forcapstone2.ACTION_DATA_AVAILABLE";
+    public static final String EXTRA_DATA = "com.example.forcapstone2.EXTRA_DATA";
 
     private final IBinder binder = new LocalBinder();
     private BluetoothAdapter bluetoothAdapter;
@@ -108,25 +115,31 @@ public class BluetoothService extends Service {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             if (newState == BluetoothGatt.STATE_CONNECTED) {
-                Log.i("BluetoothService", "Connected to GATT server.");
                 bluetoothGatt.discoverServices();
                 showToast("Connected to " + gatt.getDevice().getName());
                 broadcastUpdate(ACTION_GATT_CONNECTED);
             } else if (newState == BluetoothGatt.STATE_DISCONNECTED) {
-                Log.i("BluetoothService", "Disconnected from GATT server.");
                 showToast("Disconnected");
                 broadcastUpdate(ACTION_GATT_DISCONNECTED);
-            } else {
-                Log.w("BluetoothService", "Connection state changed to " + newState + " with status " + status);
             }
         }
 
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                Log.i("BluetoothService", "Services discovered.");
-            } else {
-                Log.w("BluetoothService", "onServicesDiscovered received: " + status);
+                for (BluetoothGattService service : gatt.getServices()) {
+                    for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
+                        if (characteristic.getUuid().equals(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))) {
+                            if (ActivityCompat.checkSelfPermission(BluetoothService.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
+                                return;
+                            }
+                            gatt.setCharacteristicNotification(characteristic, true);
+                            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
+                            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
+                            gatt.writeDescriptor(descriptor);
+                        }
+                    }
+                }
             }
         }
 
@@ -139,7 +152,10 @@ public class BluetoothService extends Service {
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            // Handle characteristic changed
+            if (characteristic.getUuid().equals(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))) {
+                final String weight = characteristic.getStringValue(0);
+                broadcastUpdate(ACTION_DATA_AVAILABLE, weight);
+            }
         }
     };
 
@@ -159,6 +175,12 @@ public class BluetoothService extends Service {
 
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
+
+    private void broadcastUpdate(final String action, final String data) {
+        final Intent intent = new Intent(action);
+        intent.putExtra(EXTRA_DATA, data);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }
