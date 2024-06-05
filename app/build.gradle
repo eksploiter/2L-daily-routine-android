@@ -6,9 +6,9 @@ android {
     namespace 'com.example.forcapstone2'
     compileSdk 34
 
-    defaultConfig {
+    defaultConfig {//build.gradle 에서는 minSdk 만 주로 바꾼다. 31 또는 33으로
         applicationId "com.example.forcapstone2"
-        minSdk 31                                 //build.gradle 에서는 minSdk 만 주로 바꾼다. 31 또는 33으로
+        minSdk 31
         targetSdk 34
         versionCode 1
         versionName "1.0"

@@ -265,7 +265,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // 팝업창을 띄우는 코드
-                Dialog dialog = new Dialog(SettingActivity.this);
+                Dialog dialog = new Dialog(SettingActivity.this, R.style.RoundedDialog);
                 dialog.setContentView(R.layout.popup_activity);
                 Window window = dialog.getWindow();
                 WindowManager.LayoutParams params = window.getAttributes();
