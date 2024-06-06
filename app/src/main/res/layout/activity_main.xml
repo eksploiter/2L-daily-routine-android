@@ -62,8 +62,24 @@
                 android:thumb="@drawable/switch_track_thumb"
                 app:track="@drawable/switch_track_selector"
                 app:layout_constraintStart_toStartOf="parent" />
+
         </FrameLayout>
     </FrameLayout>
+
+    <Button
+        android:id="@+id/format"
+        android:layout_width="80dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/transparent_button"
+        android:text="00:00"
+        android:textColor="#ffffff"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
 
     <!-- Layouts and Views that are common to both themes -->
     <LinearLayout
@@ -291,18 +307,6 @@
         android:gravity="center"
         android:text="현재 물 측정값 : 0%"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
-
-    <Button
-        android:id="@+id/format"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="200dp"
-        android:background="@drawable/rounded_button"
-        android:text="초기화"
-        android:textColor="#ffffff"
-        app:layout_constraintStart_toStartOf="@+id/themeContainer"
         app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

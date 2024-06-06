@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
 
             int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
             TextView amountPercent = findViewById(R.id.amountPercent);
-            String percent = String.valueOf(percentage) + " %";
+            String percent = String.valueOf(percentage) + "%";
             amountPercent.setText(percent);
 
             // 완성되면 지울 것. 테스트용
