@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     private int currentAmount = 0;
     private TextView nowAmount;
 
-    private final Handler handler = new Handler(Looper.getMainLooper()) {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
             nowAmount.setText(BluetoothService.receivedMessage);
@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
         informationButton = findViewById(R.id.informationButton);
         Button format = findViewById(R.id.format);
 
+
         // activity_main.xml의 TextView에 목표량 연결
         TextView purposewaterAmountText = findViewById(R.id.PurposewaterAmountText);
         String goalAmountText = "목표량 " + String.valueOf((float) myApp.getGoalAmount() / 1000 + "L");
@@ -149,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
             String percent = String.valueOf(percentage) + "%";
             amountPercent.setText(percent);
         });
+
 
         // Set click listeners
         button.setOnClickListener(v -> {
@@ -247,23 +249,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        new Runnable() {
-            @Override
-            public void run() {
-//                handler.postDelayed(() -> {
+        reloadIcon.setOnClickListener(v -> {
+            handler.post(() -> {
                 if (bluetoothService != null) {
                     bluetoothService.readData();
                     Message message = handler.obtainMessage();
                     handler.sendMessage(message);
                 }
-//                }, 3000);
-                handler.postDelayed(this, 3000);
-            }
-        }.run();
-
-
-        reloadIcon.setOnClickListener(v -> {
-
+            });
             Toast.makeText(getApplicationContext(), "새로고침 성공!", Toast.LENGTH_SHORT).show();
 
             myApp.reloadAmount();

@@ -36,7 +36,6 @@ public class BluetoothService extends Service {
     private static final String TAG = "BluetoothService";
     public static final String ACTION_GATT_CONNECTED = "com.example.forcapstone2.ACTION_GATT_CONNECTED";
     public static final String ACTION_GATT_DISCONNECTED = "com.example.forcapstone2.ACTION_GATT_DISCONNECTED";
-    // 추가===========================================================================================================================================
     public static final String ACTION_DATA_AVAILABLE = "com.example.forcapstone2.ACTION_DATA_AVAILABLE";
 
     public static String receivedMessage = "";
