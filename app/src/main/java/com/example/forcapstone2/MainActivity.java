@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
             nowAmount.setText(BluetoothService.receivedMessage);
         }
     };
-    // 추가============================================================================================================
+
     private BluetoothService bluetoothService;
     private boolean isBound = false;
 
@@ -79,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
             isBound = false;
         }
     };
-    //======================================================================================================================
 
     private static final int REQUEST_PERMISSIONS = 1;
 
@@ -147,14 +146,14 @@ public class MainActivity extends AppCompatActivity {
 
             int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
             TextView amountPercent = findViewById(R.id.amountPercent);
-            String percent = String.valueOf(percentage) + "%";
+            String percent = String.valueOf(percentage) + " %";
             amountPercent.setText(percent);
         });
 
 
         // Set click listeners
         button.setOnClickListener(v -> {
-            //bluetoothService.readData();
+            bluetoothService.readData();
 
             myApp.getTodayAmount();
             if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
@@ -169,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
             setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
-            Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
 
             // Send data 'A' to Arduino
             if (isBound) {
@@ -206,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
             int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
             TextView amountPercent = findViewById(R.id.amountPercent);
-            String percent = String.valueOf(percentage) + "%";
+            String percent = String.valueOf(percentage) + " %";
             amountPercent.setText(percent);
 
             // 완성되면 지울 것. 테스트용
@@ -214,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             String now = "현재 텀블러 측정값 : " + String.valueOf(myApp.getBeforeAmount());
 
 
-            Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
 
         });
 

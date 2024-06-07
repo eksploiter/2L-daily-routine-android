@@ -48,7 +48,7 @@ public class BluetoothService extends Service {
     private static final long SCAN_PERIOD = 10000;
     private static final String TARGET_MAC_ADDRESS = "1E:41:CF:5C:6F:4E"; // Your Arduino Nano BLE MAC address
     private static final UUID MY_SERVICE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
-    private static final UUID MY_CHARACTERISTIC_UUID = UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB");
+    private static final UUID MY_CHARACTERISTIC_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private BluetoothGattCharacteristic characteristic;
 
     @Nullable
@@ -78,16 +78,16 @@ public class BluetoothService extends Service {
             handler.postDelayed(() -> {
                 isScanning = false;
                 bluetoothLeScanner.stopScan(leScanCallback);
-                Log.d("BluetoothService", "Stopped scanning");
+                Log.d(TAG, "Stopped scanning");
             }, SCAN_PERIOD);
 
             isScanning = true;
             bluetoothLeScanner.startScan(leScanCallback);
-            Log.d("BluetoothService", "Started scanning");
+            Log.d(TAG, "Started scanning");
         } else {
             isScanning = false;
             bluetoothLeScanner.stopScan(leScanCallback);
-            Log.d("BluetoothService", "Stopped scanning");
+            Log.d(TAG, "Stopped scanning");
         }
     }
 
@@ -107,7 +107,7 @@ public class BluetoothService extends Service {
 
     @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
-        Log.d("BluetoothService", "Connecting to device: " + device.getAddress());
+        Log.d(TAG, "Connecting to device: " + device.getAddress());
         if (ContextCompat.checkSelfPermission(BluetoothService.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             bluetoothGatt = device.connectGatt(BluetoothService.this, false, gattCallback);
         } else {
@@ -153,13 +153,22 @@ public class BluetoothService extends Service {
                 // 원하는 서비스 및 특성(UUID) 찾기
                 BluetoothGattService service = gatt.getService(MY_SERVICE_UUID);
                 if (service != null) {
+                    Log.d(TAG, "Service found: " + MY_SERVICE_UUID);
                     characteristic = service.getCharacteristic(MY_CHARACTERISTIC_UUID);
                     if (characteristic != null) {
-                        Log.d(TAG, "onServicesDiscovered");
+                        Log.d(TAG, "Characteristic found: " + MY_CHARACTERISTIC_UUID);
                         gatt.readCharacteristic(characteristic);
                         broadcastUpdate(ACTION_DATA_AVAILABLE);
+                    } else {
+                        Log.e(TAG, "Characteristic not found: " + MY_CHARACTERISTIC_UUID);
+                        showToast("Characteristic not found");
                     }
+                } else {
+                    Log.e(TAG, "Service not found: " + MY_SERVICE_UUID);
+                    showToast("Service not found");
                 }
+            } else {
+                Log.e(TAG, "onServicesDiscovered received: " + status);
             }
         }
 
