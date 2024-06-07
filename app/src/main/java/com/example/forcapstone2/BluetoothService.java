@@ -52,6 +52,10 @@ public class BluetoothService extends Service {
         return binder;
     }
 
+    public boolean isScanning() {
+        return isScanning;
+    }
+
     public class LocalBinder extends Binder {
         BluetoothService getService() {
             return BluetoothService.this;
@@ -129,12 +133,12 @@ public class BluetoothService extends Service {
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 for (BluetoothGattService service : gatt.getServices()) {
                     for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
-                        if (characteristic.getUuid().equals(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))) {
+                        if (characteristic.getUuid().equals(UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB"))) {
                             if (ActivityCompat.checkSelfPermission(BluetoothService.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
                                 return;
                             }
                             gatt.setCharacteristicNotification(characteristic, true);
-                            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
+                            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB"));
                             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
                             gatt.writeDescriptor(descriptor);
                         }
@@ -152,7 +156,7 @@ public class BluetoothService extends Service {
 
         @Override
         public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            if (characteristic.getUuid().equals(UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))) {
+            if (characteristic.getUuid().equals(UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB"))) {
                 final String weight = characteristic.getStringValue(0);
                 broadcastUpdate(ACTION_DATA_AVAILABLE, weight);
             }

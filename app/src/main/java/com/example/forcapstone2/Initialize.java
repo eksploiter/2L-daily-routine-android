@@ -17,7 +17,6 @@ public class Initialize extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
 
-
         // 날짜에 따른 다른 로직 실행
         switch (dayOfWeek) {
             case Calendar.MONDAY:

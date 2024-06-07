@@ -309,4 +309,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
 
+    <TextView
+        android:id="@+id/tumble"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:textSize="15sp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="100dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#194569"
+        android:gravity="center"
+        android:text="현재 텀블러 무게: 0kg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

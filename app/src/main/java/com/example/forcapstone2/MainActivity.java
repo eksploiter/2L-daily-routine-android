@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Switch switch1;
     private Switch switch2;
     private TextView waterAmountText;
+    private TextView tumble;
     private BroadcastReceiver gattUpdateReceiver;
 
     private FrameLayout lightThemeLayout;
@@ -67,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
 
         waterAmountText = findViewById(R.id.waterAmountText);
+        tumble = findViewById(R.id.tumble);
 
         // Initialize views
         switch1 = findViewById(R.id.switch1);
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
             private void updateWeightDisplay(String weight) {
                 // Update the water amount text view with the received weight
-                waterAmountText.setText(weight + " kg");
+                tumble.setText(weight + "kg");
             }
         };
 
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
             TextView waterAmountText = findViewById(R.id.waterAmountText);
             String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
             waterAmountText.setText(todayAmountText);
+
 
             int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
             TextView amountPercent = findViewById(R.id.amountPercent);
@@ -371,10 +374,5 @@ public class MainActivity extends AppCompatActivity {
         final IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction("com.example.forcapstone2.ACTION_DATA_AVAILABLE");
         return intentFilter;
-    }
-
-    private void updateWeightDisplay(String weight) {
-        // Update the water amount text view with the received weight
-        waterAmountText.setText(weight + " kg");
     }
 }
