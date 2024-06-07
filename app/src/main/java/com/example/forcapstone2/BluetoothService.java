@@ -7,9 +7,9 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
@@ -23,20 +23,23 @@ import android.util.Log;
 import android.widget.Toast;
 import android.Manifest;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.UUID;
 
 public class BluetoothService extends Service {
-
+    private static final String TAG = "BluetoothService";
     public static final String ACTION_GATT_CONNECTED = "com.example.forcapstone2.ACTION_GATT_CONNECTED";
     public static final String ACTION_GATT_DISCONNECTED = "com.example.forcapstone2.ACTION_GATT_DISCONNECTED";
+    // 추가===========================================================================================================================================
     public static final String ACTION_DATA_AVAILABLE = "com.example.forcapstone2.ACTION_DATA_AVAILABLE";
-    public static final String EXTRA_DATA = "com.example.forcapstone2.EXTRA_DATA";
 
+    public static String receivedMessage = "";
     private final IBinder binder = new LocalBinder();
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothLeScanner bluetoothLeScanner;
@@ -44,16 +47,15 @@ public class BluetoothService extends Service {
     private Handler handler = new Handler();
     private boolean isScanning = false;
     private static final long SCAN_PERIOD = 10000;
-    private static final String TARGET_MAC_ADDRESS = "1E:41:CF:5C:6F:4E"; // Your Arduino Nano BLE MAC address 76:05:96:D0:E9:3E, 1E:41:CF:5C:6F:4E
+    private static final String TARGET_MAC_ADDRESS = "1E:41:CF:5C:6F:4E"; // Your Arduino Nano BLE MAC address
+    private static final UUID MY_SERVICE_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
+    private static final UUID MY_CHARACTERISTIC_UUID = UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB");
+    private BluetoothGattCharacteristic characteristic;
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return binder;
-    }
-
-    public boolean isScanning() {
-        return isScanning;
     }
 
     public class LocalBinder extends Binder {
@@ -90,16 +92,16 @@ public class BluetoothService extends Service {
         }
     }
 
+    // BLE 스캔 콜백 설정
     private final ScanCallback leScanCallback = new ScanCallback() {
-        @SuppressLint("MissingPermission")
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
+            super.onScanResult(callbackType, result);
             BluetoothDevice device = result.getDevice();
-            Log.d("BluetoothService", "Found device: " + device.getAddress());
+
+            // MAC 주소 확인 후 연결 시도
             if (TARGET_MAC_ADDRESS.equals(device.getAddress())) {
-                Log.d("BluetoothService", "Target device found");
                 connectToDevice(device);
-                scanLeDevice(false);
             }
         }
     };
@@ -114,16 +116,34 @@ public class BluetoothService extends Service {
         }
     }
 
-    private final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
-        @SuppressLint("MissingPermission")
+    public void sendData(String data) {
+        if (bluetoothGatt != null && characteristic != null) {
+            characteristic.setValue(data.getBytes());
+            bluetoothGatt.writeCharacteristic(characteristic);
+        } else {
+            showToast("Device not connected or characteristic not found");
+        }
+    }
+
+    public void readData(){
+        Log.d(TAG, "readData()");
+        if (bluetoothGatt != null && characteristic != null) {
+            Log.d(TAG, "readData() if");
+            bluetoothGatt.readCharacteristic(characteristic);
+        } else {
+            showToast("Device not connected or characteristic not found");
+        }
+    }
+    // GATT 콜백 설정
+    public final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
-            if (newState == BluetoothGatt.STATE_CONNECTED) {
-                bluetoothGatt.discoverServices();
-                showToast("Connected to " + gatt.getDevice().getName());
+            if (newState == BluetoothProfile.STATE_CONNECTED) {
+                // 연결 성공 시 서비스 검색
+                Log.d(TAG, "onConnectionStateChange");
+                gatt.discoverServices();
                 broadcastUpdate(ACTION_GATT_CONNECTED);
-            } else if (newState == BluetoothGatt.STATE_DISCONNECTED) {
-                showToast("Disconnected");
+            } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
                 broadcastUpdate(ACTION_GATT_DISCONNECTED);
             }
         }
@@ -131,35 +151,37 @@ public class BluetoothService extends Service {
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                for (BluetoothGattService service : gatt.getServices()) {
-                    for (BluetoothGattCharacteristic characteristic : service.getCharacteristics()) {
-                        if (characteristic.getUuid().equals(UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB"))) {
-                            if (ActivityCompat.checkSelfPermission(BluetoothService.this, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                                return;
-                            }
-                            gatt.setCharacteristicNotification(characteristic, true);
-                            BluetoothGattDescriptor descriptor = characteristic.getDescriptor(UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB"));
-                            descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-                            gatt.writeDescriptor(descriptor);
-                        }
+                // 원하는 서비스 및 특성(UUID) 찾기
+                BluetoothGattService service = gatt.getService(MY_SERVICE_UUID);
+                if (service != null) {
+                    characteristic = service.getCharacteristic(MY_CHARACTERISTIC_UUID);
+                    if (characteristic != null) {
+                        Log.d(TAG, "onServicesDiscovered");
+                        gatt.readCharacteristic(characteristic);
+                        broadcastUpdate(ACTION_DATA_AVAILABLE);
                     }
                 }
             }
         }
 
         @Override
-        public void onCharacteristicRead(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+        public void onCharacteristicRead(@NonNull BluetoothGatt gatt, @NonNull BluetoothGattCharacteristic characteristic, @NonNull byte[] value, int status) {
+            super.onCharacteristicRead(gatt, characteristic, value, status);
+//            Log.d(TAG, "Status: "+ status);
+//            Log.d(TAG, "value.length: "+ value.length);
+//            Log.d(TAG, "value: "+ Arrays.toString(value));
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                // Handle characteristic read
+                Log.d(TAG, "onCharacteristicRead");
+                String receivedMessage = new String(value, StandardCharsets.UTF_8);
+                Log.d(TAG, "data: " + receivedMessage);
+                BluetoothService.receivedMessage = receivedMessage;
             }
         }
 
         @Override
-        public void onCharacteristicChanged(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic) {
-            if (characteristic.getUuid().equals(UUID.fromString("00002A19-0000-1000-8000-00805F9B34FB"))) {
-                final String weight = characteristic.getStringValue(0);
-                broadcastUpdate(ACTION_DATA_AVAILABLE, weight);
-            }
+        public void onCharacteristicChanged(@NonNull BluetoothGatt gatt, @NonNull BluetoothGattCharacteristic characteristic, @NonNull byte[] value) {
+            byte[] bytes = characteristic.getValue();
+            String received = new String(bytes, StandardCharsets.UTF_8);
         }
     };
 
@@ -179,12 +201,6 @@ public class BluetoothService extends Service {
 
     private void broadcastUpdate(final String action) {
         final Intent intent = new Intent(action);
-        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
-    }
-
-    private void broadcastUpdate(final String action, final String data) {
-        final Intent intent = new Intent(action);
-        intent.putExtra(EXTRA_DATA, data);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 }

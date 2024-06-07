@@ -6,13 +6,17 @@ import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Looper;
+import android.os.Message;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,11 +30,12 @@ import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -40,9 +45,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton informationButton;
     private Switch switch1;
     private Switch switch2;
-    private TextView waterAmountText;
-    private TextView tumble;
-    private BroadcastReceiver gattUpdateReceiver;
 
     private FrameLayout lightThemeLayout;
     private FrameLayout darkThemeLayout;
@@ -51,6 +53,33 @@ public class MainActivity extends AppCompatActivity {
     private ImageView bluetoothIcon;
     private ImageView reloadIcon;
     private int currentAmount = 0;
+    private TextView nowAmount;
+
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            nowAmount.setText(BluetoothService.receivedMessage);
+        }
+    };
+    // 추가============================================================================================================
+    private BluetoothService bluetoothService;
+    private boolean isBound = false;
+
+    private final ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            BluetoothService.LocalBinder binder = (BluetoothService.LocalBinder) service;
+            bluetoothService = binder.getService();
+            isBound = true;
+            Log.d("MainActivity", "ServiceConnection-onServiceConnected");
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            isBound = false;
+        }
+    };
+    //======================================================================================================================
 
     private static final int REQUEST_PERMISSIONS = 1;
 
@@ -67,15 +96,13 @@ public class MainActivity extends AppCompatActivity {
 
         createNotificationChannel();
 
-        waterAmountText = findViewById(R.id.waterAmountText);
-        tumble = findViewById(R.id.tumble);
-
         // Initialize views
         switch1 = findViewById(R.id.switch1);
         switch2 = findViewById(R.id.switch2);
         lightThemeLayout = findViewById(R.id.lightThemeLayout);
         darkThemeLayout = findViewById(R.id.darkThemeLayout);
 
+        nowAmount = findViewById(R.id.nowAmount);
         ImageView button = findViewById(R.id.button);
         ImageView button2 = findViewById(R.id.button2);
         buttonSetting = findViewById(R.id.buttonSetting);
@@ -85,23 +112,29 @@ public class MainActivity extends AppCompatActivity {
         informationButton = findViewById(R.id.informationButton);
         Button format = findViewById(R.id.format);
 
+        // activity_main.xml의 TextView에 목표량 연결
+        TextView purposewaterAmountText = findViewById(R.id.PurposewaterAmountText);
+        String goalAmountText = "목표량 " + String.valueOf((float) myApp.getGoalAmount() / 1000 + "L");
+        purposewaterAmountText.setText(goalAmountText);
 
-        // Initialize BroadcastReceiver to handle BLE data
-        gattUpdateReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                final String action = intent.getAction();
-                if ("com.example.forcapstone2.ACTION_DATA_AVAILABLE".equals(action)) {
-                    final String data = intent.getStringExtra("com.example.forcapstone2.EXTRA_DATA");
-                    updateWeightDisplay(data);
-                }
-            }
+        setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
-            private void updateWeightDisplay(String weight) {
-                // Update the water amount text view with the received weight
-                tumble.setText(weight + "kg");
-            }
-        };
+        createNotificationChannel();
+        resetAlarm(MainActivity.this);
+
+        // Bind to BluetoothService
+        Intent serviceIntent = new Intent(this, BluetoothService.class);
+        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
+
+        // Set the initial theme to light mode
+        setInitialTheme();
+
+        //        new Handler(Looper.getMainLooper()) {
+        //            @Override
+        //            public void handleMessage(@NonNull Message msg) {
+        //                super.handleMessage(msg);
+        //            }
+        //        }.post(() -> bluetoothService.readData());
 
         format.setOnClickListener(v -> {
             myApp.setTodayAmount(0);
@@ -117,22 +150,10 @@ public class MainActivity extends AppCompatActivity {
             amountPercent.setText(percent);
         });
 
-
-        // activity_main.xml의 TextView에 목표량 연결
-        TextView purposewaterAmountText = findViewById(R.id.PurposewaterAmountText);
-        String goalAmountText = "목표량 " + String.valueOf((float) myApp.getGoalAmount() / 1000) + "L";
-        purposewaterAmountText.setText(goalAmountText);
-
-        setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
-
-        createNotificationChannel();
-        resetAlarm(MainActivity.this);
-
-        // Set the initial theme to light mode
-        setInitialTheme();
-
         // Set click listeners
-        button.setOnClickListener(v -> { // 물버림
+        button.setOnClickListener(v -> {
+            //bluetoothService.readData();
+
             myApp.getTodayAmount();
             if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
                 createNotification();
@@ -147,9 +168,29 @@ public class MainActivity extends AppCompatActivity {
             setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
             Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+
+            // Send data 'A' to Arduino
+            if (isBound) {
+                bluetoothService.sendData("A");
+            }
+
+            // Send data 'C' to Arduino
+            if (isBound) {
+                bluetoothService.sendData("C");
+            }
+
+            // Send data 'D' to Arduino
+            if (isBound) {
+                bluetoothService.sendData("D");
+            }
+
+            // Send data 'E' to Arduino
+            if (isBound) {
+                bluetoothService.sendData("E");
+            }
         });
 
-        button2.setOnClickListener(view -> { // 물 채움
+        button2.setOnClickListener(view -> {
             myApp.getTodayAmount();
             if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
                 createNotification();
@@ -167,11 +208,12 @@ public class MainActivity extends AppCompatActivity {
             amountPercent.setText(percent);
 
             // 완성되면 지울 것. 테스트용
-            TextView nowAmount = findViewById(R.id.nowAmount);
+
             String now = "현재 텀블러 측정값 : " + String.valueOf(myApp.getBeforeAmount());
-            nowAmount.setText(now);
+
 
             Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
+
         });
 
         switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -205,12 +247,38 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        new Runnable() {
+            @Override
+            public void run() {
+//                handler.postDelayed(() -> {
+                if (bluetoothService != null) {
+                    bluetoothService.readData();
+                    Message message = handler.obtainMessage();
+                    handler.sendMessage(message);
+                }
+//                }, 3000);
+                handler.postDelayed(this, 3000);
+            }
+        }.run();
+
+
         reloadIcon.setOnClickListener(v -> {
+
             Toast.makeText(getApplicationContext(), "새로고침 성공!", Toast.LENGTH_SHORT).show();
+
             myApp.reloadAmount();
         });
 
         informationButton.setOnClickListener(v -> showInformationPopup());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (isBound) {
+            unbindService(serviceConnection);
+            isBound = false;
+        }
     }
 
     private void resetAlarm(MainActivity mainActivity) {
@@ -220,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
         // activity_main.xml의 TextView에 연결해서 퍼센트 계산
         int percentage = (int) ((float) todayAmount / goalAmount * 100);
         TextView amountPercent = findViewById(R.id.amountPercent);
-        String percent = String.valueOf(percentage) + "%";
+        String percent = String.valueOf(percentage) + " %";
         amountPercent.setText(percent);
 
         // activity_main.xml의 TextView에 오늘 마신양 연결
@@ -233,6 +301,7 @@ public class MainActivity extends AppCompatActivity {
         String now = "현재 물 측정값 : " + String.valueOf(beforeAmount);
         nowAmount.setText(now);
     }
+
 
     private void requestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -256,6 +325,7 @@ public class MainActivity extends AppCompatActivity {
         lightThemeLayout.setVisibility(View.VISIBLE);
         darkThemeLayout.setVisibility(View.GONE);
         switch1.setChecked(false);
+        switch2.setChecked(false);
         switch2.setChecked(false);
         updateIconsForLightTheme();
     }
@@ -356,23 +426,6 @@ public class MainActivity extends AppCompatActivity {
         String setResetTime = format1.format(new Date(resetCal.getTimeInMillis() + AlarmManager.INTERVAL_DAY));
 
         Log.d("resetAlarm", "ResetHour : " + setResetTime);
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LocalBroadcastManager.getInstance(this).registerReceiver(gattUpdateReceiver, makeGattUpdateIntentFilter());
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(gattUpdateReceiver);
-    }
-
-    private static IntentFilter makeGattUpdateIntentFilter() {
-        final IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction("com.example.forcapstone2.ACTION_DATA_AVAILABLE");
-        return intentFilter;
     }
 }
