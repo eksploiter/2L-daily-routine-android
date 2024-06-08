@@ -54,14 +54,22 @@ public class MainActivity extends AppCompatActivity {
     private ImageView reloadIcon;
     private int currentAmount = 0;
     private TextView nowAmount;
+    private TextView waterAmountText;
+    private MyApp myApp;
 
-    private Handler handler = new Handler(Looper.getMainLooper()) {
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
-            nowAmount.setText(BluetoothService.receivedMessage);
+            if (BluetoothService.readValue != null) {
+                double readValue = BluetoothService.readValue;
+                int converted = (int) (readValue * 1000);
+                myApp.reloadAmount(converted);
+                waterAmountText.setText(converted + "ml");
+                nowAmount.setText(converted + "ml");
+            }
         }
     };
-
+    // 추가============================================================================================================
     private BluetoothService bluetoothService;
     private boolean isBound = false;
 
@@ -71,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             BluetoothService.LocalBinder binder = (BluetoothService.LocalBinder) service;
             bluetoothService = binder.getService();
             isBound = true;
-            Log.d("MainActivity", "ServiceConnection-onServiceConnected");
+            Log.d("BluetoothService", "ServiceConnection-onServiceConnected");
         }
 
         @Override
@@ -79,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             isBound = false;
         }
     };
+    //======================================================================================================================
 
     private static final int REQUEST_PERMISSIONS = 1;
 
@@ -88,7 +97,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        MyApp myApp = (MyApp) getApplication();
+        myApp = (MyApp) getApplication();
 
         // Request necessary permissions
         requestPermissions();
@@ -102,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         darkThemeLayout = findViewById(R.id.darkThemeLayout);
 
         nowAmount = findViewById(R.id.nowAmount);
+        waterAmountText = findViewById(R.id.waterAmountText);
         ImageView button = findViewById(R.id.button);
         ImageView button2 = findViewById(R.id.button2);
         buttonSetting = findViewById(R.id.buttonSetting);
@@ -110,7 +120,6 @@ public class MainActivity extends AppCompatActivity {
         reloadIcon = findViewById(R.id.reloadIcon);
         informationButton = findViewById(R.id.informationButton);
         Button format = findViewById(R.id.format);
-
 
         // activity_main.xml의 TextView에 목표량 연결
         TextView purposewaterAmountText = findViewById(R.id.PurposewaterAmountText);
@@ -122,19 +131,13 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
         resetAlarm(MainActivity.this);
 
+        // 추가================================================================================================================================
         // Bind to BluetoothService
         Intent serviceIntent = new Intent(this, BluetoothService.class);
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
 
         // Set the initial theme to light mode
         setInitialTheme();
-
-        //        new Handler(Looper.getMainLooper()) {
-        //            @Override
-        //            public void handleMessage(@NonNull Message msg) {
-        //                super.handleMessage(msg);
-        //            }
-        //        }.post(() -> bluetoothService.readData());
 
         format.setOnClickListener(v -> {
             myApp.setTodayAmount(0);
@@ -150,10 +153,8 @@ public class MainActivity extends AppCompatActivity {
             amountPercent.setText(percent);
         });
 
-
         // Set click listeners
         button.setOnClickListener(v -> {
-            bluetoothService.readData();
 
             myApp.getTodayAmount();
             if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
@@ -168,7 +169,8 @@ public class MainActivity extends AppCompatActivity {
 
             setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
-            //Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+
 
             // Send data 'A' to Arduino
             if (isBound) {
@@ -213,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
             String now = "현재 텀블러 측정값 : " + String.valueOf(myApp.getBeforeAmount());
 
 
-            //Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
 
         });
 
@@ -248,22 +250,34 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+//        new Runnable() {
+//            @Override
+//            public void run() {
+//                if (bluetoothService != null) {
+//                    bluetoothService.readData();
+//                    Message message = handler.obtainMessage();
+//                    handler.sendMessage(message);
+//                }
+//                handler.postDelayed(this, 3000);
+//            }
+//        }.run();
+
+
         reloadIcon.setOnClickListener(v -> {
-            handler.post(() -> {
-                if (bluetoothService != null) {
-                    bluetoothService.readData();
-                    Message message = handler.obtainMessage();
-                    handler.sendMessage(message);
-                }
-            });
+
             Toast.makeText(getApplicationContext(), "새로고침 성공!", Toast.LENGTH_SHORT).show();
 
-            myApp.reloadAmount();
+            if (bluetoothService != null) {
+                bluetoothService.readData();
+                Message message = handler.obtainMessage();
+                handler.sendMessage(message);
+            }
         });
 
         informationButton.setOnClickListener(v -> showInformationPopup());
     }
 
+    // 추가================================================================================================================================
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -284,12 +298,10 @@ public class MainActivity extends AppCompatActivity {
         amountPercent.setText(percent);
 
         // activity_main.xml의 TextView에 오늘 마신양 연결
-        TextView waterAmountText = findViewById(R.id.waterAmountText);
         String todayAmountText = String.valueOf(todayAmount) + "mL";
         waterAmountText.setText(todayAmountText);
 
         // 완성되면 지울 것. 테스트용
-        TextView nowAmount = findViewById(R.id.nowAmount);
         String now = "현재 물 측정값 : " + String.valueOf(beforeAmount);
         nowAmount.setText(now);
     }
@@ -420,4 +432,5 @@ public class MainActivity extends AppCompatActivity {
         Log.d("resetAlarm", "ResetHour : " + setResetTime);
 
     }
+
 }

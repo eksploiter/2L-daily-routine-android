@@ -55,14 +55,14 @@ public class MyApp extends Application {
         editor.apply();
     }
 
-    public int reloadAmount() { // 새로고침 버튼 - 물을 그냥 마신 경우
+    public int reloadAmount(int value) { // 새로고침 버튼 - 물을 그냥 마신 경우
         int beforeWeight = getBeforeAmount(); // 저장된 값 불러오기
-        setBeforeAmount(getCurrentAmount(100)); // 현재 무게 sharedPreferences에 저장
+        setBeforeAmount(getCurrentAmount(value)); // 현재 무게 sharedPreferences에 저장
 
-        if (beforeWeight < getCurrentAmount(100)) { // 물 양이 늘어나면 마신 것이 아니니 그냥 오늘 물 값 반환
+        if (beforeWeight < getCurrentAmount(value)) { // 물 양이 늘어나면 마신 것이 아니니 그냥 오늘 물 값 반환
             return getTodayAmount();
         } else { // 그게 아니라면 줄어든만큼 마신량으로 계산
-            setTodayAmount(getTodayAmount() + (beforeWeight - getCurrentAmount(50)));
+            setTodayAmount(getTodayAmount() + (beforeWeight - getCurrentAmount(value)));
             return getTodayAmount();
         }
     }
