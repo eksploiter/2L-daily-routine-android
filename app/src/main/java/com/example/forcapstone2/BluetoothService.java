@@ -13,6 +13,7 @@ import android.bluetooth.BluetoothProfile;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanResult;
+import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,6 +30,7 @@ import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
@@ -39,6 +41,7 @@ public class BluetoothService extends Service {
     public static final String ACTION_DATA_AVAILABLE = "com.example.forcapstone2.ACTION_DATA_AVAILABLE";
 
     public static String receivedMessage = "";
+    public static Double readValue = 0d;
     private final IBinder binder = new LocalBinder();
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothLeScanner bluetoothLeScanner;
@@ -69,36 +72,38 @@ public class BluetoothService extends Service {
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         bluetoothAdapter = bluetoothManager.getAdapter();
         bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
-        scanLeDevice(true);
+        ScanSettings scanSettings = new ScanSettings.Builder()
+                .setScanMode(ScanSettings.SCAN_MODE_LOW_LATENCY)
+                .build();
+
+        scanLeDevice(true, scanSettings);
     }
 
     @SuppressLint("MissingPermission")
-    private void scanLeDevice(final boolean enable) {
+    private void scanLeDevice(final boolean enable, ScanSettings scanSettings) {
         if (enable) {
             handler.postDelayed(() -> {
                 isScanning = false;
                 bluetoothLeScanner.stopScan(leScanCallback);
-                Log.d(TAG, "Stopped scanning");
+                Log.d("BluetoothService", "Stopped scanning");
             }, SCAN_PERIOD);
 
             isScanning = true;
-            bluetoothLeScanner.startScan(leScanCallback);
-            Log.d(TAG, "Started scanning");
+            bluetoothLeScanner.startScan(new ArrayList<>(), scanSettings, leScanCallback);
+            Log.d("BluetoothService", "Started scanning");
         } else {
             isScanning = false;
             bluetoothLeScanner.stopScan(leScanCallback);
-            Log.d(TAG, "Stopped scanning");
+            Log.d("BluetoothService", "Stopped scanning");
         }
     }
 
-    // BLE 스캔 콜백 설정
     private final ScanCallback leScanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             super.onScanResult(callbackType, result);
             BluetoothDevice device = result.getDevice();
 
-            // MAC 주소 확인 후 연결 시도
             if (TARGET_MAC_ADDRESS.equals(device.getAddress())) {
                 connectToDevice(device);
             }
@@ -107,7 +112,7 @@ public class BluetoothService extends Service {
 
     @SuppressLint("MissingPermission")
     private void connectToDevice(BluetoothDevice device) {
-        Log.d(TAG, "Connecting to device: " + device.getAddress());
+        Log.d("BluetoothService", "Connecting to device: " + device.getAddress());
         if (ContextCompat.checkSelfPermission(BluetoothService.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             bluetoothGatt = device.connectGatt(BluetoothService.this, false, gattCallback);
         } else {
@@ -117,28 +122,31 @@ public class BluetoothService extends Service {
 
     public void sendData(String data) {
         if (bluetoothGatt != null && characteristic != null) {
-            characteristic.setValue(data.getBytes());
-            bluetoothGatt.writeCharacteristic(characteristic);
+            characteristic.setValue(data.getBytes(StandardCharsets.UTF_8));
+            boolean success = bluetoothGatt.writeCharacteristic(characteristic);
+            if (success) {
+                Log.d(TAG, "Write initiated successfully.");
+            } else {
+                Log.e(TAG, "Write initiation failed.");
+            }
         } else {
             showToast("Device not connected or characteristic not found");
+            Log.e(TAG, "sendData()");
         }
     }
 
-    public void readData(){
+    public void readData() {
         Log.d(TAG, "readData()");
         if (bluetoothGatt != null && characteristic != null) {
             Log.d(TAG, "readData() if");
             bluetoothGatt.readCharacteristic(characteristic);
-        } else {
-            showToast("Device not connected or characteristic not found");
         }
     }
-    // GATT 콜백 설정
+
     public final BluetoothGattCallback gattCallback = new BluetoothGattCallback() {
         @Override
         public void onConnectionStateChange(BluetoothGatt gatt, int status, int newState) {
             if (newState == BluetoothProfile.STATE_CONNECTED) {
-                // 연결 성공 시 서비스 검색
                 Log.d(TAG, "onConnectionStateChange");
                 gatt.discoverServices();
                 broadcastUpdate(ACTION_GATT_CONNECTED);
@@ -150,39 +158,31 @@ public class BluetoothService extends Service {
         @Override
         public void onServicesDiscovered(BluetoothGatt gatt, int status) {
             if (status == BluetoothGatt.GATT_SUCCESS) {
-                // 원하는 서비스 및 특성(UUID) 찾기
                 BluetoothGattService service = gatt.getService(MY_SERVICE_UUID);
                 if (service != null) {
-                    Log.d(TAG, "Service found: " + MY_SERVICE_UUID);
                     characteristic = service.getCharacteristic(MY_CHARACTERISTIC_UUID);
                     if (characteristic != null) {
-                        Log.d(TAG, "Characteristic found: " + MY_CHARACTERISTIC_UUID);
+                        Log.d(TAG, "onServicesDiscovered");
                         gatt.readCharacteristic(characteristic);
                         broadcastUpdate(ACTION_DATA_AVAILABLE);
-                    } else {
-                        Log.e(TAG, "Characteristic not found: " + MY_CHARACTERISTIC_UUID);
-                        showToast("Characteristic not found");
                     }
-                } else {
-                    Log.e(TAG, "Service not found: " + MY_SERVICE_UUID);
-                    showToast("Service not found");
                 }
-            } else {
-                Log.e(TAG, "onServicesDiscovered received: " + status);
             }
         }
 
         @Override
         public void onCharacteristicRead(@NonNull BluetoothGatt gatt, @NonNull BluetoothGattCharacteristic characteristic, @NonNull byte[] value, int status) {
             super.onCharacteristicRead(gatt, characteristic, value, status);
-//            Log.d(TAG, "Status: "+ status);
-//            Log.d(TAG, "value.length: "+ value.length);
-//            Log.d(TAG, "value: "+ Arrays.toString(value));
             if (status == BluetoothGatt.GATT_SUCCESS) {
                 Log.d(TAG, "onCharacteristicRead");
                 String receivedMessage = new String(value, StandardCharsets.UTF_8);
                 Log.d(TAG, "data: " + receivedMessage);
                 BluetoothService.receivedMessage = receivedMessage;
+                try {
+                    readValue = Double.parseDouble(receivedMessage);
+                } catch (Exception e) {
+                    Log.e(TAG, "Read value parsing error");
+                }
             }
         }
 
@@ -190,6 +190,14 @@ public class BluetoothService extends Service {
         public void onCharacteristicChanged(@NonNull BluetoothGatt gatt, @NonNull BluetoothGattCharacteristic characteristic, @NonNull byte[] value) {
             byte[] bytes = characteristic.getValue();
             String received = new String(bytes, StandardCharsets.UTF_8);
+        }
+
+        @Override
+        public void onCharacteristicWrite(BluetoothGatt gatt, BluetoothGattCharacteristic characteristic, int status) {
+            super.onCharacteristicWrite(gatt, characteristic, status);
+            if (status == BluetoothGatt.GATT_SUCCESS) {
+                Log.d(TAG, "Write Success");
+            }
         }
     };
 
