@@ -2,6 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.forcapstone2">
 
+    <!-- 알림 표시 권한 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 정확한 알람 스케줄링 권한 -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!-- 정확한 알람 사용 권한 -->
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+
     <!-- Required Bluetooth permissions -->
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
