@@ -62,17 +62,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/Initialize.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/Initialize.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SettingActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bluetooth_connection.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bluetooth_connection.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/classAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/18cb7587b7e29b05abbf54d91945da77/cp_init.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/18cb7587b7e29b05abbf54d91945da77/cp_init.jar.lock.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/18cb7587b7e29b05abbf54d91945da77/cp_init.jar.receipt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar.lock.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar.receipt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/aa397d12b91d673238341afd6ae57edf/cp_init.jar.receipt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/b0b62d9b930cef1f37a7599124a249b0/init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/b0b62d9b930cef1f37a7599124a249b0/init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/b0b62d9b930cef1f37a7599124a249b0/init.jar.receipt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/be2144ce117869342b38ef2f488da4d6/init.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/be2144ce117869342b38ef2f488da4d6/init.jar.lock.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/be2144ce117869342b38ef2f488da4d6/init.jar.receipt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/c643374f639c74c6ce2174b63ad18d93/cp_init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/c643374f639c74c6ce2174b63ad18d93/cp_init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/c643374f639c74c6ce2174b63ad18d93/cp_init.jar.receipt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/e26977d12a594f93306ea2cfec0d0116/proj.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/e26977d12a594f93306ea2cfec0d0116/proj.jar.lock.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/e26977d12a594f93306ea2cfec0d0116/proj.jar.receipt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.lock.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.receipt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/results.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/transformed/emoji2-1.2.0-runtime/emoji2-1.2.0-runtime_dex/classes.dex" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/e5bff572b3d6bb408420f4921b02b083/results.bin" beforeDir="false" />
@@ -306,5 +334,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="업로드!!&#10;&#10;2024-05-26" />
     <option name="LAST_COMMIT_MESSAGE" value="업로드!!&#10;&#10;2024-05-26" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SettingActivity.java</url>
+          <line>133</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

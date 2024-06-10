@@ -48,7 +48,6 @@ public class Initialize extends BroadcastReceiver {
                 myApp.initializeToday(6);
                 break;
         }
-
         // myApp 객체를 사용하여 initializeToday 메소드를 호출합니다.
         // 메소드 이름이 initializeToday라고 가정하면, 올바르게 메소드를 호출하기 위해 메소드 이름 뒤에 괄호를 추가해야 합니다.
         // myApp.initializeToday(1);
