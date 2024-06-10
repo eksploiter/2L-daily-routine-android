@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
                 double readValue = BluetoothService.readValue;
                 int converted = (int) (readValue * 1000);
                 myApp.reloadAmount(converted);
-                waterAmountText.setText(converted + "ml");
-                nowAmount.setText(converted + "ml");
+                waterAmountText.setText(converted + "mL");
+                nowAmount.setText(converted + "mL");
             }
         }
     };
@@ -207,7 +207,7 @@ public class MainActivity extends AppCompatActivity {
 
             int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
             TextView amountPercent = findViewById(R.id.amountPercent);
-            String percent = String.valueOf(percentage) + " %";
+            String percent = String.valueOf(percentage) + "%";
             amountPercent.setText(percent);
 
             // 완성되면 지울 것. 테스트용
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
         // activity_main.xml의 TextView에 연결해서 퍼센트 계산
         int percentage = (int) ((float) todayAmount / goalAmount * 100);
         TextView amountPercent = findViewById(R.id.amountPercent);
-        String percent = String.valueOf(percentage) + " %";
+        String percent = String.valueOf(percentage) + "%";
         amountPercent.setText(percent);
 
         // activity_main.xml의 TextView에 오늘 마신양 연결
@@ -430,7 +430,5 @@ public class MainActivity extends AppCompatActivity {
         String setResetTime = format1.format(new Date(resetCal.getTimeInMillis() + AlarmManager.INTERVAL_DAY));
 
         Log.d("resetAlarm", "ResetHour : " + setResetTime);
-
     }
-
 }

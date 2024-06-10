@@ -139,7 +139,7 @@ public class SettingActivity extends AppCompatActivity {
         myApp.setGoalSpinnerItem(position);
 
         if (myApp.getTodayAmount() < myApp.getGoalAmount()) { // 마신량이랑 목표치 비교해서
-            checkAndNotifyForCurrentAmount(); // 알림 발생      ***앱 완성하면 필요 X, 지금은 목표치 변화량에 따른 알림 발생 보기 위해 넣어놓은 것.
+            //checkAndNotifyForCurrentAmount(); // 알림 발생      ***앱 완성하면 필요 X, 지금은 목표치 변화량에 따른 알림 발생 보기 위해 넣어놓은 것.
         }
         if (mlnitSpinner == false) { // 처음 선택되었을 때 알림 메시지 안 뜨도록
             mlnitSpinner = true;
@@ -313,7 +313,7 @@ public class SettingActivity extends AppCompatActivity {
 
 
     // 목표치 변경에 따른 알림 보기 위한 메소드. 앱 정식 출시에는 필요 X
-    private void checkAndNotifyForCurrentAmount() {
+    /* private void checkAndNotifyForCurrentAmount() {
         // 알림 생성 및 발송 코드
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -330,5 +330,5 @@ public class SettingActivity extends AppCompatActivity {
         }
 
         notificationManager.notify(0, builder.build());
-    }
+    }*/
 }
