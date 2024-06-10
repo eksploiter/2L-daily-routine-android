@@ -278,7 +278,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.20" />
-    
+
     <TextView
         android:id="@+id/amountPercent"
         android:layout_width="95dp"
@@ -298,14 +298,14 @@
     <TextView
         android:id="@+id/nowAmount"
         android:layout_width="200dp"
-        android:layout_height="30dp"
-        android:textSize="15sp"
-        android:layout_marginTop="360dp"
-        android:layout_marginEnd="20dp"
+        android:layout_height="100dp"
+        android:textSize="30sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="105dp"
         android:fontFamily="sans-serif-light"
         android:textColor="#194569"
         android:gravity="center"
-        android:text="현재 물 측정값 : 0%"
+        android:text="현재 물 측정값 : 0mL"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
 

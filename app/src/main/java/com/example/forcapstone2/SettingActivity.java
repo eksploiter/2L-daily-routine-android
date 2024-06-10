@@ -71,7 +71,7 @@ public class SettingActivity extends AppCompatActivity {
         showSelectedtime.setText(myApp.getSelectedTime());
         buttonSetTime = findViewById(R.id.buttonSetTime);
 
-        setupTimePicker(); // TimePicker를 24시간제로 설정
+        setupTimePicker(); // TimePicker를 24시간제로 설정f
         initializeAndDisplayNotiTime(); // 이전 설정 시간 표시, Calendar 초기 설정, 초기 토스트 메시지 출력
         changedTimePicker(); // TimePicker 변화에 따른 설정 메소드
         setupNotiTimeButton(); // 시간 확정, 알림 설정 버튼
@@ -103,13 +103,13 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
-    private void setupTumblerWeight() { // 텀블러 무게 설정
+    /*private void setupTumblerWeight() { // 텀블러 무게 설정
         spinnerTumblerWeight = findViewById(R.id.spinnerTumblerWeight);
         ArrayAdapter<CharSequence> tumblerWeightAdapter = ArrayAdapter.createFromResource(this,
                 R.array.tumbler_weight_options, android.R.layout.simple_spinner_item);
         tumblerWeightAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerTumblerWeight.setAdapter(tumblerWeightAdapter);
-    }
+    }*/
 
     private void initializeSpinnerSelection() {
         // 스피너 아이템 선택 이벤트 처리
@@ -139,7 +139,7 @@ public class SettingActivity extends AppCompatActivity {
         myApp.setGoalSpinnerItem(position);
 
         if (myApp.getTodayAmount() < myApp.getGoalAmount()) { // 마신량이랑 목표치 비교해서
-            //checkAndNotifyForCurrentAmount(); // 알림 발생      ***앱 완성하면 필요 X, 지금은 목표치 변화량에 따른 알림 발생 보기 위해 넣어놓은 것.
+            checkAndNotifyForCurrentAmount(); // 알림 발생      ***앱 완성하면 필요 X, 지금은 목표치 변화량에 따른 알림 발생 보기 위해 넣어놓은 것.
         }
         if (mlnitSpinner == false) { // 처음 선택되었을 때 알림 메시지 안 뜨도록
             mlnitSpinner = true;
@@ -313,7 +313,7 @@ public class SettingActivity extends AppCompatActivity {
 
 
     // 목표치 변경에 따른 알림 보기 위한 메소드. 앱 정식 출시에는 필요 X
-    /* private void checkAndNotifyForCurrentAmount() {
+    private void checkAndNotifyForCurrentAmount() {
         // 알림 생성 및 발송 코드
         NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -330,5 +330,5 @@ public class SettingActivity extends AppCompatActivity {
         }
 
         notificationManager.notify(0, builder.build());
-    }*/
+    }
 }

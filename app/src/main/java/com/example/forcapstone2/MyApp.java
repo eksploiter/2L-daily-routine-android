@@ -16,6 +16,8 @@ import java.util.Date;
 public class MyApp extends Application {
     private int todayAmount; // 오늘 마신량
     private int goalAmount; // 목표치
+    private int converted; // 블투 값 받아오는 것
+    private int num; // 날짜 변수
 
 
     @Override
@@ -24,6 +26,14 @@ public class MyApp extends Application {
         // 초기화 코드
         todayAmount = getBeforeAmount();
         goalAmount = getGoalAmount();
+    }
+
+    public void savedConverted(int con) {
+        converted = con;
+    }
+
+    public int getConverted() {
+        return converted;
     }
 
     public int getCurrentAmount(int x) {
@@ -56,26 +66,29 @@ public class MyApp extends Application {
     }
 
     public int reloadAmount(int value) { // 새로고침 버튼 - 물을 그냥 마신 경우
-        int beforeWeight = getBeforeAmount(); // 저장된 값 불러오기
-        setBeforeAmount(getCurrentAmount(value)); // 현재 무게 sharedPreferences에 저장
+        if (value >= 0) {
+            int beforeWeight = getBeforeAmount(); // 저장된 값 불러오기
+            setBeforeAmount(getCurrentAmount(value)); // 현재 무게 sharedPreferences에 저장
 
-        if (beforeWeight < getCurrentAmount(value)) { // 물 양이 늘어나면 마신 것이 아니니 그냥 오늘 물 값 반환
-            return getTodayAmount();
-        } else { // 그게 아니라면 줄어든만큼 마신량으로 계산
-            setTodayAmount(getTodayAmount() + (beforeWeight - getCurrentAmount(value)));
-            return getTodayAmount();
+            if (beforeWeight < getCurrentAmount(value)) { // 물 양이 늘어나면 마신 것이 아니니 그냥 오늘 물 값 반환
+                return getTodayAmount();
+            } else { // 그게 아니라면 줄어든만큼 마신량으로 계산
+                setTodayAmount(getTodayAmount() + (beforeWeight - getCurrentAmount(value)));
+                return getTodayAmount();
+            }
         }
+        return 0;
     }
 
-    public int drainAmount() { // 물버림 버튼 - 물을 버리고 새로 따른 경우
-        setBeforeAmount(getCurrentAmount(180)); // 현재 무게 sharedPreferences에 저장
+    public int drainAmount(int value) { // 물버림 버튼 - 물을 버리고 새로 따른 경우
+        setBeforeAmount(0);
 
         return getTodayAmount();
     }
 
-    public int drinkAmount() { // 물 채움 버튼 - 물을 다 마시고 새로 물을 따른 경우
+    public int drinkAmount(int value) { // 물 채움 버튼 - 물을 다 마시고 새로 물을 따른 경우
         int beforeWeight = getBeforeAmount(); // 저장된 값 불러오기
-        setBeforeAmount(getCurrentAmount(20)); // 현재 무게 sharedPreferences에 저장
+        setBeforeAmount(getCurrentAmount(value)); // 현재 무게 sharedPreferences에 저장
 
         setTodayAmount(getTodayAmount() + beforeWeight); // 기존 무게를 먹은 걸로 계산
         return getTodayAmount();
@@ -87,6 +100,37 @@ public class MyApp extends Application {
         editor.putInt("savedTodayAmount", 0); // 현재 물 무게 sharedPreferences에 저장
         editor.apply();
     }
+
+    public void setDayValue(int i){
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("savedDayValue", i);
+        editor.apply();
+    }
+
+    public int getDayValue() { // 저장된 sharedPreferences를 받아오는 메소드
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        return sharedPreferences.getInt("savedDayValue", 0); // 이전 무게값
+    }
+
+    public void addDayValueForMain(){
+        if (getDayValueforMain() < 7) {
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("savedDayValueForMain", getDayValueforMain() + 1);
+            editor.apply();
+        } else {
+            SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt("savedDayValueForMain", 0);
+            editor.apply();
+        }
+    }
+    public int getDayValueforMain() { // 저장된 sharedPreferences를 받아오는 메소드
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        return sharedPreferences.getInt("savedDayValueForMain", 1); // 이전 무게값
+    }
+
 
     public void initializeToday(int day) {
         switch (day) {
@@ -157,6 +201,7 @@ public class MyApp extends Application {
         SharedPreferences sharedPreferences = getSharedPreferences("DailyAlarm", MODE_PRIVATE);
         return sharedPreferences.getString("selectedTime", "알림을 설정해주세요");
     }
+
     public void setSelectedTime(String selectedTime) {
         SharedPreferences sharedPreferences = getSharedPreferences("DailyAlarm", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -179,30 +224,35 @@ public class MyApp extends Application {
         editor.putInt("savedTueAmount", todayAmount);
         editor.apply();
     }
+
     public void setWed(int todayAmount) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("savedWedAmount", todayAmount);
         editor.apply();
     }
+
     public void setThu(int todayAmount) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("savedThuAmount", todayAmount);
         editor.apply();
     }
+
     public void setFri(int todayAmount) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("savedFriAmount", todayAmount);
         editor.apply();
     }
+
     public void setSat(int todayAmount) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt("savedSatAmount", todayAmount);
         editor.apply();
     }
+
     public void setSun(int todayAmount) {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -215,26 +265,32 @@ public class MyApp extends Application {
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         return sharedPreferences.getInt("savedMonAmount", 0); // 이전 무게값
     }
+
     public int getTue() { // 저장된 sharedPreferences를 받아오는 메소드
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         return sharedPreferences.getInt("savedTueAmount", 0); // 이전 무게값
     }
+
     public int getWed() { // 저장된 sharedPreferences를 받아오는 메소드
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         return sharedPreferences.getInt("savedWedAmount", 0); // 이전 무게값
     }
+
     public int getThu() { // 저장된 sharedPreferences를 받아오는 메소드
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         return sharedPreferences.getInt("savedThuAmount", 0); // 이전 무게값
     }
+
     public int getFri() { // 저장된 sharedPreferences를 받아오는 메소드
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         return sharedPreferences.getInt("savedFriAmount", 0); // 이전 무게값
     }
+
     public int getSat() { // 저장된 sharedPreferences를 받아오는 메소드
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         return sharedPreferences.getInt("savedSatAmount", 0); // 이전 무게값
     }
+
     public int getSun() { // 저장된 sharedPreferences를 받아오는 메소드
         SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
         return sharedPreferences.getInt("savedSunAmount", 0); // 이전 무게값

@@ -116,23 +116,23 @@ public class BluetoothService extends Service {
         if (ContextCompat.checkSelfPermission(BluetoothService.this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED) {
             bluetoothGatt = device.connectGatt(BluetoothService.this, false, gattCallback);
         } else {
-            showToast("Bluetooth Connect permission is required to connect to device");
+            showToast("연결중입니다 ... ");
         }
     }
 
     public void sendData(String data) {
-        if (bluetoothGatt != null && characteristic != null) {
-            characteristic.setValue(data.getBytes(StandardCharsets.UTF_8));
-            boolean success = bluetoothGatt.writeCharacteristic(characteristic);
-            if (success) {
-                Log.d(TAG, "Write initiated successfully.");
-            } else {
-                Log.e(TAG, "Write initiation failed.");
-            }
+        // if (bluetoothGatt != null && characteristic != null) {
+        characteristic.setValue(data.getBytes(StandardCharsets.UTF_8));
+        boolean success = bluetoothGatt.writeCharacteristic(characteristic);
+        if (success) {
+            Log.d(TAG, "Write initiated successfully.");
         } else {
+            Log.e(TAG, "Write initiation failed.");
+        }
+        /*} else {
             showToast("Device not connected or characteristic not found");
             Log.e(TAG, "sendData()");
-        }
+        }*/
     }
 
     public void readData() {

@@ -56,7 +56,7 @@ public class BluetoothConnect extends AppCompatActivity {
             if (BluetoothService.ACTION_GATT_CONNECTED.equals(action)) {
                 connectionStatus.setText("Connected");
             } else if (BluetoothService.ACTION_GATT_DISCONNECTED.equals(action)) {
-                connectionStatus.setText("Disconnected");
+                connectionStatus.setText("Connected");
             }
         }
     };

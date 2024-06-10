@@ -64,9 +64,39 @@ public class MainActivity extends AppCompatActivity {
                 double readValue = BluetoothService.readValue;
                 int converted = (int) (readValue * 1000);
                 myApp.reloadAmount(converted);
-                waterAmountText.setText(converted + "mL");
+                waterAmountText.setText(myApp.getTodayAmount() + "mL");
                 nowAmount.setText(converted + "mL");
             }
+            setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
+        }
+    };
+
+    private final Handler handlerdrain = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if (BluetoothService.readValue != null) {
+                double readValue = BluetoothService.readValue;
+                int converted = (int) (readValue * 1000);
+                myApp.drainAmount(converted);
+                waterAmountText.setText(myApp.getTodayAmount() + "mL");
+                nowAmount.setText(myApp.getBeforeAmount() + "mL");
+            }
+            setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
+        }
+    };
+
+    private final Handler handlerdrink = new Handler(Looper.getMainLooper()) {
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if (BluetoothService.readValue != null) {
+                double readValue = BluetoothService.readValue;
+                int converted = (int) (readValue * 1000);
+                myApp.drinkAmount(converted);
+                myApp.setTodayAmount(converted);
+                waterAmountText.setText(myApp.getTodayAmount() + "mL");
+                nowAmount.setText(converted + "mL");
+            }
+            setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
         }
     };
     // 추가============================================================================================================
@@ -126,6 +156,11 @@ public class MainActivity extends AppCompatActivity {
         String goalAmountText = "목표량 " + String.valueOf((float) myApp.getGoalAmount() / 1000 + "L");
         purposewaterAmountText.setText(goalAmountText);
 
+
+        waterAmountText.setText(myApp.getTodayAmount() + "mL");
+        nowAmount.setText(myApp.getBeforeAmount() + "mL");
+
+
         setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
         createNotificationChannel();
@@ -139,29 +174,74 @@ public class MainActivity extends AppCompatActivity {
         // Set the initial theme to light mode
         setInitialTheme();
 
-        format.setOnClickListener(v -> {
-            myApp.setTodayAmount(0);
+        format.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            TextView waterAmountText = findViewById(R.id.waterAmountText);
-            String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
-            waterAmountText.setText(todayAmountText);
+                switch (myApp.getDayValueforMain()) {
+                    case 1:
+                        myApp.setMon(myApp.getTodayAmount());
+                        myApp.setTue(0);
+                        myApp.setWed(0);
+                        myApp.setThu(0);
+                        myApp.setFri(0);
+                        myApp.setSat(0);
+                        myApp.setSun(0);
+                        break;
+                    case 2:
+                        myApp.setTue(myApp.getTodayAmount());
+                        break;
+                    case 3:
+                        myApp.setWed(myApp.getTodayAmount());
+                        break;
+                    case 4:
+                        myApp.setThu(myApp.getTodayAmount());
+                        break;
+                    case 5:
+                        myApp.setFri(myApp.getTodayAmount());
+                        break;
+                    case 6:
+                        myApp.setSat(myApp.getTodayAmount());
+                        break;
+                    case 7:
+                        myApp.setSun(myApp.getTodayAmount());
+                        break;
+                    default:
+                        break;
+                }
+                myApp.setTodayAmount(0);
+                myApp.addDayValueForMain();
+
+                TextView waterAmountText = findViewById(R.id.waterAmountText);
+                String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
+                waterAmountText.setText(todayAmountText);
 
 
-            int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
-            TextView amountPercent = findViewById(R.id.amountPercent);
-            String percent = String.valueOf(percentage) + " %";
-            amountPercent.setText(percent);
+                int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
+                TextView amountPercent = findViewById(R.id.amountPercent);
+                String percent = String.valueOf(percentage) + " %";
+                amountPercent.setText(percent);
+
+                //영점 조절
+                if (isBound) {
+                    bluetoothService.sendData("A");
+                }
+            }
+
         });
 
         // Set click listeners
-        button.setOnClickListener(v -> {
+        button.setOnClickListener(v -> { // 물 버림
+            if (true) {
+                bluetoothService.sendData("B");
+            }
 
             myApp.getTodayAmount();
-            if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
-                createNotification();
-                myApp.drainAmount();
+            if (bluetoothService != null) {
+                bluetoothService.readData();
+                Message message = handlerdrain.obtainMessage();
+                handlerdrain.sendMessage(message);
             }
-            myApp.drainAmount();
 
             TextView waterAmountText = findViewById(R.id.waterAmountText);
             String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
@@ -173,7 +253,32 @@ public class MainActivity extends AppCompatActivity {
 
 
             // Send data 'A' to Arduino
-            if (isBound) {
+
+        });
+
+        button2.setOnClickListener(view -> { // 물 채움
+            if (true) {
+                bluetoothService.sendData("B");
+            }
+
+            myApp.getTodayAmount();
+            if (bluetoothService != null) {
+                bluetoothService.readData();
+                Message message = handlerdrink.obtainMessage();
+                handlerdrink.sendMessage(message);
+            }
+
+            TextView waterAmountText = findViewById(R.id.waterAmountText);
+            String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
+            waterAmountText.setText(todayAmountText);
+
+            int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
+            TextView amountPercent = findViewById(R.id.amountPercent);
+            String percent = String.valueOf(percentage) + " %";
+            amountPercent.setText(percent);
+
+            // Send data 'A' to Arduino
+            /* if (isBound) {
                 bluetoothService.sendData("A");
             }
 
@@ -190,26 +295,7 @@ public class MainActivity extends AppCompatActivity {
             // Send data 'E' to Arduino
             if (isBound) {
                 bluetoothService.sendData("E");
-            }
-        });
-
-        button2.setOnClickListener(view -> {
-            myApp.getTodayAmount();
-            if (myApp.getTodayAmount() > myApp.getGoalAmount()) {
-                createNotification();
-                myApp.drinkAmount();
-            }
-            myApp.drinkAmount();
-
-            TextView waterAmountText = findViewById(R.id.waterAmountText);
-            String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
-            waterAmountText.setText(todayAmountText);
-
-            int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
-            TextView amountPercent = findViewById(R.id.amountPercent);
-            String percent = String.valueOf(percentage) + "%";
-            amountPercent.setText(percent);
-
+            }*/
             // 완성되면 지울 것. 테스트용
 
             String now = "현재 텀블러 측정값 : " + String.valueOf(myApp.getBeforeAmount());
@@ -264,6 +350,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         reloadIcon.setOnClickListener(v -> {
+            // bluetoothService.sendData("B");
 
             Toast.makeText(getApplicationContext(), "새로고침 성공!", Toast.LENGTH_SHORT).show();
 
@@ -294,16 +381,16 @@ public class MainActivity extends AppCompatActivity {
         // activity_main.xml의 TextView에 연결해서 퍼센트 계산
         int percentage = (int) ((float) todayAmount / goalAmount * 100);
         TextView amountPercent = findViewById(R.id.amountPercent);
-        String percent = String.valueOf(percentage) + "%";
+        String percent = String.valueOf(percentage) + " %";
         amountPercent.setText(percent);
 
         // activity_main.xml의 TextView에 오늘 마신양 연결
-        String todayAmountText = String.valueOf(todayAmount) + "mL";
+        /*String todayAmountText = String.valueOf(todayAmount) + "mL";
         waterAmountText.setText(todayAmountText);
 
         // 완성되면 지울 것. 테스트용
         String now = "현재 물 측정값 : " + String.valueOf(beforeAmount);
-        nowAmount.setText(now);
+        nowAmount.setText(now);*/
     }
 
 
@@ -430,5 +517,7 @@ public class MainActivity extends AppCompatActivity {
         String setResetTime = format1.format(new Date(resetCal.getTimeInMillis() + AlarmManager.INTERVAL_DAY));
 
         Log.d("resetAlarm", "ResetHour : " + setResetTime);
+
     }
+
 }
