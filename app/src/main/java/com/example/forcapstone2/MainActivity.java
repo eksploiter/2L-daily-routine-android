@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,6 +56,12 @@ public class MainActivity extends AppCompatActivity {
     private int currentAmount = 0;
     private TextView nowAmount;
     private TextView waterAmountText;
+    private TextView soFarText;
+    private TextView farText;
+    private TextView settingTextView;
+    private TextView bluetoothTextView;
+    private TextView statsTextView;
+    private TextView refreshTextView;
     private MyApp myApp;
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
@@ -139,9 +146,14 @@ public class MainActivity extends AppCompatActivity {
         switch2 = findViewById(R.id.switch2);
         lightThemeLayout = findViewById(R.id.lightThemeLayout);
         darkThemeLayout = findViewById(R.id.darkThemeLayout);
-
         nowAmount = findViewById(R.id.nowAmount);
         waterAmountText = findViewById(R.id.waterAmountText);
+        soFarText = findViewById(R.id.soFarText);
+        farText = findViewById(R.id.farText);
+        settingTextView = findViewById(R.id.settingTextView);
+        bluetoothTextView = findViewById(R.id.bluetoothTextView);
+        statsTextView = findViewById(R.id.statsTextView);
+        refreshTextView = findViewById(R.id.refreshTextView);
         ImageView button = findViewById(R.id.button);
         ImageView button2 = findViewById(R.id.button2);
         buttonSetting = findViewById(R.id.buttonSetting);
@@ -219,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
                 int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
                 TextView amountPercent = findViewById(R.id.amountPercent);
-                String percent = String.valueOf(percentage) + " %";
+                String percent = String.valueOf(percentage) + "%";
                 amountPercent.setText(percent);
 
                 //영점 조절
@@ -274,7 +286,7 @@ public class MainActivity extends AppCompatActivity {
 
             int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
             TextView amountPercent = findViewById(R.id.amountPercent);
-            String percent = String.valueOf(percentage) + " %";
+            String percent = String.valueOf(percentage) + "%";
             amountPercent.setText(percent);
 
             // Send data 'A' to Arduino
@@ -381,7 +393,7 @@ public class MainActivity extends AppCompatActivity {
         // activity_main.xml의 TextView에 연결해서 퍼센트 계산
         int percentage = (int) ((float) todayAmount / goalAmount * 100);
         TextView amountPercent = findViewById(R.id.amountPercent);
-        String percent = String.valueOf(percentage) + " %";
+        String percent = String.valueOf(percentage) + "%";
         amountPercent.setText(percent);
 
         // activity_main.xml의 TextView에 오늘 마신양 연결
@@ -442,6 +454,16 @@ public class MainActivity extends AppCompatActivity {
         statisticsIcon.setImageResource(R.drawable.chart);
         bluetoothIcon.setImageResource(R.drawable.bluetooth);
         reloadIcon.setImageResource(R.drawable.reload);
+
+        nowAmount.setTextColor(Color.parseColor("#194569"));
+        waterAmountText.setTextColor(Color.parseColor("#194569"));
+        farText.setTextColor(Color.parseColor("#5f84a2"));
+        soFarText.setTextColor(Color.parseColor("#5f84a2"));
+
+        settingTextView.setTextColor(Color.parseColor("#194569"));
+        bluetoothTextView.setTextColor(Color.parseColor("#194569"));
+        statsTextView.setTextColor(Color.parseColor("#194569"));
+        refreshTextView.setTextColor(Color.parseColor("#194569"));
     }
 
     private void updateIconsForDarkTheme() {
@@ -449,6 +471,16 @@ public class MainActivity extends AppCompatActivity {
         statisticsIcon.setImageResource(R.drawable.chart_w);
         bluetoothIcon.setImageResource(R.drawable.bluetooth_w);
         reloadIcon.setImageResource(R.drawable.reload_w);
+
+        nowAmount.setTextColor(Color.parseColor("#cadeed"));
+        waterAmountText.setTextColor(Color.parseColor("#cadeed"));
+        farText.setTextColor(Color.parseColor("#91aec4"));
+        soFarText.setTextColor(Color.parseColor("#91aec4"));
+
+        settingTextView.setTextColor(Color.parseColor("#cadeed"));
+        bluetoothTextView.setTextColor(Color.parseColor("#cadeed"));
+        statsTextView.setTextColor(Color.parseColor("#cadeed"));
+        refreshTextView.setTextColor(Color.parseColor("#cadeed"));
     }
 
     private void showInformationPopup() {
