@@ -30,15 +30,13 @@
                 android:id="@+id/switch1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-light"
+
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
                 android:thumb="@drawable/switch_track_thumb"
                 app:track="@drawable/switch_track_selector"
-                app:thumbTextPadding="24dp"
-                app:switchMinWidth="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+
+                />
         </FrameLayout>
 
         <!-- Dark Theme Layout -->
@@ -57,12 +55,13 @@
                 android:id="@+id/switch2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="20dp"
+
+                android:layout_marginTop="30dp"
+                android:layout_marginStart="20dp"
                 android:thumb="@drawable/switch_track_thumb"
                 app:track="@drawable/switch_track_selector"
-                app:layout_constraintStart_toStartOf="parent" />
+
+                 />
 
         </FrameLayout>
     </FrameLayout>
@@ -243,7 +242,7 @@
     <ImageButton
         android:id="@+id/informationButton"
         android:layout_width="70dp"
-        android:layout_height="100dp"
+        android:layout_height="110dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:background="?android:selectableItemBackground"
@@ -286,46 +285,45 @@
 
     <TextView
         android:id="@+id/amountPercent"
-        android:layout_width="95dp"
-        android:layout_height="55dp"
-        android:textSize="40sp"
-        android:layout_marginTop="270dp"
-        android:layout_marginEnd="160dp"
-        android:fontFamily="sans-serif-light"
-        android:textColor="#ffffff"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:text="0%"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
-
-    <TextView
-        android:id="@+id/farText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="27sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="#194569"
-        android:gravity="center"
-        android:text="Now"
+        android:text="0%"
+        android:textSize="40sp"
+        android:textColor="#ffffff"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22"/>
+        app:layout_constraintVertical_bias="0.6" />
+
+    <TextView
+        android:id="@+id/farText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="Now"
+        android:textColor="#194569"
+        android:textSize="27sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22" />
 
     <TextView
         android:id="@+id/nowAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="25sp"
         android:fontFamily="sans-serif-light"
-        android:textColor="#5f84a2"
-        android:gravity="center"
         android:text="0mL"
+        android:textColor="#5f84a2"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
