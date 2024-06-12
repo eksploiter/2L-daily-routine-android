@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton informationButton;
     private Switch switch1;
     private Switch switch2;
-
     private FrameLayout lightThemeLayout;
     private FrameLayout darkThemeLayout;
     private ImageView buttonSetting;
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
         }
     };
-    // 추가============================================================================================================
+
     private BluetoothService bluetoothService;
     private boolean isBound = false;
 
@@ -118,13 +117,11 @@ public class MainActivity extends AppCompatActivity {
             isBound = true;
             Log.d("BluetoothService", "ServiceConnection-onServiceConnected");
         }
-
         @Override
         public void onServiceDisconnected(ComponentName name) {
             isBound = false;
         }
     };
-    //======================================================================================================================
 
     private static final int REQUEST_PERMISSIONS = 1;
 
@@ -178,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
         resetAlarm(MainActivity.this);
 
-        // 추가================================================================================================================================
         // Bind to BluetoothService
         Intent serviceIntent = new Intent(this, BluetoothService.class);
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
@@ -289,27 +285,6 @@ public class MainActivity extends AppCompatActivity {
             String percent = String.valueOf(percentage) + "%";
             amountPercent.setText(percent);
 
-            // Send data 'A' to Arduino
-            /* if (isBound) {
-                bluetoothService.sendData("A");
-            }
-
-            // Send data 'C' to Arduino
-            if (isBound) {
-                bluetoothService.sendData("C");
-            }
-
-            // Send data 'D' to Arduino
-            if (isBound) {
-                bluetoothService.sendData("D");
-            }
-
-            // Send data 'E' to Arduino
-            if (isBound) {
-                bluetoothService.sendData("E");
-            }*/
-            // 완성되면 지울 것. 테스트용
-
             String now = "현재 텀블러 측정값 : " + String.valueOf(myApp.getBeforeAmount());
 
 
@@ -348,19 +323,6 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-//        new Runnable() {
-//            @Override
-//            public void run() {
-//                if (bluetoothService != null) {
-//                    bluetoothService.readData();
-//                    Message message = handler.obtainMessage();
-//                    handler.sendMessage(message);
-//                }
-//                handler.postDelayed(this, 3000);
-//            }
-//        }.run();
-
-
         reloadIcon.setOnClickListener(v -> {
             // bluetoothService.sendData("B");
 
@@ -376,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
         informationButton.setOnClickListener(v -> showInformationPopup());
     }
 
-    // 추가================================================================================================================================
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -549,7 +510,5 @@ public class MainActivity extends AppCompatActivity {
         String setResetTime = format1.format(new Date(resetCal.getTimeInMillis() + AlarmManager.INTERVAL_DAY));
 
         Log.d("resetAlarm", "ResetHour : " + setResetTime);
-
     }
-
 }
