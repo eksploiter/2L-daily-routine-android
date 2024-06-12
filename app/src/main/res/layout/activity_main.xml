@@ -30,6 +30,7 @@
                 android:id="@+id/switch1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-light"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="20dp"
                 android:thumb="@drawable/switch_track_thumb"
@@ -150,6 +151,7 @@
             android:src="@drawable/settings" />
 
         <TextView
+            android:id="@+id/settingTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="setting"
@@ -176,6 +178,7 @@
             android:src="@drawable/bluetooth" />
 
         <TextView
+            android:id="@+id/bluetoothTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="bluetooth"
@@ -197,11 +200,12 @@
         <ImageView
             android:id="@+id/statisticsIcon"
             android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_height="39dp"
             android:contentDescription="@string/chart"
             android:src="@drawable/chart" />
 
         <TextView
+            android:id="@+id/statsTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="stats"
@@ -228,6 +232,7 @@
             android:src="@drawable/reload" />
 
         <TextView
+            android:id="@+id/refreshTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="refresh"
@@ -238,7 +243,7 @@
     <ImageButton
         android:id="@+id/informationButton"
         android:layout_width="70dp"
-        android:layout_height="90dp"
+        android:layout_height="100dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
         android:background="?android:selectableItemBackground"
@@ -254,14 +259,14 @@
         android:fontFamily="sans-serif-light"
         android:text="Total"
         android:textColor="#194569"
-        android:textSize="20sp"
+        android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/waterAmountText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintVertical_bias="1.2" />
 
     <TextView
         android:id="@+id/waterAmountText"
@@ -270,21 +275,21 @@
         android:fontFamily="sans-serif-light"
         android:text="0mL"
         android:textColor="#5f84a2"
-        android:textSize="55sp"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.20" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <TextView
         android:id="@+id/amountPercent"
         android:layout_width="95dp"
         android:layout_height="55dp"
-        android:textSize="35sp"
-        android:layout_marginTop="240dp"
+        android:textSize="40sp"
+        android:layout_marginTop="270dp"
         android:layout_marginEnd="160dp"
         android:fontFamily="sans-serif-light"
         android:textColor="#ffffff"
@@ -296,18 +301,38 @@
         app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
 
     <TextView
-        android:id="@+id/nowAmount"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:textSize="30sp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="105dp"
+        android:id="@+id/farText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="27sp"
         android:fontFamily="sans-serif-light"
         android:textColor="#194569"
         android:gravity="center"
-        android:text="현재 물 측정값 : 0mL"
+        android:text="Now"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/waterAmountText" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.22"/>
+
+    <TextView
+        android:id="@+id/nowAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="25sp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#5f84a2"
+        android:gravity="center"
+        android:text="0mL"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.26"/>
 
     <!--<TextView
         android:id="@+id/tumble"
