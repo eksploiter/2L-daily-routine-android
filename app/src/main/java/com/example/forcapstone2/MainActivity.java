@@ -228,6 +228,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Set click listeners
         button.setOnClickListener(v -> { // 물 버림
+            if (!isBound) {
+                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (true) {
                 bluetoothService.sendData("B");
             }
@@ -253,6 +257,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         button2.setOnClickListener(view -> { // 물 채움
+            if (!isBound) {
+                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
+                return;
+            }
             if (true) {
                 bluetoothService.sendData("B");
             }

@@ -60,7 +60,7 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/bluetooth_devices_list"
         android:layout_marginTop="20dp"
-        android:text="Connected"
+        android:text="Disconnected"
         android:textSize="25sp"
         android:textStyle="bold"
         android:textColor="#194569"/>
