@@ -44,24 +44,12 @@ import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
     private ImageButton informationButton;
-    private Switch switch1;
-    private Switch switch2;
-    private FrameLayout lightThemeLayout;
-    private FrameLayout darkThemeLayout;
-    private ImageView buttonSetting;
-    private ImageView statisticsIcon;
-    private ImageView bluetoothIcon;
-    private ImageView reloadIcon;
-    private int currentAmount = 0;
-    private TextView nowAmount;
-    private TextView waterAmountText;
-    private TextView soFarText;
-    private TextView farText;
-    private TextView settingTextView;
-    private TextView bluetoothTextView;
-    private TextView statsTextView;
-    private TextView refreshTextView;
+    private Switch switch1, switch2;
+    private FrameLayout lightThemeLayout, darkThemeLayout;
+    private ImageView buttonSetting, statisticsIcon, bluetoothIcon, reloadIcon;
+    private TextView nowAmount, waterAmountText, soFarText, farText, settingTextView, bluetoothTextView, statsTextView, refreshTextView;
     private MyApp myApp;
+    private int currentAmount = 0;
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -356,16 +344,7 @@ public class MainActivity extends AppCompatActivity {
         TextView amountPercent = findViewById(R.id.amountPercent);
         String percent = String.valueOf(percentage) + "%";
         amountPercent.setText(percent);
-
-        // activity_main.xml의 TextView에 오늘 마신양 연결
-        /*String todayAmountText = String.valueOf(todayAmount) + "mL";
-        waterAmountText.setText(todayAmountText);
-
-        // 완성되면 지울 것. 테스트용
-        String now = "현재 물 측정값 : " + String.valueOf(beforeAmount);
-        nowAmount.setText(now);*/
     }
-
 
     private void requestPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
