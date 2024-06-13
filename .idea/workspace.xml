@@ -62,14 +62,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/BluetoothService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/BluetoothService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/bluetooth_connection.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/bluetooth_connection.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/jarAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/jarAnalysis.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/0615cc1fb6fd12123c0563e61501625a/init.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/0615cc1fb6fd12123c0563e61501625a/init.jar.lock.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/jars-9/0615cc1fb6fd12123c0563e61501625a/init.jar.receipt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar.receipt" beforeDir="false" />
@@ -90,6 +106,10 @@
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.receipt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_active_track_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_active_track_color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_halo_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_halo_color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_inactive_track_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_inactive_track_color.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_thumb_color.xml" beforeDir="false" afterPath="$PROJECT_DIR$/caches/transforms-3/d65de9993b17100a463b57420029c7e4/transformed/material-1.10.0/res/color/m3_slider_thumb_color.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/results.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/transformed/emoji2-1.2.0-runtime/emoji2-1.2.0-runtime_dex/classes.dex" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/e5bff572b3d6bb408420f4921b02b083/results.bin" beforeDir="false" />
@@ -102,7 +122,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\minsu\.android\avd\Pixel_8_Pro_API_33.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RF9N600EW7P]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
