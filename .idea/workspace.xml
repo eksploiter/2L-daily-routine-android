@@ -62,12 +62,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/checksums/checksums.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/checksums/md5-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/checksums/sha1-checksums.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/dependencies-accessors.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/dependencies-accessors/executionHistory.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/BluetoothService.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/BluetoothService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/0615cc1fb6fd12123c0563e61501625a/init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/0615cc1fb6fd12123c0563e61501625a/init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/0615cc1fb6fd12123c0563e61501625a/init.jar.receipt" beforeDir="false" />
@@ -90,7 +98,6 @@
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/results.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/transformed/emoji2-1.2.0-runtime/emoji2-1.2.0-runtime_dex/classes.dex" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/e5bff572b3d6bb408420f4921b02b083/results.bin" beforeDir="false" />
@@ -103,7 +110,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[RF9N600EW7P]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\minsu\.android\avd\Pixel_8_Pro_API_33.avd)]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -144,7 +151,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="jrt://$APPLICATION_HOME_DIR$/jbr/Contents/Home!/java.base/java/util/Optional.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-31/android.jar!/android/Manifest.class" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -157,53 +164,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ApkExportedModule&quot;: &quot;forcapstone2.app&quot;,
-    &quot;ExportApk.ApkPathForforcapstone2.app&quot;: &quot;C:\\Users\\minsu\\OneDrive\\Desktop&quot;,
-    &quot;Notification.DisplayName-DoNotAsk-Execution&quot;: &quot;External process execution failed&quot;,
-    &quot;Notification.DoNotAsk-Execution&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ScreenRecorder.SavePath&quot;: &quot;C:\\Users\\minsu\\OneDrive\\Desktop&quot;,
-    &quot;ScreenshotViewer.SavePath&quot;: &quot;C:/Users/minsu/OneDrive/Desktop&quot;,
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupAchive.java_SELECTED&quot;: &quot;WaterCupAchive&quot;,
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_SELECTED&quot;: &quot;WaterCupDark&quot;,
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_SELECTED&quot;: &quot;WaterCupView&quot;,
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/human.java_SELECTED&quot;: &quot;human&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/minsu/OneDrive/Desktop&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Android App.app.executor": "Run",
+    "ApkExportedModule": "forcapstone2.app",
+    "ExportApk.ApkPathForforcapstone2.app": "C:\\Users\\minsu\\OneDrive\\Desktop",
+    "Notification.DisplayName-DoNotAsk-Execution": "External process execution failed",
+    "Notification.DoNotAsk-Execution": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ScreenRecorder.SavePath": "C:\\Users\\minsu\\OneDrive\\Desktop",
+    "ScreenshotViewer.SavePath": "C:/Users/minsu/OneDrive/Desktop",
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupAchive.java_SELECTED": "WaterCupAchive",
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_SELECTED": "WaterCupDark",
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_SELECTED": "WaterCupView",
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/human.java_SELECTED": "human",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/minsu/OneDrive/Desktop",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.17",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;ExportApk.BuildVariants&quot;: [
-      &quot;release&quot;
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
     ],
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupAchive.java_WaterCupAchive_DIMENSIONS&quot;: [
-      &quot;1080&quot;,
-      &quot;1920&quot;
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupAchive.java_WaterCupAchive_DIMENSIONS": [
+      "1080",
+      "1920"
     ],
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_WaterCupDark_DIMENSIONS&quot;: [
-      &quot;1080&quot;,
-      &quot;1920&quot;
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupDark.java_WaterCupDark_DIMENSIONS": [
+      "1080",
+      "1920"
     ],
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_WaterCupView_DIMENSIONS&quot;: [
-      &quot;1080&quot;,
-      &quot;1920&quot;
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/WaterCupView.java_WaterCupView_DIMENSIONS": [
+      "1080",
+      "1920"
     ],
-    &quot;android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/human.java_human_DIMENSIONS&quot;: [
-      &quot;1080&quot;,
-      &quot;1920&quot;
+    "android-custom-viewC:/Users/minsu/OneDrive/Desktop/forcapstone2/app/src/main/java/com/example/forcapstone2/human.java_human_DIMENSIONS": [
+      "1080",
+      "1920"
     ]
   }
-}</component>
+}]]></component>
   <component name="PsdUISettings">
     <option name="MODULE_TAB" value="Signing Configs" />
     <option name="LAST_EDITED_SIGNING_CONFIG" value="debug" />
