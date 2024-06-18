@@ -43,7 +43,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageButton informationButton;
+    private ImageButton informationButton;                                                          //findViewById 사용 전 private 로 미리 선언해주어야한다.
     private Switch switch1, switch2;
     private FrameLayout lightThemeLayout, darkThemeLayout;
     private ImageView buttonSetting, statisticsIcon, bluetoothIcon, reloadIcon;
@@ -53,13 +53,13 @@ public class MainActivity extends AppCompatActivity {
 
     private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
-        public void handleMessage(@NonNull Message msg) {
+        public void handleMessage(@NonNull Message msg) {                                           //nonnull > 이 값은 널값을 허용하지 않는다.
             if (BluetoothService.readValue != null) {
-                double readValue = BluetoothService.readValue;
-                int converted = (int) (readValue * 1000);
-                myApp.reloadAmount(converted);
-                waterAmountText.setText(myApp.getTodayAmount() + "mL");
-                nowAmount.setText(converted + "mL");
+                double readValue = BluetoothService.readValue;                                      //아두이노로 부터 값을 읽어 온다.
+                int converted = (int) (readValue * 1000);                                           //아두이노로 부터 값을 kg 단위로 읽어 온다.
+                myApp.reloadAmount(converted);                                                      //물의 양 새로 고침
+                waterAmountText.setText(myApp.getTodayAmount() + "mL");                             //오늘 마신 물 총 량
+                nowAmount.setText(converted + "mL");                                                //현재 텀블러에 담긴 물의 양
             }
             setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
         }
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    private BluetoothService bluetoothService;
+    private BluetoothService bluetoothService;                                                      //블루투스 서비스에 관하여 (블루투스 연결 시에 다른 페이지로 넘어가면 블루투스가 끊어지는 상황이 발생)
     private boolean isBound = false;
 
     private final ServiceConnection serviceConnection = new ServiceConnection() {
@@ -103,11 +103,11 @@ public class MainActivity extends AppCompatActivity {
             BluetoothService.LocalBinder binder = (BluetoothService.LocalBinder) service;
             bluetoothService = binder.getService();
             isBound = true;
-            Log.d("BluetoothService", "ServiceConnection-onServiceConnected");
+            Log.d("BluetoothService", "ServiceConnection-onServiceConnected");             //서비스가 연결됐을 시 모든 페이지에 서비스를 연결할 수 있도록 허용
         }
         @Override
         public void onServiceDisconnected(ComponentName name) {
-            isBound = false;
+            isBound = false;                                                                        //서비스가 연결되지 않을 시 false
         }
     };
 
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         createNotificationChannel();
 
         // Initialize views
-        switch1 = findViewById(R.id.switch1);
+        switch1 = findViewById(R.id.switch1);                                                       //findViewById는 xml에서 id를 가져와 활용하겠다는 의미
         switch2 = findViewById(R.id.switch2);
         lightThemeLayout = findViewById(R.id.lightThemeLayout);
         darkThemeLayout = findViewById(R.id.darkThemeLayout);
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (myApp.getDayValueforMain()) {
                     case 1:
-                        myApp.setMon(myApp.getTodayAmount());
+                        myApp.setMon(myApp.getTodayAmount());                                       // 첫 시작은 월요일 나머지 값은 무조건 0
                         myApp.setTue(0);
                         myApp.setWed(0);
                         myApp.setThu(0);
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
                     default:
                         break;
                 }
-                myApp.setTodayAmount(0);
+                myApp.setTodayAmount(0);                                                            // TodayAmount 로 부터 값을 가져온다.
                 myApp.addDayValueForMain();
 
                 TextView waterAmountText = findViewById(R.id.waterAmountText);
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
                 String percent = String.valueOf(percentage) + "%";
                 amountPercent.setText(percent);
 
-                //영점 조절
+                //영점 조절 -> 일종의 텀블러 값을 초기화해주는 기능인데, 우리는 이 기능 말고 초기화 버튼을 추가했음
                 if (isBound) {
                     bluetoothService.sendData("A");
                 }
@@ -288,15 +288,15 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
+        switch1.setOnCheckedChangeListener((buttonView, isChecked) -> {                             // 밝은 테마에서 스위치를 눌렀을 시에
+            if (isChecked) {                                                                        // if ~ else 문을 이용해서 지금 상태를 확인 후 테마를 변환해준다.
                 switchToDarkTheme();
             } else {
                 switchToLightTheme();
             }
         });
 
-        switch2.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        switch2.setOnCheckedChangeListener((buttonView, isChecked) -> {                             // 어두운 테마에서 스위치를 눌렀을 시에
             if (isChecked) {
                 switchToDarkTheme();
             } else {
@@ -305,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         buttonSetting.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);       // intent 를 사용해서 원하는 페이지로 넘어간다.
             startActivity(intent);
         });
 
@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
         updateIconsForLightTheme();
     }
 
-    private void updateIconsForLightTheme() {// 라이트 모드
+    private void updateIconsForLightTheme() {                                                       // 라이트 모드
         buttonSetting.setImageResource(R.drawable.settings);
         statisticsIcon.setImageResource(R.drawable.chart);
         bluetoothIcon.setImageResource(R.drawable.bluetooth);
@@ -414,18 +414,18 @@ public class MainActivity extends AppCompatActivity {
         refreshTextView.setTextColor(Color.parseColor("#194569"));
     }
 
-    private void updateIconsForDarkTheme() {// 다크 모드
+    private void updateIconsForDarkTheme() {                                                        // 다크 모드
         buttonSetting.setImageResource(R.drawable.settings_w);
         statisticsIcon.setImageResource(R.drawable.chart_w);
         bluetoothIcon.setImageResource(R.drawable.bluetooth_w);
         reloadIcon.setImageResource(R.drawable.reload_w);
 
-        nowAmount.setTextColor(Color.parseColor("#cadeed"));// 아이콘 밑에 글자
+        nowAmount.setTextColor(Color.parseColor("#cadeed"));                                // 아이콘 밑에 글자 색상
         waterAmountText.setTextColor(Color.parseColor("#cadeed"));
         farText.setTextColor(Color.parseColor("#91aec4"));
         soFarText.setTextColor(Color.parseColor("#91aec4"));
 
-        settingTextView.setTextColor(Color.parseColor("#cadeed"));//물 양
+        settingTextView.setTextColor(Color.parseColor("#cadeed"));                          //물 양 표기 색상
         bluetoothTextView.setTextColor(Color.parseColor("#cadeed"));
         statsTextView.setTextColor(Color.parseColor("#cadeed"));
         refreshTextView.setTextColor(Color.parseColor("#cadeed"));
