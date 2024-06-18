@@ -397,7 +397,7 @@ public class MainActivity extends AppCompatActivity {
         updateIconsForLightTheme();
     }
 
-    private void updateIconsForLightTheme() {
+    private void updateIconsForLightTheme() {// 라이트 모드
         buttonSetting.setImageResource(R.drawable.settings);
         statisticsIcon.setImageResource(R.drawable.chart);
         bluetoothIcon.setImageResource(R.drawable.bluetooth);
@@ -414,24 +414,24 @@ public class MainActivity extends AppCompatActivity {
         refreshTextView.setTextColor(Color.parseColor("#194569"));
     }
 
-    private void updateIconsForDarkTheme() {
+    private void updateIconsForDarkTheme() {// 다크 모드
         buttonSetting.setImageResource(R.drawable.settings_w);
         statisticsIcon.setImageResource(R.drawable.chart_w);
         bluetoothIcon.setImageResource(R.drawable.bluetooth_w);
         reloadIcon.setImageResource(R.drawable.reload_w);
 
-        nowAmount.setTextColor(Color.parseColor("#cadeed"));
+        nowAmount.setTextColor(Color.parseColor("#cadeed"));// 아이콘 밑에 글자
         waterAmountText.setTextColor(Color.parseColor("#cadeed"));
         farText.setTextColor(Color.parseColor("#91aec4"));
         soFarText.setTextColor(Color.parseColor("#91aec4"));
 
-        settingTextView.setTextColor(Color.parseColor("#cadeed"));
+        settingTextView.setTextColor(Color.parseColor("#cadeed"));//물 양
         bluetoothTextView.setTextColor(Color.parseColor("#cadeed"));
         statsTextView.setTextColor(Color.parseColor("#cadeed"));
         refreshTextView.setTextColor(Color.parseColor("#cadeed"));
     }
 
-    private void showInformationPopup() {
+    private void showInformationPopup() {//하이루 정보 팝업
         Dialog dialog = new Dialog(MainActivity.this, R.style.RoundedDialog);
         dialog.setContentView(R.layout.popup_activity);
         Window window = dialog.getWindow();

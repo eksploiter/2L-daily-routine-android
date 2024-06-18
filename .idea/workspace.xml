@@ -62,6 +62,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/02cecb7860b075b6265928e34a464def/manifest-merger-30.4.2.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/02cecb7860b075b6265928e34a464def/manifest-merger-30.4.2.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/02cecb7860b075b6265928e34a464def/manifest-merger-30.4.2.jar.receipt" beforeDir="false" />
