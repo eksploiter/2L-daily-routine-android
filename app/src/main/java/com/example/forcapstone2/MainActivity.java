@@ -153,10 +153,8 @@ public class MainActivity extends AppCompatActivity {
         String goalAmountText = "목표량 " + String.valueOf((float) myApp.getGoalAmount() / 1000 + "L");
         purposewaterAmountText.setText(goalAmountText);
 
-
         waterAmountText.setText(myApp.getTodayAmount() + "mL");
         nowAmount.setText(myApp.getBeforeAmount() + "mL");
-
 
         setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
@@ -212,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
                 String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
                 waterAmountText.setText(todayAmountText);
 
-
                 int percentage = (int) ((float) myApp.getTodayAmount() / myApp.getGoalAmount() * 100);
                 TextView amountPercent = findViewById(R.id.amountPercent);
                 String percent = String.valueOf(percentage) + "%";
@@ -223,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
                     bluetoothService.sendData("A");
                 }
             }
-
         });
 
         // Set click listeners
@@ -250,7 +246,6 @@ public class MainActivity extends AppCompatActivity {
             setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
             Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
-
 
             // Send data 'A' to Arduino
 
