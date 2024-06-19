@@ -64,10 +64,6 @@
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileContent/fileContent.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/8.4/javaCompile/javaCompile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/02cecb7860b075b6265928e34a464def/manifest-merger-30.4.2.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/02cecb7860b075b6265928e34a464def/manifest-merger-30.4.2.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/02cecb7860b075b6265928e34a464def/manifest-merger-30.4.2.jar.receipt" beforeDir="false" />
@@ -116,7 +112,7 @@
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/caches/modules-2/files-2.1/androidx.lifecycle/lifecycle-livedata-core/2.5.1/5b28be9eee128e14c41b82d552a208def9badd3a/lifecycle-livedata-core-2.5.1.module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/results.bin" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/transformed/emoji2-1.2.0-runtime/emoji2-1.2.0-runtime_dex/classes.dex" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/transforms-3/e5bff572b3d6bb408420f4921b02b083/results.bin" beforeDir="false" />

@@ -420,12 +420,12 @@ public class MainActivity extends AppCompatActivity {
         bluetoothIcon.setImageResource(R.drawable.bluetooth_w);
         reloadIcon.setImageResource(R.drawable.reload_w);
 
-        nowAmount.setTextColor(Color.parseColor("#cadeed"));                                // 아이콘 밑에 글자 색상
+        nowAmount.setTextColor(Color.parseColor("#cadeed"));                               // 아이콘 밑에 글자 색상
         waterAmountText.setTextColor(Color.parseColor("#cadeed"));
         farText.setTextColor(Color.parseColor("#91aec4"));
         soFarText.setTextColor(Color.parseColor("#91aec4"));
 
-        settingTextView.setTextColor(Color.parseColor("#cadeed"));                          //물 양 표기 색상
+        settingTextView.setTextColor(Color.parseColor("#cadeed"));                         //물 양 표기 색상
         bluetoothTextView.setTextColor(Color.parseColor("#cadeed"));
         statsTextView.setTextColor(Color.parseColor("#cadeed"));
         refreshTextView.setTextColor(Color.parseColor("#cadeed"));
