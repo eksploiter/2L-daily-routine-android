@@ -7,13 +7,14 @@
         <item>2000</item>
     </string-array>
 
-    <string-array name="tumbler_weight_options">
+    <!--<string-array name="tumbler_weight_options">
         <item>500g</item>
         <item>750g</item>
         <item>1kg</item>
         <item>1.25kg</item>
         <item>1.5kg</item>
-    </string-array>
+    </string-array> -->
+    <!-- 텁블러 초기화 전 텀블러 무게에 따른 영점 조절을 계획 했었음 -->
 
 </resources>
 

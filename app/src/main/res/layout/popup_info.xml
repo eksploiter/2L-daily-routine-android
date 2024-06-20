@@ -34,7 +34,20 @@
                 android:id="@+id/whatIsHirueText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="주간통계\n\n 매일매일 \n원하는 목표량에\n도달해보세요! \n\n주간 통계는 \n요일별 마신량과 \n그 주에 얼마나 마셨는지\n확인할 수 있는\n페이지입니다.\n\n\n제작: 물좀마셔조\nProduction: P.D.W"
+                android:text="주간통계"
+                android:textStyle="bold"
+                android:textColor="@color/f"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/whatIsHirueText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\n 매일매일 \n원하는 목표량에\n도달해보세요! \n\n주간 통계는 \n요일별 마신량과 \n그 주에 얼마나 마셨는지\n확인할 수 있는\n페이지입니다.\n\n\n제작: 물좀마셔조\nProduction: P.D.W"
                 android:textColor="@color/f"
                 android:textSize="18sp"
                 android:gravity="center"

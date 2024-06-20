@@ -223,7 +223,49 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Set click listeners
-        button.setOnClickListener(v -> { // 물 버림
+        button.setOnClickListener(v -> {
+            // Check if the service is bound
+            if (!isBound) {
+                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Check if the BluetoothService is available
+            if (bluetoothService == null) {
+                Toast.makeText(getApplicationContext(), "Bluetooth service not available.", Toast.LENGTH_SHORT).show();
+                Log.e("MainActivity", "Bluetooth service is null");
+                return;
+            }
+
+            // Check if the characteristic is initialized properly
+            if (bluetoothService.isCharacteristicInitialized()) {  // Add a method in BluetoothService to check this
+                bluetoothService.sendData("B");
+            } else {
+                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
+                Log.e("MainActivity", "Characteristic is not initialized in BluetoothService");
+                return;
+            }//Characteristic not initialized.
+
+            myApp.getTodayAmount();
+            if (bluetoothService != null) {
+                bluetoothService.readData();
+                Message message = handlerdrain.obtainMessage();
+                handlerdrain.sendMessage(message);
+            }
+
+            TextView waterAmountText = findViewById(R.id.waterAmountText);
+            String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
+            waterAmountText.setText(todayAmountText);
+
+            setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
+
+            Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+
+            // Send data 'A' to Arduino (if needed in the future)
+        });
+
+        // Set click listeners
+        /*button.setOnClickListener(v -> { // 물 버림 위에 비교
             if (!isBound) {
                 Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
                 return;
@@ -249,7 +291,8 @@ public class MainActivity extends AppCompatActivity {
 
             // Send data 'A' to Arduino
 
-        });
+        });*/
+
 
         button2.setOnClickListener(view -> { // 물 채움
             if (!isBound) {

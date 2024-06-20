@@ -34,7 +34,20 @@
                 android:id="@+id/whatIsHirueText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="블루투스 연결\n\n블루투스 기기와 연결하고\n하루에 마시는 물의 양을\n간편하게 측정하고 기록하세요!\n\n건강한 수분 섭취를 위한\n당신의 루틴을 지원합니다!\n\n\n제작: 물좀마셔조\nProduction: P.D.W"
+                android:text="블루투스 연결"
+                android:textStyle="bold"
+                android:textColor="@color/f"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:layout_gravity="center"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/whatIsHirueText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="\n블루투스 기기와 연결하고\n하루에 마시는 물의 양을\n간편하게 측정하고 기록하세요!\n\n건강한 수분 섭취를 위한\n당신의 루틴을 지원합니다!\n\n\n제작: 물좀마셔조\nProduction: P.D.W"
                 android:textColor="@color/f"
                 android:textSize="18sp"
                 android:gravity="center"
