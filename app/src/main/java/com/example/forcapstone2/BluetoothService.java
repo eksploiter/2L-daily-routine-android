@@ -120,7 +120,7 @@ public class BluetoothService extends Service {
         }
     }
 
-    public void sendData(String data) {
+    /*public void sendData(String data) {
         // if (bluetoothGatt != null && characteristic != null) {
         characteristic.setValue(data.getBytes(StandardCharsets.UTF_8));
         boolean success = bluetoothGatt.writeCharacteristic(characteristic);
@@ -133,7 +133,26 @@ public class BluetoothService extends Service {
             showToast("Device not connected or characteristic not found");
             Log.e(TAG, "sendData()");
         }*/
+
+    public boolean isCharacteristicInitialized() {
+        return (bluetoothGatt != null && characteristic != null);
     }
+
+    public void sendData(String data) {//디바이스 연결 관련 토스트 메시지 구현, 전에는 몇 줄이 주석 처리 됐음 -> 강제 종료 되는 문제가 발생
+        if (bluetoothGatt != null && characteristic != null) {
+            characteristic.setValue(data.getBytes(StandardCharsets.UTF_8));
+            boolean success = bluetoothGatt.writeCharacteristic(characteristic);
+            if (success) {
+                Log.d(TAG, "Write initiated successfully.");
+            } else {
+                Log.e(TAG, "Write initiation failed.");
+            }
+        } else {
+            showToast("Device not connected");
+            Log.e(TAG, "sendData() failed: bluetoothGatt or characteristic is null");
+        }
+    }
+
 
     public void readData() {
         Log.d(TAG, "readData()");
