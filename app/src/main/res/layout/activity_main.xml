@@ -105,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="목표량 2L"
+            android:text="GOAL 2L"
             android:textColor="#ffffff"
             android:textSize="30sp"
             android:textStyle="bold" />

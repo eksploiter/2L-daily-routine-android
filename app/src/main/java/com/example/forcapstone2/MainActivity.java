@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         // activity_main.xml의 TextView에 목표량 연결
         TextView purposewaterAmountText = findViewById(R.id.PurposewaterAmountText);
-        String goalAmountText = "목표량 " + String.valueOf((float) myApp.getGoalAmount() / 1000 + "L");
+        String goalAmountText = "GOAL " + String.valueOf((float) myApp.getGoalAmount() / 1000 + "L");
         purposewaterAmountText.setText(goalAmountText);
 
         waterAmountText.setText(myApp.getTodayAmount() + "mL");
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(v -> {
             // Check if the service is bound
             if (!isBound) {
-                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please connect to Bluetooth first.", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
             if (bluetoothService.isCharacteristicInitialized()) {  // Add a method in BluetoothService to check this
                 bluetoothService.sendData("B");
             } else {
-                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please connect to Bluetooth first.", Toast.LENGTH_SHORT).show();
                 Log.e("MainActivity", "Characteristic is not initialized in BluetoothService");
                 return;
             }//Characteristic not initialized.
@@ -259,49 +259,33 @@ public class MainActivity extends AppCompatActivity {
 
             setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
 
-            Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "water away!", Toast.LENGTH_SHORT).show();
 
             // Send data 'A' to Arduino (if needed in the future)
         });
 
-        // Set click listeners
-        /*button.setOnClickListener(v -> { // 물 버림 위에 비교
-            if (!isBound) {
-                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if (true) {
-                bluetoothService.sendData("B");
-            }
-
-            myApp.getTodayAmount();
-            if (bluetoothService != null) {
-                bluetoothService.readData();
-                Message message = handlerdrain.obtainMessage();
-                handlerdrain.sendMessage(message);
-            }
-
-            TextView waterAmountText = findViewById(R.id.waterAmountText);
-            String todayAmountText = String.valueOf(myApp.getTodayAmount()) + "mL";
-            waterAmountText.setText(todayAmountText);
-
-            setMainTextVeiw(myApp.getTodayAmount(), myApp.getGoalAmount(), myApp.getBeforeAmount());
-
-            Toast.makeText(getApplicationContext(), "물을 버렸어요!", Toast.LENGTH_SHORT).show();
-
-            // Send data 'A' to Arduino
-
-        });*/
-
-
         button2.setOnClickListener(view -> { // 물 채움
+            // Check if the service is bound
             if (!isBound) {
-                Toast.makeText(getApplicationContext(), "블루투스 연결부터 해주세요.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Please connect to Bluetooth first.", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (true) {
-                bluetoothService.sendData("B");
+
+            // Check if the BluetoothService is available
+            if (bluetoothService == null) {
+                Toast.makeText(getApplicationContext(), "Bluetooth service not available.", Toast.LENGTH_SHORT).show();
+                Log.e("MainActivity", "Bluetooth service is null");
+                return;
             }
+
+            // Check if the characteristic is initialized properly
+            if (bluetoothService.isCharacteristicInitialized()) {  // Add a method in BluetoothService to check this
+                bluetoothService.sendData("B");
+            } else {
+                Toast.makeText(getApplicationContext(), "Please connect to Bluetooth first.", Toast.LENGTH_SHORT).show();
+                Log.e("MainActivity", "Characteristic is not initialized in BluetoothService");
+                return;
+            }//Characteristic not initialized.
 
             myApp.getTodayAmount();
             if (bluetoothService != null) {
@@ -322,7 +306,7 @@ public class MainActivity extends AppCompatActivity {
             String now = "현재 텀블러 측정값 : " + String.valueOf(myApp.getBeforeAmount());
 
 
-            Toast.makeText(getApplicationContext(), "물을 추가했어요!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "add water!", Toast.LENGTH_SHORT).show();
 
         });
 
@@ -360,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
         reloadIcon.setOnClickListener(v -> {
             // bluetoothService.sendData("B");
 
-            Toast.makeText(getApplicationContext(), "새로고침 성공!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Reloaded successfully!", Toast.LENGTH_SHORT).show();
 
             if (bluetoothService != null) {
                 bluetoothService.readData();
