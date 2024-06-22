@@ -1,6 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 plugins {
-alias(libs.plugins.androidApplication) apply false
+    id 'com.android.application' version '8.5.0' apply false
+    id 'com.android.library' version '8.5.0' apply false
 }
-//build.gradle 에서는 minSdk 만 주로 바꾼다. 31 또는 33으로
-//여기는 손 잘 안댐
