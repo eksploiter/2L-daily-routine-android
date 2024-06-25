@@ -19,4 +19,6 @@ It is also convenient to check the connection and charging status with LED indic
 - Android Studio
 <br>
 
+## Main Screen
+
 <br>
