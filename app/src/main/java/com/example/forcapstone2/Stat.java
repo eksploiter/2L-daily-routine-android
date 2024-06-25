@@ -85,7 +85,7 @@ public class Stat extends AppCompatActivity {
         int[] waterIntakeData = {myApp.getMon(), myApp.getTue(), myApp.getWed(), myApp.getThu(), myApp.getFri(), myApp.getSat(), myApp.getSun()};
 
         // 요일 이름 배열
-        String[] daysOfWeek = {"월", "화", "수", "목", "금", "토", "일"};
+        String[] daysOfWeek = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"};
 
         // ListView에 표시할 데이터를 준비합니다.
         ArrayList<String> displayList = new ArrayList<>();
@@ -114,6 +114,6 @@ public class Stat extends AppCompatActivity {
         listView.setAdapter(adapter);
 
         TextView tvTotalIntake = findViewById(R.id.tvTotalIntake);
-        tvTotalIntake.setText("  주간 총 섭취량 : " + totalIntake + "ml / " + weeklyGoal + "ml"); // 실시간으로 변하는 총 섭취량 표시
+        tvTotalIntake.setText(" Total weekly intake : " + totalIntake + "ml / " + weeklyGoal + "ml"); // 실시간으로 변하는 총 섭취량 표시
     }
-}
+}//그레고리안의 사용으로 세계 각지의 어느 나라든 정확한 날짜에 값을 입력할 수 있다.

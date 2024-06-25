@@ -103,7 +103,7 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
-    /*private void setupTumblerWeight() { // 텀블러 무게 설정
+    /*private void setupTumblerWeight() { // 텀블러 무게 설정 -> 초기화 버튼의 추가로 텀블러의 무게를 미리 설정해 놓을 필요가 없어짐
         spinnerTumblerWeight = findViewById(R.id.spinnerTumblerWeight);
         ArrayAdapter<CharSequence> tumblerWeightAdapter = ArrayAdapter.createFromResource(this,
                 R.array.tumbler_weight_options, android.R.layout.simple_spinner_item);
@@ -158,7 +158,7 @@ public class SettingActivity extends AppCompatActivity {
         SharedPreferences savedTime = getSharedPreferences("DailyAlarm", MODE_PRIVATE);
         long millis = savedTime.getLong("nextNotifyTime", Calendar.getInstance().getTimeInMillis());
 
-        // 그래고리안 달력 사용 (윤년 반영)
+        // 그래고리안 달력 사용 (윤년 반영) -> 정확한 시간을 반영할 수 있다.
         Calendar nextNotifyTime = new GregorianCalendar();
         nextNotifyTime.setTimeInMillis(millis);
 
