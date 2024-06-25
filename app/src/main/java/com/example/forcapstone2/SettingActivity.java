@@ -311,7 +311,6 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
 
-
     // 목표치 변경에 따른 알림 보기 위한 메소드. 앱 정식 출시에는 필요 X
     private void checkAndNotifyForCurrentAmount() {
         // 알림 생성 및 발송 코드

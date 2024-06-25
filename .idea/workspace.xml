@@ -62,6 +62,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SettingActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/SettingActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/198863fd0de91fa0f163653a760b3e35/init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/198863fd0de91fa0f163653a760b3e35/init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/198863fd0de91fa0f163653a760b3e35/init.jar.receipt" beforeDir="false" />
@@ -125,7 +130,6 @@
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.lock.lock" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/o_0296f5f934c19efc7fafba335bddd8ea/external-system-rt.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/o_172ca5ecb2f624574983b1403cd55e4e/android-project-system-gradle-models.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/caches/jars-9/o_17c064222186054f6e17cefbab5f15c0/android-base-common.jar" beforeDir="false" />
@@ -183,18 +187,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "thanx-To-Dev-Minsoo"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;thanx-To-Dev-Minsoo&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android.git",
-    "accountId": "f30fb1be-5172-49df-aefe-d7251de671db"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android.git&quot;,
+    &quot;accountId&quot;: &quot;f30fb1be-5172-49df-aefe-d7251de671db&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-31/android.jar!/android/Manifest.class" root0="SKIP_INSPECTION" />
   </component>
