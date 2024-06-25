@@ -1,16 +1,19 @@
 # 2L Daily Routine (application)
-하루 물 섭취 권장량인 2L를 마실 수 있도록 도와주는 어플리케이션입니다.
+It is an application that helps you drink 2L of water, the recommended daily amount.
 <br><br>
 
-## 설명
-이 제품은 무게 센서로 물 섭취량을 측정하고, 블루투스로 연결된 앱에 전송합니다. 앱은 이 데이터를 바탕으로 하루 섭취량을 계산하고 시각화하여 보여줍니다. 사용자가 권장 섭취량을 달성하면 축하 알림을 보내 건강한 습관 형성을 돕습니다. 또한 LED 표시등으로 연결 상태와 충전 상태를 확인할 수 있어 편의성이 높습니다.
+## Description
+The product measures your water intake with a weight sensor and sends it to a Bluetooth-connected app. 
+Based on this data, the app calculates, visualizes, and shows your daily intake. 
+When the user achieves the recommended intake, he or she sends a congratulatory notification to help build a healthy habit. 
+It is also convenient to check the connection and charging status with LED indicators.
 <br>
-1. 무게 센서가 물의 무게를 정밀하게 감지하여 실시간으로 앱에 전송, 사용자의 정확한 물 섭취량 파악 가능
-2. 블루투스로 연결된 앱이 물 섭취량 데이터를 자동 수집 및 시각화하여 사용자의 물 섭취 패턴 확인 편리
-3. 하루 2L 물 섭취 목표 달성 시 축하 알림으로 건강한 습관 형성 장려
+1. The weight sensor accurately detects the weight of water and sends it to the app in real time, allowing users to accurately determine their water intake
+2. Bluetooth-connected apps automatically collect and visualize water intake data to make it easier to check user's water intake patterns
+3. Encourage the formation of healthy habits with celebratory reminders when achieving the goal of drinking 2L water per day
 <br>
 
-## 기술스택
+## Tech Stack
 - JAVA
 - Gradle
 - Android Studio
