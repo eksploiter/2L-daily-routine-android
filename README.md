@@ -20,5 +20,5 @@ It is also convenient to check the connection and charging status with LED indic
 <br>
 
 ## Main Screen
-![MainActivity](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/2cf764f4-1ca2-4cf2-9e3e-9092f0117e02)
+![MainActivity_1](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/fc174739-923b-4758-ab35-7b55e41e53a0)
 <br>
