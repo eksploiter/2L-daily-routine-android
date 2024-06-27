@@ -1,1 +1,11 @@
-/build
+# Gradle 빌드 파일 무시
+/.gradle/
+/build/
+
+# Android Studio 특정 파일 무시
+.idea/
+*.iml
+*.hprof
+
+# 캐시 파일 무시
+caches/

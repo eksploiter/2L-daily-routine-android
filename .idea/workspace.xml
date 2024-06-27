@@ -62,78 +62,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a4173f8d-4fa4-4ef6-b065-414a7fbe30ec" name="Changes" comment="업로드!!&#10;&#10;2024-05-26">
+      <change afterPath="$PROJECT_DIR$/daemon/8.7/daemon-12752.out.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.7/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/ThemeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/forcapstone2/ThemeManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/198863fd0de91fa0f163653a760b3e35/init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/198863fd0de91fa0f163653a760b3e35/init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/198863fd0de91fa0f163653a760b3e35/init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/24d3cdf88d6d993c6aaea367e3e34228/gradle-tooling-extension-impl.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/24d3cdf88d6d993c6aaea367e3e34228/gradle-tooling-extension-impl.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/6f9d3b768929479446129dc675127d81/util_rt.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/6f9d3b768929479446129dc675127d81/util_rt.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/6f9d3b768929479446129dc675127d81/util_rt.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/7aed7ed3dd8fe9259a66809bfda9c5a0/init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/7aed7ed3dd8fe9259a66809bfda9c5a0/init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/7aed7ed3dd8fe9259a66809bfda9c5a0/init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/950afa9263ddffaf433cd3f8fd15b72f/init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/9c26d95a47b37d2793bc7616648c19fb/util-8.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/9c26d95a47b37d2793bc7616648c19fb/util-8.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/9c26d95a47b37d2793bc7616648c19fb/util-8.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/9dc6fff0c0f6f90fcae072f5d58ddc45/cp_init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/9dc6fff0c0f6f90fcae072f5d58ddc45/cp_init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/9dc6fff0c0f6f90fcae072f5d58ddc45/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/a967f10b0654de9b78f58d68a2d75228/external-system-rt.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/a967f10b0654de9b78f58d68a2d75228/external-system-rt.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/a967f10b0654de9b78f58d68a2d75228/external-system-rt.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/aa397d12b91d673238341afd6ae57edf/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/aa7ec1a2e29b3532cdace0bf9d7a821b/proj.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/aa7ec1a2e29b3532cdace0bf9d7a821b/proj.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/aa7ec1a2e29b3532cdace0bf9d7a821b/proj.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/b0b62d9b930cef1f37a7599124a249b0/init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/b0b62d9b930cef1f37a7599124a249b0/init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/b0b62d9b930cef1f37a7599124a249b0/init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/b4d38b222408dfa4f800c0ee2ed25d4c/kotlin-gradle-tooling.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/b4d38b222408dfa4f800c0ee2ed25d4c/kotlin-gradle-tooling.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/b4d38b222408dfa4f800c0ee2ed25d4c/kotlin-gradle-tooling.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/bad783d51206f17550a8771c4d42368d/init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/bad783d51206f17550a8771c4d42368d/init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/bad783d51206f17550a8771c4d42368d/init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/be2144ce117869342b38ef2f488da4d6/init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/be2144ce117869342b38ef2f488da4d6/init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/be2144ce117869342b38ef2f488da4d6/init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c1a90535203cb677faf2c6d59eecb5f0/cp_init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c1a90535203cb677faf2c6d59eecb5f0/cp_init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c1a90535203cb677faf2c6d59eecb5f0/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c643374f639c74c6ce2174b63ad18d93/cp_init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c643374f639c74c6ce2174b63ad18d93/cp_init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c643374f639c74c6ce2174b63ad18d93/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c824b9326b2801f65e7699ec18ec721a/cp_init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c824b9326b2801f65e7699ec18ec721a/cp_init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/c824b9326b2801f65e7699ec18ec721a/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d3e1101bbd57e99c2fe75912341ce432/cp_init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d3e1101bbd57e99c2fe75912341ce432/cp_init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/d3e1101bbd57e99c2fe75912341ce432/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/e26977d12a594f93306ea2cfec0d0116/proj.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/e26977d12a594f93306ea2cfec0d0116/proj.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/e26977d12a594f93306ea2cfec0d0116/proj.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/f3341f318162b78420b80d16b81421da/gradle-api-impldep-8.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/f3341f318162b78420b80d16b81421da/gradle-api-impldep-8.2.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/f3341f318162b78420b80d16b81421da/gradle-api-impldep-8.2.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/f9e8b7c4adeaf779bb6477a407a7b8b0/gradle-tooling-extension-api.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/f9e8b7c4adeaf779bb6477a407a7b8b0/gradle-tooling-extension-api.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/f9e8b7c4adeaf779bb6477a407a7b8b0/gradle-tooling-extension-api.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.lock.lock" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/feccecc00caeff59836b37a676bae14e/cp_init.jar.receipt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" beforeDir="false" afterPath="$PROJECT_DIR$/caches/jars-9/jars-9.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/o_0296f5f934c19efc7fafba335bddd8ea/external-system-rt.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/o_172ca5ecb2f624574983b1403cd55e4e/android-project-system-gradle-models.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/jars-9/o_17c064222186054f6e17cefbab5f15c0/android-base-common.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/results.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/transforms-3/ddf3d93538cddd565fad089c3e6c6651/transformed/emoji2-1.2.0-runtime/emoji2-1.2.0-runtime_dex/classes.dex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/caches/transforms-3/e5bff572b3d6bb408420f4921b02b083/results.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.tmp/gradle13235065516098803993.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.tmp/gradle7443854351125532052.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/daemon/8.7/daemon-12944.out.log" beforeDir="false" afterPath="$PROJECT_DIR$/daemon/8.7/daemon-12944.out.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
     </list>
