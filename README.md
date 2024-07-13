@@ -5,7 +5,7 @@ It is an application that helps you drink 2L of water, the recommended daily amo
 ## Description
 The product measures your water intake with a weight sensor and sends it to a Bluetooth-connected app. 
 Based on this data, the app calculates, visualizes, and shows your daily intake. 
-When the user achieves the recommended intake, he or she sends a congratulatory notification to help build a healthy habit. 
+When the user achieves the recommended intake, the app sends a congratulatory notification to help build a healthy habit. 
 It is also convenient to check the connection and charging status with LED indicators.
 <br>
 1. The weight sensor accurately detects the weight of water and sends it to the app in real time, allowing users to accurately determine their water intake
