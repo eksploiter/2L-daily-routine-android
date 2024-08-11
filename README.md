@@ -1,5 +1,6 @@
 # 2L Daily Routine (application)
 It is an application that helps you drink 2L of water, the recommended daily amount.
+- CAPSTONE DESIGN for 4th grade 1st semester
 <br><br>
 
 ## Description
@@ -12,6 +13,9 @@ It is also convenient to check the connection and charging status with LED indic
 2. Bluetooth-connected apps automatically collect and visualize water intake data to make it easier to check user's water intake patterns
 3. Encourage the formation of healthy habits with celebratory reminders when achieving the goal of drinking 2L water per day
 <br>
+
+##Project Period
+- CAPSTONE DESIGN : 2024.03.01 ~ 2024.06.14
 
 ## Tech Stack
 - JAVA
