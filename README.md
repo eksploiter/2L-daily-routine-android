@@ -16,6 +16,7 @@ It is also convenient to check the connection and charging status with LED indic
 
 ## Project Period
 - CAPSTONE DESIGN : 2024.03.01 ~ 2024.06.14
+<br>
 
 ## Tech Stack
 - JAVA
