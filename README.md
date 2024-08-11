@@ -14,7 +14,7 @@ It is also convenient to check the connection and charging status with LED indic
 3. Encourage the formation of healthy habits with celebratory reminders when achieving the goal of drinking 2L water per day
 <br>
 
-##Project Period
+## Project Period
 - CAPSTONE DESIGN : 2024.03.01 ~ 2024.06.14
 
 ## Tech Stack
