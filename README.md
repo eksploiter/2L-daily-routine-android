@@ -1,6 +1,6 @@
 # 2L Daily Routine (application)
 It is an application that helps you drink 2L of water, the recommended daily amount.
-- CAPSTONE DESIGN for 4th grade 1st semester
+- CAPSTONE DESIGN for 4th grade 1st semester (a silver award)
 <br><br>
 
 ## Description
