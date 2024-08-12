@@ -50,4 +50,4 @@ It is also convenient to check the connection and charging status with LED indic
 <br>
 
 ## Result of the Contest
-- CAPSTONE DESIGN for 4th grade 1st semester - a silver award 🥈 (Second place)
+- CAPSTONE DESIGN for 4th grade 1st semester - a silver award 🥈 (2nd place)
