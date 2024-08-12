@@ -1,6 +1,5 @@
 # 2L Daily Routine (application)
 It is an application that helps you drink 2L of water, the recommended daily amount.
-- CAPSTONE DESIGN for 4th grade 1st semester (a silver award 🥈)
 <br><br>
 
 ## Description
@@ -48,3 +47,6 @@ It is also convenient to check the connection and charging status with LED indic
 ## Main Screen
 ![MainActivity_2](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/1b462772-2dba-4c4c-ba04-4575b0c0fa41) ![Main_dark_2](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/bf253487-c493-4722-81fc-1e2c0c09ef0a) ![Setting_1](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/7f06286a-69d2-4296-87c0-2c34e33a77e2)
 <br>
+
+## Result of the Contest
+- CAPSTONE DESIGN for 4th grade 1st semester - a silver award 🥈 (Second place)
