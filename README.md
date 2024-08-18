@@ -1,4 +1,4 @@
-# 2L Daily Routine (application)
+# 2L Daily Routine (android)
 It is an application that helps you drink 2L of water, the recommended daily amount.
 <br><br>
 
