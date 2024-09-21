@@ -13,6 +13,17 @@ It is also convenient to check the connection and charging status with LED indic
 3. Encourage the formation of healthy habits with celebratory reminders when achieving the goal of drinking 2L water per day
 <br>
 
+### You can see how it works!
+
+<a href="https://www.youtube.com/watch?v=0itAvftwnco">
+        <img 
+            src="https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=YouTube&logoColor=white&link=https://www.youtube.com/watch?v=0itAvftwnco"
+            style="height: auto; margin-left: 20px; margin-right: 20px; padding: 10px;"/>
+    </a>
+
+<br/>
+<br/>
+
 ## Project Period
 - CAPSTONE DESIGN : 2024.03.01 ~ 2024.06.14
 <br>
