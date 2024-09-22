@@ -1,7 +1,6 @@
 # 2L Daily Routine (android)
 It is an application that helps you drink 2L of water, the recommended daily amount.
-<br><br>
-
+<br>
 
 ## Description
 The product measures your water intake with a weight sensor and sends it to a Bluetooth-connected app. 
@@ -13,7 +12,6 @@ It is also convenient to check the connection and charging status with LED indic
 2. Bluetooth-connected apps automatically collect and visualize water intake data to make it easier to check user's water intake patterns
 3. Encourage the formation of healthy habits with celebratory reminders when achieving the goal of drinking 2L water per day
 <br>
-
 
 ### You can see how it works!
 <a href="https://www.youtube.com/watch?v=0itAvftwnco">
@@ -88,4 +86,4 @@ It is also convenient to check the connection and charging status with LED indic
 
 
 ## Result of the Contest
-- CAPSTONE DESIGN for 4th grade 1st semester - a silver award 🥈 (2nd place)
+- CAPSTONE DESIGN - a silver award 🥈 (2nd place)
