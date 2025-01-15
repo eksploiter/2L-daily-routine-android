@@ -47,6 +47,18 @@ It is also convenient to check the connection and charging status with LED indic
 </table>
 <br/>
 
+# The results
+## · Android (Frontend)
+<br>
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/d0901f6e-48a1-4ab1-959c-d81b1b22935d" width="15%" />
+  <img src="https://github.com/user-attachments/assets/e7c070ab-1fc6-44ef-bc25-9b9583139b68" width="15%" />
+  <img src="https://github.com/user-attachments/assets/0addbb49-93d4-40b2-a6a4-982c069e3f84" width="15%" />
+  <img src="https://github.com/user-attachments/assets/111450f0-a7e4-41a1-b7c9-9b4cfd401a0f" width="15%" />
+  <img src="https://github.com/user-attachments/assets/f74fc7b9-ecf8-494e-bec4-bbcc5ce54abe" width="15%" />
+  <img src="https://github.com/user-attachments/assets/6198505b-2bac-45b4-a569-542b3813a437" width="15%" />
+</p>
+
 
 ## Tech Stack
 #### Design & Frontend
@@ -77,13 +89,6 @@ It is also convenient to check the connection and charging status with LED indic
   <img src="https://img.shields.io/badge/ZOOM-0B5CFF?style=for-the-badge&logo=ZOOM&logoColor=white"/>
 </p>
 <br>
-
-
-## Main Screen
-![MainActivity_2](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/1b462772-2dba-4c4c-ba04-4575b0c0fa41) ![Main_dark_2](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/bf253487-c493-4722-81fc-1e2c0c09ef0a) ![Setting_1](https://github.com/thanx-To-Dev-Minsoo/2L-daily-routine_Android/assets/136697128/7f06286a-69d2-4296-87c0-2c34e33a77e2)
-<br>
-<br>
-
 
 ## Result of the Contest
 - CAPSTONE DESIGN - a silver award 🥈 (2nd place)
