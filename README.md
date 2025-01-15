@@ -12,7 +12,7 @@ It is an application that helps you drink 2L of water, the recommended daily amo
 <br/>
 
 
-## Project Period
+## 📆 Project Period
 - CAPSTONE DESIGN : 2024.03.01 ~ 2024.06.14
 <br>
 
@@ -70,7 +70,7 @@ It is also convenient to check the connection and charging status with LED indic
 </p>
 <br>
 
-## Members
+## 😎 Members
 <table>
    <tr>
     <td align="center"><b><a href="https://github.com/eksploiter">eksploiter</a></b></td>
