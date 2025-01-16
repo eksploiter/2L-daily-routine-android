@@ -89,4 +89,4 @@ It is also convenient to check the connection and charging status with LED indic
 <br/>
 
 ## Result of the Contest
-- CAPSTONE DESIGN - a silver award 🥈 (2nd place)
+- CAPSTONE DESIGN - a silver award 🥈 (2nd place) 
