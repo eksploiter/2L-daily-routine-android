@@ -50,8 +50,9 @@ It is also convenient to check the connection and charging status with LED indic
 	  <td colspan="3" align="center">설정 / 블루투스 연결 / 주간 통계</td>
   </tr>
 </table>
+<br>
 
-## Tech Stack
+# Tech Stack
 #### Design & Frontend
 <p>
   <img src="https://img.shields.io/badge/Android-34A853?style=for-the-badge&logo=Android&logoColor=white"/>
