@@ -29,8 +29,8 @@ It is also convenient to check the connection and charging status with LED indic
 
 # The results
 
-## Android
-<h3>✸ 주요 기능 (Mobile)</h3>
+## · Android (Mobile)
+<h3>✸ 주요 기능 </h3>
 
 <table>
 	<tr>
