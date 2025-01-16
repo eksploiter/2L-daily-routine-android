@@ -52,7 +52,7 @@ It is also convenient to check the connection and charging status with LED indic
 </table>
 <br>
 
-##Tech Stack
+## Tech Stack
 #### Design & Frontend
 <p>
   <img src="https://img.shields.io/badge/Android-34A853?style=for-the-badge&logo=Android&logoColor=white"/>
