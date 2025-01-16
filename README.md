@@ -46,7 +46,7 @@ It is also convenient to check the connection and charging status with LED indic
     <td align="center"><img width="329" src="https://github.com/user-attachments/assets/6198505b-2bac-45b4-a569-542b3813a437"/></td>
   </tr>
   <tr>
-    <td colspan="3" align="center">메인 페이지 및 사용 설명/td>
+    <td colspan="3" align="center">메인 페이지 및 사용 설명</td>
 	  <td colspan="3" align="center">설정 / 블루투스 연결 / 주간 통계</td>
   </tr>
 </table>
