@@ -28,17 +28,28 @@ It is also convenient to check the connection and charging status with LED indic
 <br>
 
 # The results
-## · Android (Mobile)
-<br>
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/d0901f6e-48a1-4ab1-959c-d81b1b22935d" width="15%" />
-  <img src="https://github.com/user-attachments/assets/e7c070ab-1fc6-44ef-bc25-9b9583139b68" width="15%" />
-  <img src="https://github.com/user-attachments/assets/0addbb49-93d4-40b2-a6a4-982c069e3f84" width="15%" />
-  <img src="https://github.com/user-attachments/assets/111450f0-a7e4-41a1-b7c9-9b4cfd401a0f" width="15%" />
-  <img src="https://github.com/user-attachments/assets/f74fc7b9-ecf8-494e-bec4-bbcc5ce54abe" width="15%" />
-  <img src="https://github.com/user-attachments/assets/6198505b-2bac-45b4-a569-542b3813a437" width="15%" />
-</p>
 
+## 주요 기능
+<h3>✸ Android (Mobile)</h3>
+
+<table>
+	<tr>
+    <td colspan="3" align="center">Main Page</td>
+	  <td colspan="3" align="center">Nevigation Bar</td>
+  </tr>
+  <tr>
+    <td align="center"><img width="329" src="https://github.com/user-attachments/assets/d0901f6e-48a1-4ab1-959c-d81b1b22935d"/></td>
+    <td align="center"><img width="329" src="https://github.com/user-attachments/assets/e7c070ab-1fc6-44ef-bc25-9b9583139b68"/></td>
+    <td align="center"><img width="329" src="https://github.com/user-attachments/assets/0addbb49-93d4-40b2-a6a4-982c069e3f84"/></td>
+	  <td align="center"><img width="329" src="https://github.com/user-attachments/assets/111450f0-a7e4-41a1-b7c9-9b4cfd401a0f"/></td>
+    <td align="center"><img width="329" src="https://github.com/user-attachments/assets/f74fc7b9-ecf8-494e-bec4-bbcc5ce54abe"/></td>
+    <td align="center"><img width="329" src="https://github.com/user-attachments/assets/6198505b-2bac-45b4-a569-542b3813a437"/></td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center">메인 페이지 및 사용 설명/td>
+	  <td colspan="3" align="center">설정 / 블루투스 연결 / 주간 통계</td>
+  </tr>
+</table>
 
 ## Tech Stack
 #### Design & Frontend
